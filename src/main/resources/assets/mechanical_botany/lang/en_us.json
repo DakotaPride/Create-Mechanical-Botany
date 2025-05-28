@@ -1,5 +1,4 @@
 {
-  "itemGroup.create_mechanical_botany": "Example Mod Tab",
-  "block.create_mechanical_botany.example_block": "Example Block",
-  "item.create_mechanical_botany.example_item": "Example Item"
+  "itemGroup.mechanical_botany.base": "Create: Mechanical Botany",
+  "block.mechanical_botany.mechanical_insolator": "Mechanical Insolator"
 }
