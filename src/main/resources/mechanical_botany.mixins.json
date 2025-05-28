@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.dakotapride.mechanical_botany.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "mechanical_botany.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
