@@ -168,9 +168,6 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         super.tick();
         FluidStack currentFluidInTank = getCurrentFluidInTank();
 
-        if (lastRecipe != null)
-            lastRecipe.setBlockEntity(this);
-
         if (getSpeed() == 0)
             return;
         for (int i = 0; i < outputInv.getSlots(); i++)
@@ -203,6 +200,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
             }
             return;
         }
+        lastRecipe.setBlockEntity(this);
 
         timer = lastRecipe.getProcessingDuration();
         sendData();

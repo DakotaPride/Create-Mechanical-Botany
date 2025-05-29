@@ -45,8 +45,6 @@ public class InsolatingRecipe extends ProcessingRecipe<RecipeInput> {
     public boolean matches(RecipeInput inv, Level worldIn) {
         if (inv.isEmpty())
             return false;
-        if (blockEntity == null)
-            return false;
 
         return blockEntity.check(inv, worldIn, ingredients, fluidIngredients);
 //        return ingredients.get(0).test(inv.getItem(0));
