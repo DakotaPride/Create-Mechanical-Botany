@@ -1,10 +1,11 @@
-package net.dakotapride.mechanical_botany.kinetics.mechanical_insolator;
+package net.dakotapride.mechanical_botany.insolator;
 
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.foundation.block.IBE;
 import net.createmod.catnip.data.Iterate;
-import net.dakotapride.mechanical_botany.registry.CreateMechanicalBotanyBlockEntityTypes;
+import net.dakotapride.mechanical_botany.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -15,29 +16,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
-public class MechanicalInsolatorBlock extends KineticBlock implements IBE<MechanicalInsolatorBlockEntity>, ICogWheel {
+public class MechanicalInsolatorBlock extends KineticBlock implements IBE<MechanicalInsolatorBlockEntity>, ICogWheel, IWrenchable {
 
     public MechanicalInsolatorBlock(Properties properties) {
         super(properties);
-    }
-
-//    @Override
-//    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-//        return AllShapes.MILLSTONE;
-//    }
-
-    @Override
-    public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-        return face == Direction.DOWN;
     }
 
     @Override
@@ -47,9 +38,9 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
         if (level.isClientSide)
             return ItemInteractionResult.SUCCESS;
 
-        withBlockEntityDo(level, pos, mechanical_insolator -> {
+        withBlockEntityDo(level, pos, etxractor -> {
             boolean emptyOutput = true;
-            IItemHandlerModifiable inv = mechanical_insolator.outputInv;
+            IItemHandlerModifiable inv = etxractor.outputInv;
             for (int slot = 0; slot < inv.getSlots(); slot++) {
                 ItemStack stackInSlot = inv.getStackInSlot(slot);
                 if (!stackInSlot.isEmpty())
@@ -60,7 +51,7 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
             }
 
             if (emptyOutput) {
-                inv = mechanical_insolator.inputInv;
+                inv = etxractor.inputInv;
                 for (int slot = 0; slot < inv.getSlots(); slot++) {
                     player.getInventory()
                             .placeItemBackInInventory(inv.getStackInSlot(slot));
@@ -68,8 +59,8 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
                 }
             }
 
-            mechanical_insolator.setChanged();
-            mechanical_insolator.sendData();
+            etxractor.setChanged();
+            etxractor.sendData();
         });
 
         return ItemInteractionResult.SUCCESS;
@@ -86,15 +77,15 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
         if (!entityIn.isAlive())
             return;
 
-        MechanicalInsolatorBlockEntity mechanical_insolator = null;
+        MechanicalInsolatorBlockEntity insolator = null;
         for (BlockPos pos : Iterate.hereAndBelow(entityIn.blockPosition()))
-            if (mechanical_insolator == null)
-                mechanical_insolator = getBlockEntity(worldIn, pos);
+            if (insolator == null)
+                insolator = getBlockEntity(worldIn, pos);
 
-        if (mechanical_insolator == null)
+        if (insolator == null)
             return;
 
-        IItemHandler capability = mechanical_insolator.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, mechanical_insolator.getBlockPos(), null);
+        IItemHandler capability = insolator.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, insolator.getBlockPos(), null);
         if (capability == null)
             return;
 
@@ -119,7 +110,7 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
 
     @Override
     public BlockEntityType<? extends MechanicalInsolatorBlockEntity> getBlockEntityType() {
-        return CreateMechanicalBotanyBlockEntityTypes.MECHANICAL_INSOLATOR.get();
+        return ModBlockEntityTypes.INSOLATOR.get();
     }
 
     @Override

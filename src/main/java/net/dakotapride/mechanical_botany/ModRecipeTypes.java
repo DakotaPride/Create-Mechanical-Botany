@@ -1,4 +1,4 @@
-package net.dakotapride.mechanical_botany.registry;
+package net.dakotapride.mechanical_botany;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
@@ -11,11 +11,11 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.createmod.catnip.lang.Lang;
-import net.dakotapride.mechanical_botany.CreateMechanicalBotany;
+import net.dakotapride.mechanical_botany.insolator.InsolatingRecipe;
 import net.dakotapride.mechanical_botany.recipe.CustomProcessingSerializer;
-import net.dakotapride.mechanical_botany.recipe.MechanicalInsolatorRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.StringRepresentable;
@@ -33,23 +33,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public enum CreateMechanicalBotanyRecipeTypes implements IRecipeTypeInfo, StringRepresentable {
-
-    INSOLATING(MechanicalInsolatorRecipe::new),
-
-
-    ;
+public enum ModRecipeTypes implements IRecipeTypeInfo, StringRepresentable {
+    INSOLATING(InsolatingRecipe::new);
 
     public final ResourceLocation id;
     public final Supplier<RecipeSerializer<?>> serializerSupplier;
     public final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> serializerObject;
     public final Supplier<RecipeType<?>> type;
 
-    public static final Codec<CreateMechanicalBotanyRecipeTypes> CODEC = StringRepresentable.fromEnum(CreateMechanicalBotanyRecipeTypes::values);
+    public static final Codec<ModRecipeTypes> CODEC = StringRepresentable.fromEnum(ModRecipeTypes::values);
 
     private boolean isProcessingRecipe;
 
-    CreateMechanicalBotanyRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
+    ModRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
         String name = Lang.asId(name());
         id = CreateMechanicalBotany.asResource(name);
         serializerObject = Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
@@ -59,7 +55,7 @@ public enum CreateMechanicalBotanyRecipeTypes implements IRecipeTypeInfo, String
         this.isProcessingRecipe = false;
     }
 
-    CreateMechanicalBotanyRecipeTypes(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {
+    ModRecipeTypes(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {
         this(() -> new CustomProcessingSerializer<>(processingFactory));
         this.isProcessingRecipe = true;
     }
@@ -99,7 +95,7 @@ public enum CreateMechanicalBotanyRecipeTypes implements IRecipeTypeInfo, String
 
     public <T extends ProcessingRecipe<?>> MapCodec<T> processingCodec() {
         if (!isProcessingRecipe)
-            throw new AssertionError("GarnishedRecipeTypes#processingCodec called on "+name()+", which is not a processing recipe");
+            throw new AssertionError("ModRecipeTypes#processingCodec called on "+name()+", which is not a processing recipe");
         return RecordCodecBuilder.mapCodec(instance -> instance.group(
                 Codec.either(Ingredient.CODEC, FluidIngredient.CODEC).listOf().fieldOf("ingredients").forGetter(i -> {
                     List<Either<Ingredient, FluidIngredient>> list = new ArrayList<>();
@@ -150,7 +146,6 @@ public enum CreateMechanicalBotanyRecipeTypes implements IRecipeTypeInfo, String
 
     private static class Registers {
         private static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, CreateMechanicalBotany.MOD_ID);
-        private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, CreateMechanicalBotany.MOD_ID);
+        private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(Registries.RECIPE_TYPE, CreateMechanicalBotany.MOD_ID);
     }
-
 }

@@ -1,58 +1,136 @@
-package net.dakotapride.mechanical_botany.kinetics.mechanical_insolator;
+package net.dakotapride.mechanical_botany.insolator;
 
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
+import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.sound.SoundScapes;
-import net.createmod.catnip.math.VecHelper;
-import net.dakotapride.mechanical_botany.recipe.MechanicalInsolatorRecipe;
-import net.dakotapride.mechanical_botany.registry.CreateMechanicalBotanyBlockEntityTypes;
-import net.dakotapride.mechanical_botany.registry.CreateMechanicalBotanyRecipeTypes;
+import com.simibubi.create.foundation.utility.CreateLang;
+import net.createmod.catnip.lang.LangBuilder;
+import net.dakotapride.mechanical_botany.CreateMechanicalBotany;
+import net.dakotapride.mechanical_botany.ModBlockEntityTypes;
+import net.dakotapride.mechanical_botany.ModRecipeTypes;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.particles.ItemParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Optional;
 
-public class MechanicalInsolatorBlockEntity extends KineticBlockEntity {
+public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation {
 
     public ItemStackHandler inputInv;
     public ItemStackHandler outputInv;
     public IItemHandler capability;
     public int timer;
-    private MechanicalInsolatorRecipe lastRecipe;
+    private InsolatingRecipe lastRecipe;
+
+    public SmartFluidTankBehaviour tank;
 
     public MechanicalInsolatorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         inputInv = new ItemStackHandler(1);
-        outputInv = new ItemStackHandler(9);
-        capability = new MechanicalInsulatorInventoryHandler();
+        outputInv = new ItemStackHandler(1);
+        capability = new InsolatorInventoryHandler();
+    }
+
+    @Override
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        //IFluidHandler handler = level.getCapability(Capabilities.FluidHandler.BLOCK, this.getBlockPos(), null);
+
+        LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
+        CreateLang.translate("gui.goggles.fluid_container").forGoggles(tooltip);
+
+//        tooltip.add(Component.literal(getCurrentFluidInTank().toString()));
+        if (!getCurrentFluidInTank().isEmpty()) {
+            CreateLang.fluidName(getCurrentFluidInTank())
+                    .style(ChatFormatting.GRAY)
+                    .forGoggles(tooltip, 1);
+            CreateLang.builder()
+                    .add(CreateLang.number(getCurrentFluidInTank().getAmount())
+                            .add(mb)
+                            .style(ChatFormatting.GOLD))
+                    .text(ChatFormatting.GRAY, " / ")
+                    .add(CreateLang.number(tank.getCapability().getTankCapacity(0))
+                            .add(mb)
+                            .style(ChatFormatting.DARK_GRAY))
+                    .forGoggles(tooltip, 1);
+        } else {
+            CreateLang.translate("gui.goggles.fluid_container.capacity")
+                    .add(CreateLang.number(tank.getCapability().getTankCapacity(0))
+                            .add(mb)
+                            .style(ChatFormatting.GOLD))
+                    .style(ChatFormatting.GRAY)
+                    .forGoggles(tooltip, 1);
+        }
+
+        CreateLang.translate("gui.goggles.item_container").forGoggles(tooltip);
+        if (!inputInv.getStackInSlot(0).isEmpty()) {
+            CreateLang.itemName(inputInv.getStackInSlot(0))
+                    .style(ChatFormatting.GRAY)
+                    .forGoggles(tooltip, 1);
+            CreateLang.builder().add(CreateLang.number(inputInv.getStackInSlot(0).getCount())
+                    .style(ChatFormatting.GOLD))
+                    .forGoggles(tooltip, 1);
+        }
+        else translate("text.insolator.empty").style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
+
+        //addBlankSpace(tooltip);
+
+        return super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+    }
+
+    public static LangBuilder builder() {
+        return new LangBuilder(CreateMechanicalBotany.MOD_ID);
+    }
+
+    public static LangBuilder translate(String langKey, Object... args) {
+        return builder().translate(langKey, args);
+    }
+
+    private static void addBlankSpace(List<Component> tooltip) {
+        tooltip.add(Component.literal(""));
     }
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
+                Capabilities.FluidHandler.BLOCK,
+                ModBlockEntityTypes.INSOLATOR.get(),
+                (be, context) -> {
+                    if (context == Direction.DOWN)
+                        return be.tank.getCapability();
+                    return null;
+                }
+        );
+        event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
-                CreateMechanicalBotanyBlockEntityTypes.MECHANICAL_INSOLATOR.get(),
+                ModBlockEntityTypes.INSOLATOR.get(),
                 (be, context) -> be.capability
         );
     }
@@ -60,8 +138,14 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity {
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         behaviours.add(new DirectBeltInputBehaviour(this));
+        behaviours.add(tank = SmartFluidTankBehaviour.single(this, 4000)
+                .allowExtraction().allowInsertion());
         super.addBehaviours(behaviours);
-        //registerAwardables(behaviours, AllAdvancements.MILLSTONE);
+        // registerAwardables(behaviours, AllAdvancements.MILLSTONE);
+    }
+
+    public FluidStack getCurrentFluidInTank() {
+        return tank.getPrimaryHandler().getFluid();
     }
 
     @Override
@@ -72,7 +156,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity {
         if (getSpeed() == 0)
             return;
         if (inputInv.getStackInSlot(0)
-                .isEmpty())
+                .isEmpty() || tank.isEmpty())
             return;
 
         float pitch = Mth.clamp((Math.abs(getSpeed()) / 256f) + .45f, .85f, 1f);
@@ -82,6 +166,10 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity {
     @Override
     public void tick() {
         super.tick();
+        FluidStack currentFluidInTank = getCurrentFluidInTank();
+
+        if (lastRecipe != null)
+            lastRecipe.setBlockEntity(this);
 
         if (getSpeed() == 0)
             return;
@@ -93,22 +181,18 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity {
         if (timer > 0) {
             timer -= getProcessingSpeed();
 
-            if (level.isClientSide) {
-                spawnParticles();
-                return;
-            }
             if (timer <= 0)
                 process();
             return;
         }
 
         if (inputInv.getStackInSlot(0)
-                .isEmpty())
+                .isEmpty() || tank.isEmpty())
             return;
 
         RecipeWrapper inventoryIn = new RecipeWrapper(inputInv);
         if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level)) {
-            Optional<RecipeHolder<MechanicalInsolatorRecipe>> recipe = CreateMechanicalBotanyRecipeTypes.INSOLATING.find(inventoryIn, level);
+            Optional<RecipeHolder<InsolatingRecipe>> recipe = ModRecipeTypes.INSOLATING.find(inventoryIn, level);
             if (!recipe.isPresent()) {
                 timer = 100;
                 sendData();
@@ -127,7 +211,6 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity {
     @Override
     public void invalidate() {
         super.invalidate();
-        invalidateCapabilities();
     }
 
     @Override
@@ -137,41 +220,36 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity {
         ItemHelper.dropContents(level, worldPosition, outputInv);
     }
 
+    public boolean check(RecipeInput inv, Level worldIn, NonNullList<Ingredient> ingredients, NonNullList<FluidIngredient> fluidIngredients) {
+        if (inv.isEmpty())
+            return false;
+        if (tank.isEmpty())
+            return false;
+
+        return ingredients.get(0).test(inv.getItem(0)) && fluidIngredients.get(0).test(getCurrentFluidInTank());
+    }
+
     private void process() {
         RecipeWrapper inventoryIn = new RecipeWrapper(inputInv);
 
-        if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level)) {
-            Optional<RecipeHolder<MechanicalInsolatorRecipe>> recipe = CreateMechanicalBotanyRecipeTypes.INSOLATING.find(inventoryIn, level);
+        if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level) || !lastRecipe.getRequiredFluid().test(getCurrentFluidInTank())) {
+            Optional<RecipeHolder<InsolatingRecipe>> recipe = ModRecipeTypes.INSOLATING.find(inventoryIn, level);
             if (!recipe.isPresent())
                 return;
             lastRecipe = recipe.get().value();
         }
 
         ItemStack stackInSlot = inputInv.getStackInSlot(0);
+        FluidStack fluidInSlot = getCurrentFluidInTank();
         stackInSlot.shrink(1);
+        fluidInSlot.shrink(1000);
         inputInv.setStackInSlot(0, stackInSlot);
         lastRecipe.rollResults()
                 .forEach(stack -> ItemHandlerHelper.insertItemStacked(outputInv, stack, false));
-        //award(AllAdvancements.MILLSTONE);
+        // award(AllAdvancements.MILLSTONE);
 
         sendData();
         setChanged();
-    }
-
-    public void spawnParticles() {
-        ItemStack stackInSlot = inputInv.getStackInSlot(0);
-        if (stackInSlot.isEmpty())
-            return;
-
-        ItemParticleOption data = new ItemParticleOption(ParticleTypes.ITEM, stackInSlot);
-        float angle = level.random.nextFloat() * 360;
-        Vec3 offset = new Vec3(0, 0, 0.5f);
-        offset = VecHelper.rotate(offset, angle, Direction.Axis.Y);
-        Vec3 target = VecHelper.rotate(offset, getSpeed() > 0 ? 25 : -25, Direction.Axis.Y);
-
-        Vec3 center = offset.add(VecHelper.getCenterOf(worldPosition));
-        target = VecHelper.offsetRandomly(target.subtract(offset), level.random, 1 / 128f);
-        level.addParticle(data, center.x, center.y, center.z, target.x, target.y, target.z);
     }
 
     @Override
@@ -194,6 +272,13 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity {
         return Mth.clamp((int) Math.abs(getSpeed() / 16f), 1, 512);
     }
 
+//    @Override
+//    public <T> @NotNull LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+//        if (isItemHandlerCap(cap))
+//            return capability.cast();
+//        return super.getCapability(cap, side);
+//    }
+
     private boolean canProcess(ItemStack stack) {
         ItemStackHandler tester = new ItemStackHandler(1);
         tester.setStackInSlot(0, stack);
@@ -201,13 +286,13 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity {
 
         if (lastRecipe != null && lastRecipe.matches(inventoryIn, level))
             return true;
-        return CreateMechanicalBotanyRecipeTypes.INSOLATING.find(inventoryIn, level)
-                .isPresent();
+
+        return ModRecipeTypes.INSOLATING.find(inventoryIn, level).isPresent();
     }
 
-    private class MechanicalInsulatorInventoryHandler extends CombinedInvWrapper {
+    private class InsolatorInventoryHandler extends CombinedInvWrapper {
 
-        public MechanicalInsulatorInventoryHandler() {
+        public InsolatorInventoryHandler() {
             super(inputInv, outputInv);
         }
 
@@ -219,7 +304,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity {
         }
 
         @Override
-        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+        public @NotNull ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
             if (outputInv == getHandlerFromIndex(getIndexForSlot(slot)))
                 return stack;
             if (!isItemValid(slot, stack))
@@ -228,12 +313,11 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity {
         }
 
         @Override
-        public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
             if (inputInv == getHandlerFromIndex(getIndexForSlot(slot)))
                 return ItemStack.EMPTY;
             return super.extractItem(slot, amount, simulate);
         }
-
     }
 
 }

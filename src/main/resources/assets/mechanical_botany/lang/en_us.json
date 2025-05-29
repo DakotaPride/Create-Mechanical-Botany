@@ -1,4 +1,8 @@
 {
   "itemGroup.mechanical_botany.base": "Create: Mechanical Botany",
-  "block.mechanical_botany.mechanical_insolator": "Mechanical Insolator"
+  "block.mechanical_botany.mechanical_insolator": "Mechanical Insolator",
+  "recipe.mechanical_botany.insolating": "Mechanical Insolating",
+  "create.gui.goggles.item_container": "Item Container Info: ",
+  "mechanical_botany.text.insolator.empty": "No Items Within Container",
+  "mechanical_botany.insolator.processing_duration": "Process Duration: %s"
 }
