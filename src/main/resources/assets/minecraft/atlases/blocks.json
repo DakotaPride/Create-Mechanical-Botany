@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "mechanical_botany:fluid/compost_flow"
+    },
+    {
+      "type": "single",
+      "resource": "mechanical_botany:fluid/compost_still"
+    }
+  ]
+}

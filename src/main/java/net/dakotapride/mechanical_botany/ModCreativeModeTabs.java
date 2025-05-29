@@ -36,6 +36,7 @@ public class ModCreativeModeTabs {
         @Override
         public void accept(CreativeModeTab.@NotNull ItemDisplayParameters parameters, CreativeModeTab.@NotNull Output output) {
             output.accept(ModBlocks.MECHANICAL_INSOLATOR.asStack());
+            output.accept(ModFluids.COMPOST.get().getBucket());
         }
     }
 

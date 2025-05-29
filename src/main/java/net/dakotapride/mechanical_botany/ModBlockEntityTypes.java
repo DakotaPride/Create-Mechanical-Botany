@@ -1,9 +1,9 @@
 package net.dakotapride.mechanical_botany;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import net.dakotapride.mechanical_botany.insolator.MechanicalInsolatorBlockEntity;
-import net.dakotapride.mechanical_botany.insolator.MechanicalInsolatorRenderer;
-import net.dakotapride.mechanical_botany.insolator.MechanicalInsolatorVisual;
+import net.dakotapride.mechanical_botany.kinetics.insolator.MechanicalInsolatorBlockEntity;
+import net.dakotapride.mechanical_botany.kinetics.insolator.MechanicalInsolatorRenderer;
+import net.dakotapride.mechanical_botany.kinetics.insolator.MechanicalInsolatorVisual;
 
 import static net.dakotapride.mechanical_botany.CreateMechanicalBotany.REGISTRATE;
 

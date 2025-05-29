@@ -1,4 +1,4 @@
-package net.dakotapride.mechanical_botany.insolator;
+package net.dakotapride.mechanical_botany.kinetics.insolator;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -29,7 +29,7 @@ public class MechanicalInsolatorRenderer extends KineticBlockEntityRenderer<Mech
 
         VertexConsumer vb = buffer.getBuffer(RenderType.solid());
 
-        SuperByteBuffer superBuffer = CachedBuffers.partialFacing(AllPartialModels.SHAFTLESS_COGWHEEL, blockState, Direction.UP);
+        SuperByteBuffer superBuffer = CachedBuffers.partialFacing(AllPartialModels.MECHANICAL_PUMP_COG, blockState, Direction.UP);
         standardKineticRotationTransform(superBuffer, be, light).renderInto(ms, vb);
     }
 

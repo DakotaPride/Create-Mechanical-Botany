@@ -1,6 +1,8 @@
 {
   "itemGroup.mechanical_botany.base": "Create: Mechanical Botany",
   "block.mechanical_botany.mechanical_insolator": "Mechanical Insolator",
+  "fluid.mechanical_botany.compost": "Liquid Compost",
+  "item.mechanical_botany.compost_bucket": "Liquid Compost Bucket",
   "recipe.mechanical_botany.insolating": "Mechanical Insolating",
   "create.gui.goggles.item_container": "Item Container Info: ",
   "mechanical_botany.text.insolator.empty": "No Items Within Container",

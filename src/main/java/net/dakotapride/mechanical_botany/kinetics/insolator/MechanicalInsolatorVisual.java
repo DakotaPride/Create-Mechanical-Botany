@@ -1,4 +1,4 @@
-package net.dakotapride.mechanical_botany.insolator;
+package net.dakotapride.mechanical_botany.kinetics.insolator;
 
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual;

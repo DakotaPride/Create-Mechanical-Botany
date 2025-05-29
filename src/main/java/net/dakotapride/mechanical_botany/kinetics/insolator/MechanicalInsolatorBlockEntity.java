@@ -1,4 +1,4 @@
-package net.dakotapride.mechanical_botany.insolator;
+package net.dakotapride.mechanical_botany.kinetics.insolator;
 
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
@@ -56,7 +56,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
     public MechanicalInsolatorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         inputInv = new ItemStackHandler(1);
-        outputInv = new ItemStackHandler(1);
+        outputInv = new ItemStackHandler(9);
         capability = new InsolatorInventoryHandler();
     }
 
@@ -98,8 +98,9 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
             CreateLang.builder().add(CreateLang.number(inputInv.getStackInSlot(0).getCount())
                     .style(ChatFormatting.GOLD))
                     .forGoggles(tooltip, 1);
+        } else {
+            translate("text.insolator.empty").style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
         }
-        else translate("text.insolator.empty").style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
 
         //addBlankSpace(tooltip);
 
@@ -171,8 +172,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         if (getSpeed() == 0)
             return;
         for (int i = 0; i < outputInv.getSlots(); i++)
-            if (outputInv.getStackInSlot(i)
-                    .getCount() == outputInv.getSlotLimit(i))
+            if (outputInv.getStackInSlot(i).getCount() == outputInv.getSlotLimit(i))
                 return;
 
         if (timer > 0) {
@@ -200,7 +200,6 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
             }
             return;
         }
-        lastRecipe.setBlockEntity(this);
 
         timer = lastRecipe.getProcessingDuration();
         sendData();
@@ -239,15 +238,15 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
 
         ItemStack stackInSlot = inputInv.getStackInSlot(0);
         FluidStack fluidInSlot = getCurrentFluidInTank();
-        stackInSlot.shrink(1);
-        fluidInSlot.shrink(1000);
-        inputInv.setStackInSlot(0, stackInSlot);
-        lastRecipe.rollResults()
-                .forEach(stack -> ItemHandlerHelper.insertItemStacked(outputInv, stack, false));
+        if (lastRecipe.getIngredients().get(0).test(stackInSlot) && lastRecipe.getFluidIngredients().get(0).test(fluidInSlot)) {
+            stackInSlot.shrink(1);
+            fluidInSlot.shrink(lastRecipe.getRequiredFluid().getRequiredAmount());
+            inputInv.setStackInSlot(0, stackInSlot);
+            lastRecipe.rollResults().forEach(stack -> ItemHandlerHelper.insertItemStacked(outputInv, stack, false));
+            sendData();
+            setChanged();
+        }
         // award(AllAdvancements.MILLSTONE);
-
-        sendData();
-        setChanged();
     }
 
     @Override
@@ -282,7 +281,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         tester.setStackInSlot(0, stack);
         RecipeWrapper inventoryIn = new RecipeWrapper(tester);
 
-        if (lastRecipe != null && lastRecipe.matches(inventoryIn, level))
+        if (lastRecipe != null && lastRecipe.matches(inventoryIn, level) && lastRecipe.getRequiredFluid().test(getCurrentFluidInTank()))
             return true;
 
         return ModRecipeTypes.INSOLATING.find(inventoryIn, level).isPresent();

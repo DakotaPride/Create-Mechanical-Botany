@@ -1,4 +1,4 @@
-package net.dakotapride.mechanical_botany.insolator;
+package net.dakotapride.mechanical_botany.kinetics.insolator;
 
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
@@ -21,12 +21,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
 public class MechanicalInsolatorBlock extends KineticBlock implements IBE<MechanicalInsolatorBlockEntity>, ICogWheel, IWrenchable {
-
     public MechanicalInsolatorBlock(Properties properties) {
         super(properties);
     }
@@ -38,9 +36,9 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
         if (level.isClientSide)
             return ItemInteractionResult.SUCCESS;
 
-        withBlockEntityDo(level, pos, etxractor -> {
+        withBlockEntityDo(level, pos, insolator -> {
             boolean emptyOutput = true;
-            IItemHandlerModifiable inv = etxractor.outputInv;
+            IItemHandlerModifiable inv = insolator.outputInv;
             for (int slot = 0; slot < inv.getSlots(); slot++) {
                 ItemStack stackInSlot = inv.getStackInSlot(slot);
                 if (!stackInSlot.isEmpty())
@@ -51,7 +49,7 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
             }
 
             if (emptyOutput) {
-                inv = etxractor.inputInv;
+                inv = insolator.inputInv;
                 for (int slot = 0; slot < inv.getSlots(); slot++) {
                     player.getInventory()
                             .placeItemBackInInventory(inv.getStackInSlot(slot));
@@ -59,8 +57,8 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
                 }
             }
 
-            etxractor.setChanged();
-            etxractor.sendData();
+            insolator.setChanged();
+            insolator.sendData();
         });
 
         return ItemInteractionResult.SUCCESS;

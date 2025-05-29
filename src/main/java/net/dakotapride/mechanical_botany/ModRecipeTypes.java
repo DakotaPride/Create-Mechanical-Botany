@@ -11,7 +11,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.createmod.catnip.lang.Lang;
-import net.dakotapride.mechanical_botany.insolator.InsolatingRecipe;
+import net.dakotapride.mechanical_botany.kinetics.insolator.InsolatingRecipe;
 import net.dakotapride.mechanical_botany.recipe.CustomProcessingSerializer;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,7 +34,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum ModRecipeTypes implements IRecipeTypeInfo, StringRepresentable {
-    INSOLATING(InsolatingRecipe::new);
+    INSOLATING(InsolatingRecipe::new),;
 
     public final ResourceLocation id;
     public final Supplier<RecipeSerializer<?>> serializerSupplier;

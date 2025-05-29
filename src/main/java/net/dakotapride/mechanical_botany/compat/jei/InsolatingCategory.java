@@ -8,15 +8,11 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import net.dakotapride.mechanical_botany.insolator.InsolatingRecipe;
-import net.minecraft.client.Minecraft;
+import net.dakotapride.mechanical_botany.kinetics.insolator.InsolatingRecipe;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-
-import static net.createmod.catnip.lang.LangBuilder.resolveBuilders;
 
 @ParametersAreNonnullByDefault
 public class InsolatingCategory extends CreateRecipeCategory<InsolatingRecipe> {
@@ -30,11 +26,11 @@ public class InsolatingCategory extends CreateRecipeCategory<InsolatingRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, InsolatingRecipe recipe, IFocusGroup focuses) {
         builder
-                .addSlot(RecipeIngredientRole.INPUT, 15, 9)
+                .addSlot(RecipeIngredientRole.INPUT, 5, 9)
                 .setBackground(getRenderedSlot(), -1, -1)
                 .addIngredients(recipe.getIngredients().get(0));
 
-        addFluidSlot(builder, 35, 9, recipe.getRequiredFluid());
+        addFluidSlot(builder, 25, 9, recipe.getRequiredFluid());
 
         List<ProcessingOutput> results = recipe.getRollableResults();
         boolean single = results.size() == 1;
@@ -44,7 +40,7 @@ public class InsolatingCategory extends CreateRecipeCategory<InsolatingRecipe> {
             int yOffset = (i / 2) * -19;
 
             builder
-                    .addSlot(RecipeIngredientRole.OUTPUT, single ? 139 : 133 + xOffset, 55 + yOffset)
+                    .addSlot(RecipeIngredientRole.OUTPUT, single ? 139 : 133 + xOffset, 37 + yOffset)
                     .setBackground(getRenderedSlot(output), -1, -1)
                     .addItemStack(output.getStack())
                     .addRichTooltipCallback(addStochasticTooltip(output));
@@ -55,9 +51,9 @@ public class InsolatingCategory extends CreateRecipeCategory<InsolatingRecipe> {
 
     @Override
     public void draw(InsolatingRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        AllGuiTextures.JEI_ARROW.render(graphics, 85, 44);
-        AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 55, 20);
-        mechanicalInsolator.draw(graphics, 48, 27);
+        AllGuiTextures.JEI_ARROW.render(graphics, 85, 41);
+        AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 45, 20);
+        mechanicalInsolator.draw(graphics, 38, 27);
     }
 
 }

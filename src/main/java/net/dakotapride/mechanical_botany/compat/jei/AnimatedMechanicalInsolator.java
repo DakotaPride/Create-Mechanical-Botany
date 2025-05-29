@@ -1,17 +1,12 @@
 package net.dakotapride.mechanical_botany.compat.jei;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import net.dakotapride.mechanical_botany.ModBlocks;
 import net.dakotapride.mechanical_botany.ModPartialModels;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-
-import static net.createmod.catnip.lang.LangBuilder.resolveBuilders;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class AnimatedMechanicalInsolator extends AnimatedKinetics {
 
@@ -20,8 +15,8 @@ public class AnimatedMechanicalInsolator extends AnimatedKinetics {
         PoseStack matrixStack = graphics.pose();
         matrixStack.pushPose();
         matrixStack.translate(xOffset, yOffset, 0);
-        AllGuiTextures.JEI_SHADOW.render(graphics, -2, 33);
-        matrixStack.translate(12, 38, 0);
+        AllGuiTextures.JEI_SHADOW.render(graphics, -2, 30);
+        matrixStack.translate(12, 35, 0);
         int scale = 22;
 
         blockElement(ModPartialModels.MECHANICAL_PUMP_COG_ROT)
@@ -30,7 +25,9 @@ public class AnimatedMechanicalInsolator extends AnimatedKinetics {
                 .scale(scale)
                 .render(graphics);
 
-        blockElement(ModBlocks.MECHANICAL_INSOLATOR.getDefaultState())
+        BlockState state = ModBlocks.MECHANICAL_INSOLATOR.getDefaultState();
+
+        blockElement(state)
                 .rotateBlock(22.5, 22.5, 0)
                 .scale(scale)
                 .render(graphics);

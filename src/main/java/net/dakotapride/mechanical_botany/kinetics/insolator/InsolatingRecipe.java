@@ -1,4 +1,4 @@
-package net.dakotapride.mechanical_botany.insolator;
+package net.dakotapride.mechanical_botany.kinetics.insolator;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
@@ -11,13 +11,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class InsolatingRecipe extends ProcessingRecipe<RecipeInput> {
-    MechanicalInsolatorBlockEntity blockEntity;
     public InsolatingRecipe(ProcessingRecipeBuilder.ProcessingRecipeParams params) {
         super(ModRecipeTypes.INSOLATING, params);
-    }
-
-    public void setBlockEntity(MechanicalInsolatorBlockEntity blockEntity) {
-        this.blockEntity = blockEntity;
     }
 
     public FluidIngredient getRequiredFluid() {
@@ -33,7 +28,7 @@ public class InsolatingRecipe extends ProcessingRecipe<RecipeInput> {
 
     @Override
     protected int getMaxFluidInputCount() {
-        return 2;
+        return 1;
     }
 
     @Override
@@ -46,8 +41,8 @@ public class InsolatingRecipe extends ProcessingRecipe<RecipeInput> {
         if (inv.isEmpty())
             return false;
 
-        return blockEntity.check(inv, worldIn, ingredients, fluidIngredients);
-//        return ingredients.get(0).test(inv.getItem(0));
+//        return blockEntity.check(inv, worldIn, ingredients, fluidIngredients);
+        return ingredients.get(0).test(inv.getItem(0)) && fluidIngredients.get(0).test(getRequiredFluid().getMatchingFluidStacks().get(0));
     }
 
     @Override
