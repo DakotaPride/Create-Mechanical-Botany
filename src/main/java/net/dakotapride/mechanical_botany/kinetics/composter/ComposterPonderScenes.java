@@ -1,21 +1,31 @@
 package net.dakotapride.mechanical_botany.kinetics.composter;
 
+import com.simibubi.create.AllFluids;
+import com.simibubi.create.content.fluids.drain.ItemDrainBlockEntity;
+import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
+import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
+import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
+import com.simibubi.create.content.processing.basin.BasinBlockEntity;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.PonderPalette;
 import net.createmod.ponder.api.element.ElementLink;
 import net.createmod.ponder.api.element.EntityElement;
-import net.createmod.ponder.api.scene.PonderStoryBoard;
-import net.createmod.ponder.api.scene.SceneBuilder;
-import net.createmod.ponder.api.scene.SceneBuildingUtil;
-import net.createmod.ponder.api.scene.Selection;
+import net.createmod.ponder.api.scene.*;
+import net.dakotapride.mechanical_botany.ModFluids;
 import net.dakotapride.mechanical_botany.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class ComposterPonderScenes {
     public static class Intro implements PonderStoryBoard {
@@ -210,6 +220,161 @@ public class ComposterPonderScenes {
 
             //scene.idle(4);
             scene.idle(20);
+        }
+    }
+
+    public static class CreatingLiquidCompost implements PonderStoryBoard {
+
+        public CreatingLiquidCompost() {}
+
+        @Override
+        public void program(SceneBuilder builder, SceneBuildingUtil util) {
+            CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+            scene.title("compost_creation", "Processing Compost Into Usable Fluids");
+            scene.configureBasePlate(0, 0, 5);
+
+            // Powers belt
+            Selection cogs0 = util.select().fromTo(0, 0, 1, 0, 1, 0);
+            // Powers pump2
+            Selection cogs1 = util.select().fromTo(6, 0, 1, 6, 1, 0);
+            // Powers pump1
+            Selection cogs2 = util.select().fromTo(3, 0, 5, 4, 1, 5);
+            Selection selection0 = util.select().fromTo(4, 1, 4, 4, 4, 3);
+            Selection selection1 = util.select().position(5, 1, 0);
+            Selection selection2 = util.select().fromTo(4, 4, 1, 4, 4, 2);
+            // Powers pump0
+            Selection cogs3 = util.select().fromTo(0, 0, 4, 0, 1, 2);
+            Selection pump0 = util.select().fromTo(1, 1, 3, 2, 1, 4);
+            Selection pump1 = util.select().fromTo(3, 2, 2, 4, 1, 2);
+            Selection pump2 = util.select().fromTo(4, 2, 1, 4, 1, 0);
+            Selection tank0 = util.select().fromTo(3, 1, 3, 3, 4, 3);
+            Selection tank1 = util.select().fromTo(5, 1, 1, 5, 4, 1);
+            BlockPos tank0Position = util.grid().at(3, 1, 3);
+            Selection belt = util.select().fromTo(1, 1, 0, 1, 1, 2);
+            BlockPos drain = util.grid().at(1, 1, 2);
+            Selection drainSelect = util.select().position(drain);
+            Selection basinAndCo = util.select().fromTo(3, 1, 1, 3, 4, 1);
+            BlockPos basinPosition = util.grid().at(3, 2, 1);
+            BlockPos burnerPosition = util.grid().at(3, 1, 1);
+
+            scene.idle(5);
+            scene.world().showSection(util.select().layer(0).substract(cogs1).substract(cogs2).substract(cogs3), Direction.UP);
+            scene.world().showSection(cogs0, Direction.DOWN);
+            scene.idle(7);
+            scene.world().showSection(belt, Direction.DOWN);
+
+            ItemStack itemStack0 = new ItemStack(ModItems.COMPOST.get());
+            ItemStack itemStack1 = new ItemStack(ModItems.COMPOST.get());
+            ItemStack itemStack2 = new ItemStack(ModItems.COMPOST.get());
+            ItemStack itemStack3 = new ItemStack(ModItems.COMPOST.get());
+
+            scene.overlay().showText(80)
+                    .text("Putting Compost into an Item Drain will provide small amounts of Liquid Compost")
+                    .attachKeyFrame()
+                    .placeNearTarget()
+                    .pointAt(util.vector().blockSurface(drain.west(), Direction.UP));
+            scene.idle(20);
+
+            scene.world().createItemOnBelt(util.grid().at(1, 1, 0), Direction.NORTH, itemStack0);
+            scene.idle(24);
+
+            scene.world().createItemOnBelt(util.grid().at(1, 1, 0), Direction.NORTH, itemStack1);
+            scene.idle(24);
+
+            scene.world().createItemOnBelt(util.grid().at(1, 1, 0), Direction.NORTH, itemStack2);
+            scene.idle(24);
+
+            scene.world().createItemOnBelt(util.grid().at(1, 1, 0), Direction.NORTH, itemStack3);
+            scene.idle(50);
+
+            scene.addKeyframe();
+            scene.idle(7);
+            scene.world().showSection(cogs3, Direction.DOWN);
+            scene.world().showSection(pump0, Direction.DOWN);
+            scene.world().showSection(tank0, Direction.DOWN);
+            scene.idle(24);
+
+            FluidStack content0 = new FluidStack(ModFluids.COMPOST.get().getSource(), 500);
+
+            for (int i = 0; i < 4; i++) {
+                scene.world().modifyBlockEntity(drain, ItemDrainBlockEntity.class,
+                        be -> {
+                            IFluidHandler fh = be.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
+                            if (fh != null)
+                                fh.drain(50, IFluidHandler.FluidAction.EXECUTE);
+                        });
+
+                scene.world().modifyBlockEntity(tank0Position, FluidTankBlockEntity.class, be -> be.getTankInventory()
+                        .fill(content0, IFluidHandler.FluidAction.EXECUTE));
+
+                scene.idle(7);
+            }
+
+            scene.addKeyframe();
+            scene.idle(14);
+            scene.world().showSection(tank1, Direction.DOWN);
+            scene.world().showSection(basinAndCo, Direction.DOWN);
+            scene.idle(7);
+            scene.world().showSection(cogs1, Direction.DOWN);
+            scene.world().showSection(pump2, Direction.DOWN);
+            scene.world().showSection(selection1, Direction.DOWN);
+            scene.world().showSection(selection2, Direction.DOWN);
+            //scene.idle(7);
+
+            scene.world().showSection(cogs2, Direction.DOWN);
+            scene.world().showSection(selection0, Direction.DOWN);
+            scene.world().showSection(pump1, Direction.DOWN);
+            scene.idle(14);
+            scene.world().modifyBlockEntity(util.grid().at(3, 2, 1), BasinBlockEntity.class,
+                    be -> {
+                        IFluidHandler handler = be.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
+                        if (handler != null)
+                            handler.fill(content0, IFluidHandler.FluidAction.EXECUTE);
+                    });
+            scene.idle(7);
+            scene.overlay().showText(80)
+                    .text("Mixing Liquid Compost and Lava together provides Molten Liquid Compost")
+                    .attachKeyFrame()
+                    .placeNearTarget()
+                    .pointAt(util.vector().blockSurface(basinPosition.west(), Direction.UP));
+            scene.idle(90);
+            scene.overlay().showControls(util.vector().blockSurface(burnerPosition, Direction.WEST), Pointing.LEFT, 15).rightClick().withItem(new ItemStack(Items.OAK_PLANKS));
+            scene.idle(3);
+            scene.world().modifyBlock(burnerPosition, s -> s.setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.KINDLED), false);
+            scene.idle(7);
+            Class<MechanicalMixerBlockEntity> type = MechanicalMixerBlockEntity.class;
+            scene.world().modifyBlockEntity(util.grid().at(3, 4, 1), type, MechanicalMixerBlockEntity::startProcessingBasin);
+            scene.idle(40);
+
+            FluidStack content1 = new FluidStack(ModFluids.MOLTEN_COMPOST.get().getSource(), 1000);
+
+            scene.addKeyframe();
+            scene.idle(4);
+            for (int i = 0; i < 5; i++) {
+                scene.idle(7);
+                scene.world().modifyBlockEntity(util.grid().at(3, 2, 1), BasinBlockEntity.class,
+                        be -> {
+                            IFluidHandler handler = be.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
+                            if (handler != null)
+                                handler.drain(new FluidStack(content0.getFluid(), content0.getAmount() / 5), IFluidHandler.FluidAction.EXECUTE);
+                        });
+                scene.world().modifyBlockEntity(util.grid().at(3, 2, 1), BasinBlockEntity.class,
+                        be -> {
+                            IFluidHandler handler = be.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
+                            if (handler != null)
+                                handler.drain(new FluidStack(Fluids.LAVA, 1000 / 5), IFluidHandler.FluidAction.EXECUTE);
+                        });
+            }
+            scene.world().modifyBlockEntity(util.grid().at(3, 2, 1), BasinBlockEntity.class,
+                    be -> {
+                        IFluidHandler handler = be.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
+                        if (handler != null)
+                            handler.fill(content1, IFluidHandler.FluidAction.EXECUTE);
+                    });
+            scene.idle(14);
+            scene.overlay().showControls(util.vector().blockSurface(basinPosition, Direction.WEST), Pointing.LEFT, 25).withItem(new ItemStack(ModFluids.MOLTEN_COMPOST.get().getBucket()));
+            scene.idle(20);
+
         }
     }
 }

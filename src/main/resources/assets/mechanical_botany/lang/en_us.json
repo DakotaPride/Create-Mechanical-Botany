@@ -18,6 +18,7 @@
 
   "mechanical_botany.ponder.insolator.header": "Growing Plants in the Mechanical Insolator",
   "mechanical_botany.ponder.composter.header": "Breaking Down Plants Into Compost",
+  "mechanical_botany.ponder.compost_creation.header": "Processing Compost Into Usable Fluids",
   "mechanical_botany.ponder.layered_composters.header": "Transporting Rotational Power With Layered Composters",
   "mechanical_botany.ponder.molten_compost_use.header": "Using Molten Liquid Compost Within a Mechanical Insolator",
   "mechanical_botany.ponder.compost_use.header": "Using Liquid Compost Within a Mechanical Insolator",
@@ -36,6 +37,8 @@
   "mechanical_botany.ponder.layered_composters.text_1": "Mechanical Composters can also be powered from the bottom",
   "mechanical_botany.ponder.layered_composters.text_2": "Rotational Power flows through the Mechanical Composter's cog",
   "mechanical_botany.ponder.layered_composters.text_3": "This offers for some unique automation potential",
+  "mechanical_botany.ponder.compost_creation.text_1": "Putting Compost into an Item Drain will provide small amounts of Liquid Compost",
+  "mechanical_botany.ponder.compost_creation.text_2": "Mixing Liquid Compost and Lava together provides Molten Liquid Compost",
   "mechanical_botany.ponder.molten_compost_use.text_1": "Wither Roses can be produced with the help of Molten Liquid Compost",
   "mechanical_botany.ponder.compost_use.text_1": "Plants gathered from Sniffers require Liquid Compost in order to be reprocessed"
 }
