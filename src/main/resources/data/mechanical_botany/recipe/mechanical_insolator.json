@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "D": {
-      "item": "minecraft:dirt"
+      "tag": "minecraft:dirt"
     },
     "C": {
       "item": "create:copper_casing"
