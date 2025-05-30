@@ -17,7 +17,12 @@
       "id": "minecraft:beetroot"
     },
     {
-      "count": 2,
+      "count": 1,
+      "id": "minecraft:beetroot_seeds"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
       "id": "minecraft:beetroot_seeds"
     }
   ]

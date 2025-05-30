@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "garnished"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "tag": "garnished:honeyed_nuts"
+      },
+      {
+        "tag": "garnished:sweetened_nuts"
+      },
+      {
+        "tag": "garnished:chocolate_glazed_nuts"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

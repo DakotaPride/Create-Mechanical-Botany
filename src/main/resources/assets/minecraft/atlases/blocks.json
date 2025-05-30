@@ -15,6 +15,14 @@
     {
       "type": "single",
       "resource": "mechanical_botany:fluid/molten_compost_still"
+    },
+    {
+      "type": "single",
+      "resource": "mechanical_botany:fluid/void_compost_flow"
+    },
+    {
+      "type": "single",
+      "resource": "mechanical_botany:fluid/void_compost_still"
     }
   ]
 }

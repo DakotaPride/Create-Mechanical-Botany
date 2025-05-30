@@ -219,6 +219,96 @@ public class InsolatorPonderScenes {
         }
     }
 
+    public static class VoidCompostUsage implements PonderStoryBoard {
+
+        public VoidCompostUsage() {}
+
+        @Override
+        public void program(SceneBuilder builder, SceneBuildingUtil util) {
+            CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+            scene.title("void_compost_use", "Using Liquid Void Compost Within a Mechanical Insolator");
+            scene.configureBasePlate(0, 0, 5);
+
+            Selection belt = util.select().fromTo(1, 2, 5, 0, 1, 2)
+                    .add(util.select().position(1, 3, 2));
+            Selection beltCog = util.select().position(2, 0, 5);
+
+            scene.world().showSection(util.select().layer(0)
+                    .substract(beltCog), Direction.UP);
+            //scene.world().showSection(util.select().everywhere(), Direction.UP);
+
+            BlockPos insolator = util.grid().at(2, 3, 2);
+            Selection insolatorSelect = util.select().position(2, 3, 2);
+            BlockPos pump = util.grid().at(2, 2, 2);
+            Selection pumpSelect = util.select().position(2, 2, 2);
+            Selection cogs = util.select().fromTo(2, 3, 3, 2, 1, 3);
+            scene.world().setKineticSpeed(insolatorSelect, 0);
+            scene.world().setKineticSpeed(pumpSelect, 0);
+
+            scene.idle(5);
+            scene.world().showSection(util.select().fromTo(5, 1, 3, 3, 1, 3), Direction.DOWN);
+            scene.world().showSection(util.select().fromTo(3, 1, 2, 3, 4, 2), Direction.DOWN);
+            scene.idle(10);
+            scene.world().showSection(util.select().position(2, 1, 2), Direction.DOWN);
+            scene.world().showSection(util.select().position(pump), Direction.DOWN);
+            scene.world().showSection(util.select().position(insolator), Direction.DOWN);
+            scene.idle(10);
+            Vec3 insolatorTop = util.vector().topOf(insolator);
+            scene.overlay().showText(80)
+                    .attachKeyFrame()
+                    .text("Liquid Void Compost is made by mixing Liquid Compost with Powdered Obsidian")
+                    .pointAt(insolatorTop)
+                    .placeNearTarget();
+            scene.idle(90);
+            scene.overlay().showText(80)
+                    .attachKeyFrame()
+                    .text("Liquid Void Compost can be used to produce Chorus Fruit")
+                    .pointAt(insolatorTop)
+                    .placeNearTarget();
+            scene.idle(90);
+
+            scene.world().showSection(cogs, Direction.DOWN);
+            scene.idle(10);
+            scene.world().setKineticSpeed(insolatorSelect, 32);
+            scene.world().setKineticSpeed(pumpSelect, 32);
+            scene.effects().indicateSuccess(insolator);
+            scene.idle(10);
+
+            ItemStack itemStack = new ItemStack(Items.CHORUS_FLOWER);
+            Vec3 entitySpawn = util.vector().topOf(insolator.above(3));
+
+            ElementLink<EntityElement> entity1 =
+                    scene.world().createItemEntity(entitySpawn, util.vector().of(0, 0.2, 0), itemStack);
+            scene.idle(18);
+            scene.world().modifyEntity(entity1, Entity::discard);
+            scene.world().modifyBlockEntity(insolator, MechanicalInsolatorBlockEntity.class,
+                    ms -> ms.inputInv.setStackInSlot(0, itemStack));
+            scene.idle(40);
+
+            scene.world().modifyBlockEntity(insolator, MechanicalInsolatorBlockEntity.class,
+                    ms -> ms.inputInv.setStackInSlot(0, ItemStack.EMPTY));
+
+            ItemStack itemStack2 = Items.CHORUS_FLOWER.getDefaultInstance();
+            scene.overlay().showControls(util.vector().blockSurface(insolator, Direction.NORTH), Pointing.RIGHT, 40).rightClick()
+                    .withItem(itemStack2);
+            scene.idle(50);
+            scene.overlay().showControls(util.vector().blockSurface(insolator, Direction.NORTH), Pointing.RIGHT, 40).rightClick()
+                    .withItem(itemStack);
+            scene.idle(50);
+
+            scene.addKeyframe();
+            scene.world().showSection(beltCog, Direction.UP);
+            scene.world().showSection(belt, Direction.EAST);
+            scene.idle(15);
+
+            BlockPos beltPos = util.grid().at(1, 2, 2);
+            scene.world().createItemOnBelt(beltPos, Direction.EAST, itemStack2);
+            scene.idle(15);
+            scene.world().createItemOnBelt(beltPos, Direction.EAST, new ItemStack(Items.CHORUS_FRUIT));
+            scene.idle(20);
+        }
+    }
+
     public static class CompostUsage implements PonderStoryBoard {
 
         public CompostUsage() {}

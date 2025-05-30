@@ -17,11 +17,13 @@ public class ModPonderScenes {
         HELPER.forComponents(ModBlocks.MECHANICAL_INSOLATOR).addStoryBoard("insolator", new InsolatorPonderScenes.Intro());
         HELPER.forComponents(ModBlocks.MECHANICAL_INSOLATOR).addStoryBoard("compost_use", new InsolatorPonderScenes.CompostUsage());
         HELPER.forComponents(ModBlocks.MECHANICAL_INSOLATOR).addStoryBoard("molten_compost_use", new InsolatorPonderScenes.MoltenCompostUsage());
+        HELPER.forComponents(ModBlocks.MECHANICAL_INSOLATOR).addStoryBoard("void_compost_use", new InsolatorPonderScenes.VoidCompostUsage());
 
         HELPER.forComponents(ModBlocks.MECHANICAL_COMPOSTER).addStoryBoard("composter", new ComposterPonderScenes.Intro());
         HELPER.forComponents(ModBlocks.MECHANICAL_COMPOSTER).addStoryBoard("layered_composter", new ComposterPonderScenes.LayeredComposters());
         HELPER.forComponents(ModBlocks.MECHANICAL_COMPOSTER).addStoryBoard("compost_creation", new ComposterPonderScenes.CreatingLiquidCompost());
         HELPER.forComponents(ModBlocks.MECHANICAL_COMPOSTER).addStoryBoard("compost_use", new InsolatorPonderScenes.CompostUsage());
         HELPER.forComponents(ModBlocks.MECHANICAL_COMPOSTER).addStoryBoard("molten_compost_use", new InsolatorPonderScenes.MoltenCompostUsage());
+        HELPER.forComponents(ModBlocks.MECHANICAL_COMPOSTER).addStoryBoard("void_compost_use", new InsolatorPonderScenes.VoidCompostUsage());
     }
 }

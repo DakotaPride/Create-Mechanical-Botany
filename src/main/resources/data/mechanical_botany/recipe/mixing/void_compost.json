@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 40,
+      "fluid": "mechanical_botany:compost"
+    },
+    {
+      "item": "create:powdered_obsidian"
+    }
+  ],
+  "results": [
+    {
+      "amount": 40,
+      "id": "mechanical_botany:void_compost"
+    }
+  ]
+}

@@ -50,6 +50,20 @@ public class ModFluids {
                     .bucket()
                     .build()
                     .register();
+    public static final FluidEntry<BaseFlowingFluid.Flowing> VOID_COMPOST =
+            REGISTRATE.standardFluid("void_compost",
+                            SolidRenderedPlaceableFluidType.create(0x432652,
+                                    () -> 1f / 8f * AllConfigs.client().honeyTransparencyMultiplier.getF()))
+                    .properties(b -> b.viscosity(2000)
+                            .density(1400))
+                    .fluidProperties(p -> p.levelDecreasePerBlock(2)
+                            .tickRate(25)
+                            .slopeFindDistance(3)
+                            .explosionResistance(100f))
+                    .source(BaseFlowingFluid.Source::new) // TODO: remove when Registrate fixes FluidBuilder
+                    .bucket()
+                    .build()
+                    .register();
 
     public static void register() {}
 

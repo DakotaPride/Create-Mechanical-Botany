@@ -17,7 +17,12 @@
       "id": "minecraft:pumpkin"
     },
     {
-      "count": 2,
+      "count": 1,
+      "id": "minecraft:pumpkin_seeds"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
       "id": "minecraft:pumpkin_seeds"
     }
   ]

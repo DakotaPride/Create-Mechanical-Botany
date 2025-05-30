@@ -4,8 +4,10 @@
   "block.mechanical_botany.mechanical_composter": "Mechanical Composter",
   "fluid.mechanical_botany.compost": "Liquid Compost",
   "fluid.mechanical_botany.molten_compost": "Molten Liquid Compost",
+  "fluid.mechanical_botany.void_compost": "Void Liquid Compost",
   "item.mechanical_botany.compost_bucket": "Liquid Compost Bucket",
   "item.mechanical_botany.molten_compost_bucket": "Molten Liquid Compost Bucket",
+  "item.mechanical_botany.void_compost_bucket": "Void Liquid Compost Bucket",
   "item.mechanical_botany.compost": "Compost",
   "recipe.mechanical_botany.insolating": "Mechanical Insolating",
   "recipe.mechanical_botany.composting": "Mechanical Composting",
@@ -21,6 +23,7 @@
   "mechanical_botany.ponder.compost_creation.header": "Processing Compost Into Usable Fluids",
   "mechanical_botany.ponder.layered_composters.header": "Transporting Rotational Power With Layered Composters",
   "mechanical_botany.ponder.molten_compost_use.header": "Using Molten Liquid Compost Within a Mechanical Insolator",
+  "mechanical_botany.ponder.void_compost_use.header": "Using Void Liquid Compost Within a Mechanical Insolator",
   "mechanical_botany.ponder.compost_use.header": "Using Liquid Compost Within a Mechanical Insolator",
   "mechanical_botany.ponder.insolator.text_1": "Mechanical Insolators will reprocess certain plants provided to them",
   "mechanical_botany.ponder.insolator.text_2": "They can be powered from the side using cogwheels",
@@ -40,5 +43,6 @@
   "mechanical_botany.ponder.compost_creation.text_1": "Putting Compost into an Item Drain will provide small amounts of Liquid Compost",
   "mechanical_botany.ponder.compost_creation.text_2": "Mixing Liquid Compost and Lava together provides Molten Liquid Compost",
   "mechanical_botany.ponder.molten_compost_use.text_1": "Wither Roses can be produced with the help of Molten Liquid Compost",
+  "mechanical_botany.ponder.void_compost_use.text_1": "Chorus Fruit can be produced with the help of Void Liquid Compost",
   "mechanical_botany.ponder.compost_use.text_1": "Plants gathered from Sniffers require Liquid Compost in order to be reprocessed"
 }

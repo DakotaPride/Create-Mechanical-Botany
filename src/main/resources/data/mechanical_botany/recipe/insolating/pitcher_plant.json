@@ -17,7 +17,12 @@
       "id": "minecraft:pitcher_plant"
     },
     {
-      "count": 2,
+      "count": 1,
+      "id": "minecraft:pitcher_pod"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
       "id": "minecraft:pitcher_pod"
     }
   ]

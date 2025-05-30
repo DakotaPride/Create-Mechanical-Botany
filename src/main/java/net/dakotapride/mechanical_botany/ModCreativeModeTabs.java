@@ -40,6 +40,7 @@ public class ModCreativeModeTabs {
             output.accept(ModItems.COMPOST.asStack());
             output.accept(ModFluids.COMPOST.get().getBucket());
             output.accept(ModFluids.MOLTEN_COMPOST.get().getBucket());
+            output.accept(ModFluids.VOID_COMPOST.get().getBucket());
         }
     }
 
