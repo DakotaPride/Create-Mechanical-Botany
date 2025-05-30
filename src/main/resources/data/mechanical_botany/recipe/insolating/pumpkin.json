@@ -1,0 +1,24 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    },
+    {
+      "item": "minecraft:pumpkin_seeds"
+    }
+  ],
+  "processing_time": 600,
+  "results": [
+    {
+      "count": 1,
+      "id": "minecraft:pumpkin"
+    },
+    {
+      "count": 2,
+      "id": "minecraft:pumpkin_seeds"
+    }
+  ]
+}

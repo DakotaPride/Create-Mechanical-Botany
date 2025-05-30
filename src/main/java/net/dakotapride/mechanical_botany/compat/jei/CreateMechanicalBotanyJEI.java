@@ -21,7 +21,9 @@ import mezz.jei.api.runtime.IJeiRuntime;
 import net.createmod.catnip.config.ConfigBase;
 import net.dakotapride.mechanical_botany.CreateMechanicalBotany;
 import net.dakotapride.mechanical_botany.ModBlocks;
+import net.dakotapride.mechanical_botany.ModItems;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
+import net.dakotapride.mechanical_botany.kinetics.composter.CompostingRecipe;
 import net.dakotapride.mechanical_botany.kinetics.insolator.InsolatingRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
@@ -29,6 +31,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
@@ -72,6 +75,12 @@ public class CreateMechanicalBotanyJEI implements IModPlugin {
                 .itemIcon(ModBlocks.MECHANICAL_INSOLATOR.get())
                 .emptyBackground(178, 72)
                 .build("insolating", InsolatingCategory::new);
+        CreateRecipeCategory<?> composting = builder(CompostingRecipe.class)
+                .addTypedRecipes(ModRecipeTypes.COMPOSTING::getType)
+                .catalyst(ModBlocks.MECHANICAL_COMPOSTER::get)
+                .doubleItemIcon(ModBlocks.MECHANICAL_COMPOSTER.get(), ModItems.COMPOST.get())
+                .emptyBackground(178, 72)
+                .build("composting", CompostingCategory::new);
 
     }
 
@@ -90,6 +99,7 @@ public class CreateMechanicalBotanyJEI implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         Categories.forEach(c -> c.registerCatalysts(registration));
+        //registration.addRecipeCatalyst(ModBlocks.MECHANICAL_COMPOSTER, RecipeTypes.COMPOSTING);
     }
 
     @Override

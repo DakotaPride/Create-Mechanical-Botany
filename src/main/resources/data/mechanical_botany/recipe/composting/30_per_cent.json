@@ -1,0 +1,121 @@
+{
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "minecraft:moss_carpet"
+      },
+      {
+        "item": "minecraft:mangrove_roots"
+      },
+      {
+        "item": "minecraft:oak_leaves"
+      },
+      {
+        "item": "minecraft:spruce_leaves"
+      },
+      {
+        "item": "minecraft:birch_leaves"
+      },
+      {
+        "item": "minecraft:jungle_leaves"
+      },
+      {
+        "item": "minecraft:acacia_leaves"
+      },
+      {
+        "item": "minecraft:dark_oak_leaves"
+      },
+      {
+        "item": "minecraft:mangrove_leaves"
+      },
+      {
+        "item": "minecraft:cherry_leaves"
+      },
+      {
+        "item": "minecraft:azalea_leaves"
+      },
+      {
+        "item": "minecraft:oak_sapling"
+      },
+      {
+        "item": "minecraft:spruce_sapling"
+      },
+      {
+        "item": "minecraft:birch_sapling"
+      },
+      {
+        "item": "minecraft:jungle_sapling"
+      },
+      {
+        "item": "minecraft:acacia_sapling"
+      },
+      {
+        "item": "minecraft:dark_oak_sapling"
+      },
+      {
+        "item": "minecraft:mangrove_propagule"
+      },
+      {
+        "item": "minecraft:cherry_sapling"
+      },
+      {
+        "item": "minecraft:short_grass"
+      },
+      {
+        "item": "minecraft:pink_petals"
+      },
+      {
+        "item": "minecraft:small_dripleaf"
+      },
+      {
+        "item": "minecraft:hanging_roots"
+      },
+      {
+        "item": "minecraft:wheat_seeds"
+      },
+      {
+        "item": "minecraft:pumpkin_seeds"
+      },
+      {
+        "item": "minecraft:melon_seeds"
+      },
+      {
+        "item": "minecraft:beetroot_seeds"
+      },
+      {
+        "item": "minecraft:torchflower_seeds"
+      },
+      {
+        "item": "minecraft:pitcher_pod"
+      },
+      {
+        "item": "minecraft:glow_berries"
+      },
+      {
+        "item": "minecraft:sweet_berries"
+      },
+      {
+        "item": "minecraft:seagrass"
+      },
+      {
+        "item": "minecraft:kelp"
+      },
+      {
+        "item": "minecraft:dried_kelp"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.30,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

@@ -10,10 +10,15 @@
       "item": "minecraft:carrot"
     }
   ],
-  "processing_time": 300,
+  "processing_time": 200,
   "results": [
     {
       "count": 2,
+      "id": "minecraft:carrot"
+    },
+    {
+      "chance": 0.35,
+      "count": 1,
       "id": "minecraft:carrot"
     }
   ]

@@ -4,6 +4,7 @@ import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.dakotapride.mechanical_botany.kinetics.composter.MechanicalComposterBlock;
 import net.dakotapride.mechanical_botany.kinetics.insolator.MechanicalInsolatorBlock;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
@@ -22,6 +23,17 @@ public class ModBlocks {
                     .transform(customItemModel())
                     // .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .register();
+    public static final BlockEntry<MechanicalComposterBlock> MECHANICAL_COMPOSTER =
+            REGISTRATE.block("mechanical_composter", MechanicalComposterBlock::new)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.noOcclusion().requiresCorrectToolForDrops())
+                    .transform(pickaxeOnly())
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+                    //.transform(CStress.setImpact(8.0D))
+                    .item()
+                    .transform(customItemModel())
+                    // .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .register();
 
     public static void register() {
         // load the class and register everything
@@ -29,6 +41,7 @@ public class ModBlocks {
 
         BlockStressValues.IMPACTS.registerProvider((block) -> {
             if (block == MECHANICAL_INSOLATOR.get()) return () -> 16.0D;
+            if (block == MECHANICAL_COMPOSTER.get()) return () -> 4.0D;
             else return null;
         });
     }

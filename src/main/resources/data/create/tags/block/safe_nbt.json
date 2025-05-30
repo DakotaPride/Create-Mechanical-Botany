@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mechanical_botany:mechanical_insolator"
+    "mechanical_botany:mechanical_insolator",
+    "mechanical_botany:mechanical_composter"
   ]
 }

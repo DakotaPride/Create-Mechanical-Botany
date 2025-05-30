@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "mechanical_botany:compost"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:bone_meal"
+    }
+  ]
+}

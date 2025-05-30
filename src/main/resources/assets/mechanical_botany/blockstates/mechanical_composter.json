@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "mechanical_botany:block/mechanical_composter"
+    }
+  }
+}
