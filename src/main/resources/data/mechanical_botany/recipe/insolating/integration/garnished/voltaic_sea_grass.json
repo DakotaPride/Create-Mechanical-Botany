@@ -2,25 +2,25 @@
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
-      "modid": "hibernalherbs"
+      "modid": "garnished"
     }
   ],
   "type": "mechanical_botany:insolating",
   "ingredients": [
     {
       "type": "fluid_stack",
-      "amount": 200,
-      "fluid": "mechanical_botany:void_compost"
+      "amount": 1000,
+      "fluid": "minecraft:water"
     },
     {
-      "item": "hibernalherbs:sage"
+      "item": "garnished:voltaic_sea_grass"
     }
   ],
-  "processing_time": 1000,
+  "processing_time": 400,
   "results": [
     {
       "count": 2,
-      "id": "hibernalherbs:sage"
+      "id": "garnished:voltaic_sea_grass"
     }
   ]
 }

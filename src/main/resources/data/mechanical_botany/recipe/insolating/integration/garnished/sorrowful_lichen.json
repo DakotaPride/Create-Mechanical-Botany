@@ -2,25 +2,25 @@
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
-      "modid": "hibernalherbs"
+      "modid": "garnished"
     }
   ],
   "type": "mechanical_botany:insolating",
   "ingredients": [
     {
       "type": "fluid_stack",
-      "amount": 200,
-      "fluid": "mechanical_botany:void_compost"
+      "amount": 100,
+      "fluid": "minecraft:lava"
     },
     {
-      "item": "hibernalherbs:sage"
+      "item": "garnished:sorrowful_lichen"
     }
   ],
-  "processing_time": 1000,
+  "processing_time": 600,
   "results": [
     {
       "count": 2,
-      "id": "hibernalherbs:sage"
+      "id": "garnished:sorrowful_lichen"
     }
   ]
 }
