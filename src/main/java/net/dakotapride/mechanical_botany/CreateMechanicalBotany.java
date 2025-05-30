@@ -56,6 +56,8 @@ public class CreateMechanicalBotany {
         ModPartialModels.register();
         ModFluids.register();
 
+        eventBus.addListener(this::clientSetup);
+
         // Register the Deferred Register to the mod event bus so blocks get registered
         // BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
@@ -82,6 +84,10 @@ public class CreateMechanicalBotany {
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
         //LOGGER.info("HELLO FROM COMMON SETUP");
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event) {
+        PonderIndex.addPlugin(new ModPonderPlugin());
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -124,7 +130,7 @@ public class CreateMechanicalBotany {
             // Some client setup code
             //LOGGER.info("HELLO FROM CLIENT SETUP");
             //LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-            PonderIndex.addPlugin(new ModPonderScenes());
+            //PonderIndex.addPlugin(new ModPonderPlugin());
 
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.MECHANICAL_INSOLATOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.MECHANICAL_COMPOSTER.get(), RenderType.cutout());

@@ -9,10 +9,11 @@ import net.dakotapride.mechanical_botany.kinetics.composter.ComposterPonderScene
 import net.dakotapride.mechanical_botany.kinetics.insolator.InsolatorPonderScenes;
 import net.minecraft.resources.ResourceLocation;
 
-public class ModPonderScenes implements PonderPlugin {
+public class ModPonderScenes {
 
     public static void register(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
+
         HELPER.forComponents(ModBlocks.MECHANICAL_INSOLATOR).addStoryBoard("insolator", new InsolatorPonderScenes.Intro());
         HELPER.forComponents(ModBlocks.MECHANICAL_INSOLATOR).addStoryBoard("compost_use", new InsolatorPonderScenes.CompostUsage());
         HELPER.forComponents(ModBlocks.MECHANICAL_INSOLATOR).addStoryBoard("molten_compost_use", new InsolatorPonderScenes.MoltenCompostUsage());
@@ -22,21 +23,5 @@ public class ModPonderScenes implements PonderPlugin {
         HELPER.forComponents(ModBlocks.MECHANICAL_COMPOSTER).addStoryBoard("compost_creation", new ComposterPonderScenes.CreatingLiquidCompost());
         HELPER.forComponents(ModBlocks.MECHANICAL_COMPOSTER).addStoryBoard("compost_use", new InsolatorPonderScenes.CompostUsage());
         HELPER.forComponents(ModBlocks.MECHANICAL_COMPOSTER).addStoryBoard("molten_compost_use", new InsolatorPonderScenes.MoltenCompostUsage());
-    }
-
-    @Override
-    public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        //PonderPlugin.super.registerScenes(helper);
-        register(helper);
-    }
-
-    @Override
-    public void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
-        ModPonderTags.register(helper);
-    }
-
-    @Override
-    public String getModId() {
-        return CreateMechanicalBotany.MOD_ID;
     }
 }

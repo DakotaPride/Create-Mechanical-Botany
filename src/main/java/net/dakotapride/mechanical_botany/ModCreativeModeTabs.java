@@ -18,7 +18,7 @@ public class ModCreativeModeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MECHANICAL_BOTANY = REGISTER.register("mechanical_botany",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.mechanical_botany.base"))
-                    .icon(Items.WHEAT_SEEDS::getDefaultInstance)
+                    .icon(ModBlocks.MECHANICAL_INSOLATOR::asStack)
                     .displayItems(new DisplayItemsGenerator(true, ModCreativeModeTabs.MECHANICAL_BOTANY))
                     .build());
 
