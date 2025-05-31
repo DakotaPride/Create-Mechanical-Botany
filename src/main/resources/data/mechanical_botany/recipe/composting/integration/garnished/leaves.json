@@ -7,39 +7,41 @@
   ],
   "type": "mechanical_botany:composting",
   "ingredients": [
-    {
-      "item": "garnished:unassigned_nut_leaves"
-    },
-    {
-      "item": "garnished:nut_leaves"
-    },
-    {
-      "item": "garnished:peanut_leaves"
-    },
-    {
-      "item": "garnished:cashew_leaves"
-    },
-    {
-      "item": "garnished:walnut_leaves"
-    },
-    {
-      "item": "garnished:almond_leaves"
-    },
-    {
-      "item": "garnished:pistachio_leaves"
-    },
-    {
-      "item": "garnished:pecan_leaves"
-    },
-    {
-      "item": "garnished:macadamia_leaves"
-    },
-    {
-      "item": "garnished:hazelnut_leaves"
-    },
-    {
-      "item": "garnished:chestnut_leaves"
-    }
+    [
+      {
+        "item": "garnished:unassigned_nut_leaves"
+      },
+      {
+        "item": "garnished:nut_leaves"
+      },
+      {
+        "item": "garnished:peanut_leaves"
+      },
+      {
+        "item": "garnished:cashew_leaves"
+      },
+      {
+        "item": "garnished:walnut_leaves"
+      },
+      {
+        "item": "garnished:almond_leaves"
+      },
+      {
+        "item": "garnished:pistachio_leaves"
+      },
+      {
+        "item": "garnished:pecan_leaves"
+      },
+      {
+        "item": "garnished:macadamia_leaves"
+      },
+      {
+        "item": "garnished:hazelnut_leaves"
+      },
+      {
+        "item": "garnished:chestnut_leaves"
+      }
+    ]
   ],
   "processing_time": 50,
   "results": [
