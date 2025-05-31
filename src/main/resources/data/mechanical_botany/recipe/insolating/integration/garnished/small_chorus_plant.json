@@ -7,7 +7,7 @@
       "fluid": "mechanical_botany:void_compost"
     },
     {
-      "item": "minecraft:small_chorus_plant"
+      "item": "garnished:small_chorus_plant"
     }
   ],
   "processing_time": 1400,
@@ -18,7 +18,7 @@
     },
     {
       "count": 1,
-      "id": "minecraft:small_chorus_plant"
+      "id": "garnished:small_chorus_plant"
     }
   ]
 }
