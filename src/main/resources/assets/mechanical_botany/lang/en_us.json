@@ -1,4 +1,6 @@
 {
+  "mechanical_botany.text.processing_ticks": "%ss",
+
   "itemGroup.mechanical_botany.base": "Create: Mechanical Botany",
   "block.mechanical_botany.mechanical_insolator": "Mechanical Insolator",
   "block.mechanical_botany.mechanical_composter": "Mechanical Composter",

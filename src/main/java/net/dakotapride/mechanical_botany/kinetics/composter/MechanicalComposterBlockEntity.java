@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.sound.SoundScapes;
 import net.createmod.catnip.math.VecHelper;
 import net.dakotapride.mechanical_botany.ModBlockEntityTypes;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
+import net.dakotapride.mechanical_botany.kinetics.insolator.InsolatingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -17,6 +18,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -24,12 +27,14 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -106,7 +111,7 @@ public class MechanicalComposterBlockEntity extends KineticBlockEntity {
 
         RecipeWrapper inventoryIn = new RecipeWrapper(inputInv);
         if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level)) {
-            Optional<RecipeHolder<CompostingRecipe>> recipe = ModRecipeTypes.COMPOSTING.find(inventoryIn, level);
+            Optional<RecipeHolder<CompostingRecipe>> recipe = ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.COMPOSTING);
             if (!recipe.isPresent()) {
                 timer = 100;
                 sendData();
@@ -139,7 +144,7 @@ public class MechanicalComposterBlockEntity extends KineticBlockEntity {
         RecipeWrapper inventoryIn = new RecipeWrapper(inputInv);
 
         if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level)) {
-            Optional<RecipeHolder<CompostingRecipe>> recipe = ModRecipeTypes.COMPOSTING.find(inventoryIn, level);
+            Optional<RecipeHolder<CompostingRecipe>> recipe = ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.COMPOSTING);
             if (!recipe.isPresent())
                 return;
             lastRecipe = recipe.get().value();
@@ -198,8 +203,8 @@ public class MechanicalComposterBlockEntity extends KineticBlockEntity {
 
         if (lastRecipe != null && lastRecipe.matches(inventoryIn, level))
             return true;
-        return ModRecipeTypes.COMPOSTING.find(inventoryIn, level)
-                .isPresent();
+
+        return ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.COMPOSTING).isPresent();
     }
 
     private class MechanicalComposterInventoryHandler extends CombinedInvWrapper {

@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    },
+    {
+      "item": "biomeswevegone:magenta_amaranth"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "count": 2,
+      "id": "biomeswevegone:magenta_amaranth"
+    }
+  ]
+}

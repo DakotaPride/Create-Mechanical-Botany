@@ -13,6 +13,7 @@ import net.createmod.catnip.lang.LangBuilder;
 import net.dakotapride.mechanical_botany.CreateMechanicalBotany;
 import net.dakotapride.mechanical_botany.ModBlockEntityTypes;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
+import net.dakotapride.mechanical_botany.kinetics.composter.CompostingRecipe;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,9 +23,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -189,7 +188,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
 
         RecipeWrapper inventoryIn = new RecipeWrapper(inputInv);
         if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level)) {
-            Optional<RecipeHolder<InsolatingRecipe>> recipe = ModRecipeTypes.INSOLATING.find(inventoryIn, level);
+            Optional<RecipeHolder<InsolatingRecipe>> recipe = ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.INSOLATING);
             if (!recipe.isPresent()) {
                 timer = 100;
                 sendData();
@@ -230,7 +229,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         RecipeWrapper inventoryIn = new RecipeWrapper(inputInv);
 
         if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level) || !lastRecipe.getRequiredFluid().test(getCurrentFluidInTank())) {
-            Optional<RecipeHolder<InsolatingRecipe>> recipe = ModRecipeTypes.INSOLATING.find(inventoryIn, level);
+            Optional<RecipeHolder<InsolatingRecipe>> recipe = ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.INSOLATING);
             if (!recipe.isPresent())
                 return;
             lastRecipe = recipe.get().value();
@@ -238,7 +237,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
 
         ItemStack stackInSlot = inputInv.getStackInSlot(0);
         FluidStack fluidInSlot = getCurrentFluidInTank();
-        if (lastRecipe.getIngredients().get(0).test(stackInSlot) && lastRecipe.getFluidIngredients().get(0).test(fluidInSlot)) {
+        if (lastRecipe.getIngredients().get(0).test(stackInSlot) && lastRecipe.getFluidIngredients().get(0).test(fluidInSlot) && lastRecipe.getRequiredFluid().getRequiredAmount() <= getCurrentFluidInTank().getAmount()) {
             stackInSlot.shrink(1);
             fluidInSlot.shrink(lastRecipe.getRequiredFluid().getRequiredAmount());
             inputInv.setStackInSlot(0, stackInSlot);
@@ -281,10 +280,10 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         tester.setStackInSlot(0, stack);
         RecipeWrapper inventoryIn = new RecipeWrapper(tester);
 
-        if (lastRecipe != null && lastRecipe.matches(inventoryIn, level) && lastRecipe.getRequiredFluid().test(getCurrentFluidInTank()))
+        if (lastRecipe != null && lastRecipe.matches(inventoryIn, level) && lastRecipe.getRequiredFluid().test(getCurrentFluidInTank()) && lastRecipe.getRequiredFluid().getRequiredAmount() <= getCurrentFluidInTank().getAmount())
             return true;
 
-        return ModRecipeTypes.INSOLATING.find(inventoryIn, level).isPresent();
+        return ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.INSOLATING).isPresent();
     }
 
     private class InsolatorInventoryHandler extends CombinedInvWrapper {

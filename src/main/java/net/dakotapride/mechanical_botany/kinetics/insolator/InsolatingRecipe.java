@@ -2,6 +2,8 @@ package net.dakotapride.mechanical_botany.kinetics.insolator;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
+import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
 import net.minecraft.world.item.crafting.RecipeInput;
@@ -10,14 +12,14 @@ import net.minecraft.world.level.Level;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class InsolatingRecipe extends ProcessingRecipe<RecipeInput> {
-    public InsolatingRecipe(ProcessingRecipeBuilder.ProcessingRecipeParams params) {
+public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
+    public InsolatingRecipe(ProcessingRecipeParams params) {
         super(ModRecipeTypes.INSOLATING, params);
     }
 
     public FluidIngredient getRequiredFluid() {
-        if (fluidIngredients.isEmpty())
-            throw new IllegalStateException("Insolator Recipe: " + id.toString() + " has no fluid ingredient!");
+//        if (fluidIngredients.isEmpty())
+//            throw new IllegalStateException("Insolator Recipe: " + id.toString() + " has no fluid ingredient!");
         return fluidIngredients.get(0);
     }
 
@@ -48,5 +50,11 @@ public class InsolatingRecipe extends ProcessingRecipe<RecipeInput> {
     @Override
     protected int getMaxOutputCount() {
         return 4;
+    }
+
+    public static class Serializer extends StandardProcessingRecipe.Serializer<InsolatingRecipe> {
+        public Serializer() {
+            super(InsolatingRecipe::new);
+        }
     }
 }

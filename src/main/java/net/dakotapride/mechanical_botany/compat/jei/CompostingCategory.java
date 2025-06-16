@@ -1,18 +1,33 @@
 package net.dakotapride.mechanical_botany.compat.jei;
 
 
+import com.simibubi.create.compat.jei.DoubleItemIcon;
+import com.simibubi.create.compat.jei.EmptyBackground;
+import com.simibubi.create.compat.jei.ItemIcon;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
+import net.dakotapride.mechanical_botany.CreateMechanicalBotany;
+import net.dakotapride.mechanical_botany.ModBlocks;
+import net.dakotapride.mechanical_botany.ModItems;
+import net.dakotapride.mechanical_botany.ModRecipeTypes;
 import net.dakotapride.mechanical_botany.kinetics.composter.CompostingRecipe;
+import net.dakotapride.mechanical_botany.kinetics.insolator.InsolatingRecipe;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 public class CompostingCategory extends CreateRecipeCategory<CompostingRecipe> {
@@ -45,6 +60,29 @@ public class CompostingCategory extends CreateRecipeCategory<CompostingRecipe> {
 
             i++;
         }
+    }
+
+    public static final RecipeType<RecipeHolder<CompostingRecipe>> TYPE =
+            RecipeType.createRecipeHolderType(CreateMechanicalBotany.asResource("composting"));
+
+    public static CompostingCategory create(IGuiHelper guiHelper) {
+        Component title = Component.translatable("recipe.mechanical_botany.composting");
+        IDrawable background = new EmptyBackground(178, 72);
+        IDrawable icon = new DoubleItemIcon(() -> new ItemStack(ModBlocks.MECHANICAL_COMPOSTER.get()), () -> ModItems.COMPOST.asStack());
+        Supplier<ItemStack> catalystStackSupplier = ModBlocks.MECHANICAL_COMPOSTER::asStack;
+        Info<CompostingRecipe> info = new Info<>(
+                TYPE,
+                title,
+                background,
+                icon,
+                CompostingCategory::getAllRecipes,
+                List.of(catalystStackSupplier)
+        );
+        return new CompostingCategory(info);
+    }
+
+    private static List<RecipeHolder<CompostingRecipe>> getAllRecipes() {
+        return CreateMechanicalBotanyJEI.getRecipeManager().getAllRecipesFor(ModRecipeTypes.COMPOSTING.getType());
     }
 
     @Override
