@@ -13,23 +13,14 @@
       "fluid": "mechanical_botany:compost"
     },
     {
-      "item": "minecraft:pitcher_pod"
+      "item": "biomeswevegone:blue_glowcane_shoot"
     }
   ],
-  "processing_time": 4000,
+  "processing_time": 8000,
   "results": [
     {
-      "count": 1,
-      "id": "minecraft:pitcher_plant"
-    },
-    {
-      "count": 1,
-      "id": "minecraft:pitcher_pod"
-    },
-    {
-      "chance": 0.25,
-      "count": 1,
-      "id": "minecraft:pitcher_pod"
+      "count": 2,
+      "id": "biomeswevegone:blue_glowcane_shoot"
     }
   ]
 }

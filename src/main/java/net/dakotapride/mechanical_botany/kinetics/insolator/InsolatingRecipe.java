@@ -38,6 +38,11 @@ public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
         return true;
     }
 
+//    @Override
+//    public int getProcessingDuration() {
+//        return super.getProcessingDuration() * 2;
+//    }
+
     @Override
     public boolean matches(RecipeInput inv, Level worldIn) {
         if (inv.isEmpty())

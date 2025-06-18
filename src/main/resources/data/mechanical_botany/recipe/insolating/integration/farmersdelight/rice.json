@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    },
+    {
+      "item": "farmersdelight:rice"
+    }
+  ],
+  "processing_time": 1600,
+  "results": [
+    {
+      "count": 1,
+      "id": "farmersdelight:rice"
+    },
+    {
+      "count": 1,
+      "id": "farmersdelight:rice_panicle"
+    }
+  ]
+}

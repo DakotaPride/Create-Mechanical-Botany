@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    },
+    {
+      "item": "biomeswevegone:pale_pumpkin_seeds"
+    }
+  ],
+  "processing_time": 4800,
+  "results": [
+    {
+      "count": 1,
+      "id": "biomeswevegone:pale_pumpkin"
+    },
+    {
+      "count": 1,
+      "id": "biomeswevegone:pale_pumpkin_seeds"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
+      "id": "biomeswevegone:pale_pumpkin_seeds"
+    }
+  ]
+}

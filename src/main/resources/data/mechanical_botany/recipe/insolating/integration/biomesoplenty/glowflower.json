@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    },
+    {
+      "item": "biomesoplenty:glowflower"
+    }
+  ],
+  "processing_time": 400,
+  "results": [
+    {
+      "count": 2,
+      "id": "biomesoplenty:glowflower"
+    }
+  ]
+}
