@@ -1,0 +1,73 @@
+{
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "biomeoplenty:willow_vine"
+      },
+      {
+        "item": "biomeoplenty:spanish_moss"
+      },
+      {
+        "item": "biomeoplenty:sprout"
+      },
+      {
+        "item": "biomeoplenty:bush"
+      },
+      {
+        "item": "biomeoplenty:high_grass"
+      },
+      {
+        "item": "biomeoplenty:clover"
+      },
+      {
+        "item": "biomeoplenty:huge_clover_petal"
+      },
+      {
+        "item": "biomeoplenty:dune_grass"
+      },
+      {
+        "item": "biomeoplenty:desert_grass"
+      },
+      {
+        "item": "biomeoplenty:dead_grass"
+      },
+      {
+        "item": "biomeoplenty:tundra_shrub"
+      },
+      {
+        "item": "biomeoplenty:barley"
+      },
+      {
+        "item": "biomeoplenty:cattail"
+      },
+      {
+        "item": "biomeoplenty:reed"
+      },
+      {
+        "item": "biomeoplenty:watergrass"
+      },
+      {
+        "item": "biomeoplenty:tiny_cactus"
+      },
+      {
+        "item": "biomeoplenty:high_grass_plant"
+      },
+      {
+        "item": "biomeoplenty:spanish_moss_plant"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.50,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "biomesoplenty:toadstool_block"
+      },
+      {
+        "item": "biomesoplenty:glowshroom_block"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.85,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

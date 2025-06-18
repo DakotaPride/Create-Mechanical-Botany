@@ -1,0 +1,85 @@
+{
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "biomesoplenty:toadstool"
+      },
+      {
+        "item": "biomesoplenty:glowshroom"
+      },
+      {
+        "item": "biomesoplenty:glowing_moss_block"
+      },
+      {
+        "item": "biomesoplenty:glowing_moss_carpet"
+      },
+      {
+        "item": "biomesoplenty:rose"
+      },
+      {
+        "item": "biomesoplenty:violet"
+      },
+      {
+        "item": "biomesoplenty:lavender"
+      },
+      {
+        "item": "biomesoplenty:tall_lavender"
+      },
+      {
+        "item": "biomesoplenty:white_lavender"
+      },
+      {
+        "item": "biomesoplenty:tall_white_lavender"
+      },
+      {
+        "item": "biomesoplenty:blue_hydrangea"
+      },
+      {
+        "item": "biomesoplenty:goldenrod"
+      },
+      {
+        "item": "biomesoplenty:orange_cosmos"
+      },
+      {
+        "item": "biomesoplenty:pink_daffodil"
+      },
+      {
+        "item": "biomesoplenty:pink_hibiscus"
+      },
+      {
+        "item": "biomesoplenty:wildflower"
+      },
+      {
+        "item": "biomesoplenty:icy_iris"
+      },
+      {
+        "item": "biomesoplenty:glowflower"
+      },
+      {
+        "item": "biomesoplenty:wilted_lily"
+      },
+      {
+        "item": "biomesoplenty:burning_blossom"
+      },
+      {
+        "item": "biomesoplenty:huge_lily_pad"
+      },
+      {
+        "item": "biomesoplenty:waterlily"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.65,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}
