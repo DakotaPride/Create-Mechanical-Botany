@@ -13,14 +13,14 @@
       "fluid": "minecraft:water"
     },
     {
-      "item": "biomeswevegone:lazarous_bellflower"
+      "item": "biomeswevegone:lazarus_bellflower"
     }
   ],
   "processing_time": 400,
   "results": [
     {
       "count": 2,
-      "id": "biomeswevegone:lazarous_bellflower"
+      "id": "biomeswevegone:lazarus_bellflower"
     }
   ]
 }

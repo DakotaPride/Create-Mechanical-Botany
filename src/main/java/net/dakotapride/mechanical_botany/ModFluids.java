@@ -2,10 +2,13 @@ package net.dakotapride.mechanical_botany;
 
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.content.fluids.VirtualFluid;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import net.createmod.catnip.theme.Color;
+import net.dakotapride.mechanical_botany.compat.jei.CreateMechanicalBotanyJEI;
+import net.dakotapride.mechanical_botany.fluid.BloodFluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -64,6 +67,9 @@ public class ModFluids {
                     .bucket()
                     .build()
                     .register();
+
+    public static final FluidEntry<BloodFluid> BLOOD =
+            REGISTRATE.virtualFluid("blood", BloodFluid.Type::new, BloodFluid::createSource, BloodFluid::createFlowing).register();
 
     public static void register() {}
 

@@ -9,8 +9,8 @@
   "ingredients": [
     {
       "type": "fluid_stack",
-      "amount": 1000,
-      "fluid": "biomeoplenty:blood"
+      "amount": 50,
+      "fluid": "mechanical_botany:blood"
     },
     {
       "item": "biomesoplenty:hair"
