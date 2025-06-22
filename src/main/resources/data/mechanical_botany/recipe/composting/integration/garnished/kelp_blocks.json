@@ -7,12 +7,14 @@
   ],
   "type": "mechanical_botany:composting",
   "ingredients": [
-    {
-      "item": "garnished:dried_dulse_kelp_block"
-    },
-    {
-      "item": "garnished:dried_vermilion_kelp_block"
-    }
+    [
+      {
+        "item": "garnished:dried_dulse_kelp_block"
+      },
+      {
+        "item": "garnished:dried_vermilion_kelp_block"
+      }
+    ]
   ],
   "processing_time": 50,
   "results": [

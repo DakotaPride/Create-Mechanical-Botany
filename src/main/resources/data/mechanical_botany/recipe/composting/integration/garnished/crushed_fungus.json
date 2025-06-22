@@ -7,15 +7,17 @@
   ],
   "type": "mechanical_botany:composting",
   "ingredients": [
-    {
-      "item": "garnished:crushed_crimson_fungus"
-    },
-    {
-      "item": "garnished:crushed_warped_fungus"
-    },
-    {
-      "item": "garnished:crushed_sepia_fungus"
-    }
+    [
+      {
+        "item": "garnished:crushed_crimson_fungus"
+      },
+      {
+        "item": "garnished:crushed_warped_fungus"
+      },
+      {
+        "item": "garnished:crushed_sepia_fungus"
+      }
+    ]
   ],
   "processing_time": 50,
   "results": [

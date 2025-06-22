@@ -23,6 +23,7 @@ import net.createmod.catnip.theme.Color;
 import net.dakotapride.mechanical_botany.CreateMechanicalBotany;
 import net.dakotapride.mechanical_botany.ModBlocks;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
+import net.dakotapride.mechanical_botany.compat.jei.util.CreateMechanicalBotanyRecipeCategory;
 import net.dakotapride.mechanical_botany.kinetics.insolator.InsolatingRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -37,7 +38,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
-public class InsolatingCategory extends CreateRecipeCategory<InsolatingRecipe> {
+public class InsolatingCategory extends CreateMechanicalBotanyRecipeCategory<InsolatingRecipe> {
 
     private final AnimatedMechanicalInsolator mechanicalInsolator = new AnimatedMechanicalInsolator();
 
@@ -52,7 +53,7 @@ public class InsolatingCategory extends CreateRecipeCategory<InsolatingRecipe> {
                 .setBackground(getRenderedSlot(), -1, -1)
                 .addIngredients(recipe.getIngredients().get(0));
 
-        addFluidSlot(builder, 25, 9, recipe.getRequiredFluid());
+        addFluidSlot(builder, 25, 9, recipe.getRequiredFluid(), RecipeIngredientRole.INPUT);
 
         List<ProcessingOutput> results = recipe.getRollableResults();
         boolean single = results.size() == 1;

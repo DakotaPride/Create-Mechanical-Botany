@@ -7,12 +7,14 @@
   ],
   "type": "mechanical_botany:composting",
   "ingredients": [
-    {
-      "item": "garnished:pansophical_petal"
-    },
-    {
-      "item": "garnished:incandescent_petal"
-    }
+    [
+      {
+        "item": "garnished:pansophical_petal"
+      },
+      {
+        "item": "garnished:incandescent_petal"
+      }
+    ]
   ],
   "processing_time": 50,
   "results": [
