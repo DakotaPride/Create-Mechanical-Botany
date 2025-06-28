@@ -5,38 +5,33 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.sound.SoundScapes;
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.lang.LangBuilder;
 import net.dakotapride.mechanical_botany.CreateMechanicalBotany;
-import net.dakotapride.mechanical_botany.ModBlockEntityTypes;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
-import net.dakotapride.mechanical_botany.kinetics.composter.CompostingRecipe;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -46,7 +41,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
 
     public ItemStackHandler inputInv;
     public ItemStackHandler outputInv;
-    public IItemHandler capability;
+    public LazyOptional<IItemHandler> capability;
     public int timer;
     private InsolatingRecipe lastRecipe;
 
@@ -56,7 +51,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         super(type, pos, state);
         inputInv = new ItemStackHandler(1);
         outputInv = new ItemStackHandler(9);
-        capability = new InsolatorInventoryHandler();
+        capability = LazyOptional.of(InsolatorInventoryHandler::new);
     }
 
     @Override
@@ -76,13 +71,13 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
                             .add(mb)
                             .style(ChatFormatting.GOLD))
                     .text(ChatFormatting.GRAY, " / ")
-                    .add(CreateLang.number(tank.getCapability().getTankCapacity(0))
+                    .add(CreateLang.number(tank.getCapability().resolve().get().getTankCapacity(0))
                             .add(mb)
                             .style(ChatFormatting.DARK_GRAY))
                     .forGoggles(tooltip, 1);
         } else {
             CreateLang.translate("gui.goggles.fluid_container.capacity")
-                    .add(CreateLang.number(tank.getCapability().getTankCapacity(0))
+                    .add(CreateLang.number(tank.getCapability().resolve().get().getTankCapacity(0))
                             .add(mb)
                             .style(ChatFormatting.GOLD))
                     .style(ChatFormatting.GRAY)
@@ -116,23 +111,6 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
 
     private static void addBlankSpace(List<Component> tooltip) {
         tooltip.add(Component.literal(""));
-    }
-
-    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(
-                Capabilities.FluidHandler.BLOCK,
-                ModBlockEntityTypes.INSOLATOR.get(),
-                (be, context) -> {
-                    if (context == Direction.DOWN)
-                        return be.tank.getCapability();
-                    return null;
-                }
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntityTypes.INSOLATOR.get(),
-                (be, context) -> be.capability
-        );
     }
 
     @Override
@@ -188,12 +166,12 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
 
         RecipeWrapper inventoryIn = new RecipeWrapper(inputInv);
         if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level)) {
-            Optional<RecipeHolder<InsolatingRecipe>> recipe = ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.INSOLATING);
+            Optional<InsolatingRecipe> recipe = ModRecipeTypes.INSOLATING.find(inventoryIn, level);
             if (!recipe.isPresent()) {
                 timer = 100;
                 sendData();
             } else {
-                lastRecipe = recipe.get().value();
+                lastRecipe = recipe.get();
                 timer = lastRecipe.getProcessingDuration();
                 sendData();
             }
@@ -216,23 +194,14 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         ItemHelper.dropContents(level, worldPosition, outputInv);
     }
 
-    public boolean check(RecipeInput inv, Level worldIn, NonNullList<Ingredient> ingredients, NonNullList<FluidIngredient> fluidIngredients) {
-        if (inv.isEmpty())
-            return false;
-        if (tank.isEmpty())
-            return false;
-
-        return ingredients.get(0).test(inv.getItem(0)) && fluidIngredients.get(0).test(getCurrentFluidInTank());
-    }
-
     private void process() {
         RecipeWrapper inventoryIn = new RecipeWrapper(inputInv);
 
         if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level) || !lastRecipe.getRequiredFluid().test(getCurrentFluidInTank())) {
-            Optional<RecipeHolder<InsolatingRecipe>> recipe = ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.INSOLATING);
+            Optional<InsolatingRecipe> recipe = ModRecipeTypes.INSOLATING.find(inventoryIn, level);
             if (!recipe.isPresent())
                 return;
-            lastRecipe = recipe.get().value();
+            lastRecipe = recipe.get();
         }
 
         ItemStack stackInSlot = inputInv.getStackInSlot(0);
@@ -249,31 +218,33 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
     }
 
     @Override
-    public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+    public void write(CompoundTag compound, boolean clientPacket) {
         compound.putInt("Timer", timer);
-        compound.put("InputInventory", inputInv.serializeNBT(registries));
-        compound.put("OutputInventory", outputInv.serializeNBT(registries));
-        super.write(compound, registries, clientPacket);
+        compound.put("InputInventory", inputInv.serializeNBT());
+        compound.put("OutputInventory", outputInv.serializeNBT());
+        super.write(compound, clientPacket);
     }
 
     @Override
-    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+    protected void read(CompoundTag compound, boolean clientPacket) {
         timer = compound.getInt("Timer");
-        inputInv.deserializeNBT(registries, compound.getCompound("InputInventory"));
-        outputInv.deserializeNBT(registries, compound.getCompound("OutputInventory"));
-        super.read(compound, registries, clientPacket);
+        inputInv.deserializeNBT(compound.getCompound("InputInventory"));
+        outputInv.deserializeNBT(compound.getCompound("OutputInventory"));
+        super.read(compound, clientPacket);
     }
 
     public int getProcessingSpeed() {
         return Mth.clamp((int) Math.abs(getSpeed() / 16f), 1, 512);
     }
 
-//    @Override
-//    public <T> @NotNull LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-//        if (isItemHandlerCap(cap))
-//            return capability.cast();
-//        return super.getCapability(cap, side);
-//    }
+    @Override
+    public <T> @NotNull LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+        if (isItemHandlerCap(cap))
+            return capability.cast();
+        if (side == Direction.DOWN && isFluidHandlerCap(cap))
+            return tank.getCapability().cast();
+        return super.getCapability(cap, side);
+    }
 
     private boolean canProcess(ItemStack stack) {
         ItemStackHandler tester = new ItemStackHandler(1);
@@ -283,7 +254,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         if (lastRecipe != null && lastRecipe.matches(inventoryIn, level) && lastRecipe.getRequiredFluid().test(getCurrentFluidInTank()) && lastRecipe.getRequiredFluid().getRequiredAmount() <= getCurrentFluidInTank().getAmount())
             return true;
 
-        return ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.INSOLATING).isPresent();
+        return ModRecipeTypes.INSOLATING.find(inventoryIn, level).isPresent();
     }
 
     private class InsolatorInventoryHandler extends CombinedInvWrapper {

@@ -6,35 +6,28 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.sound.SoundScapes;
 import net.createmod.catnip.math.VecHelper;
-import net.dakotapride.mechanical_botany.ModBlockEntityTypes;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
-import net.dakotapride.mechanical_botany.kinetics.insolator.InsolatingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +35,7 @@ public class MechanicalComposterBlockEntity extends KineticBlockEntity {
 
     public ItemStackHandler inputInv;
     public ItemStackHandler outputInv;
-    public IItemHandler capability;
+    public LazyOptional<IItemHandler> capability;
     public int timer;
     private CompostingRecipe lastRecipe;
 
@@ -50,15 +43,7 @@ public class MechanicalComposterBlockEntity extends KineticBlockEntity {
         super(type, pos, state);
         inputInv = new ItemStackHandler(1);
         outputInv = new ItemStackHandler(9);
-        capability = new MechanicalComposterInventoryHandler();
-    }
-
-    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntityTypes.COMPOSTER.get(),
-                (be, context) -> be.capability
-        );
+        capability = LazyOptional.of(MechanicalComposterInventoryHandler::new);
     }
 
     @Override
@@ -111,12 +96,12 @@ public class MechanicalComposterBlockEntity extends KineticBlockEntity {
 
         RecipeWrapper inventoryIn = new RecipeWrapper(inputInv);
         if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level)) {
-            Optional<RecipeHolder<CompostingRecipe>> recipe = ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.COMPOSTING);
+            Optional<CompostingRecipe> recipe = ModRecipeTypes.COMPOSTING.find(inventoryIn, level);
             if (!recipe.isPresent()) {
                 timer = 100;
                 sendData();
             } else {
-                lastRecipe = recipe.get().value();
+                lastRecipe = recipe.get();
                 timer = lastRecipe.getProcessingDuration();
                 sendData();
             }
@@ -130,7 +115,7 @@ public class MechanicalComposterBlockEntity extends KineticBlockEntity {
     @Override
     public void invalidate() {
         super.invalidate();
-        invalidateCapabilities();
+        capability.invalidate();
     }
 
     @Override
@@ -144,10 +129,10 @@ public class MechanicalComposterBlockEntity extends KineticBlockEntity {
         RecipeWrapper inventoryIn = new RecipeWrapper(inputInv);
 
         if (lastRecipe == null || !lastRecipe.matches(inventoryIn, level)) {
-            Optional<RecipeHolder<CompostingRecipe>> recipe = ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.COMPOSTING);
+            Optional<CompostingRecipe> recipe = ModRecipeTypes.COMPOSTING.find(inventoryIn, level);
             if (!recipe.isPresent())
                 return;
-            lastRecipe = recipe.get().value();
+            lastRecipe = recipe.get();
         }
 
         ItemStack stackInSlot = inputInv.getStackInSlot(0);
@@ -177,23 +162,30 @@ public class MechanicalComposterBlockEntity extends KineticBlockEntity {
     }
 
     @Override
-    public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+    public void write(CompoundTag compound, boolean clientPacket) {
         compound.putInt("Timer", timer);
-        compound.put("InputInventory", inputInv.serializeNBT(registries));
-        compound.put("OutputInventory", outputInv.serializeNBT(registries));
-        super.write(compound, registries, clientPacket);
+        compound.put("InputInventory", inputInv.serializeNBT());
+        compound.put("OutputInventory", outputInv.serializeNBT());
+        super.write(compound, clientPacket);
     }
 
     @Override
-    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+    protected void read(CompoundTag compound, boolean clientPacket) {
         timer = compound.getInt("Timer");
-        inputInv.deserializeNBT(registries, compound.getCompound("InputInventory"));
-        outputInv.deserializeNBT(registries, compound.getCompound("OutputInventory"));
-        super.read(compound, registries, clientPacket);
+        inputInv.deserializeNBT(compound.getCompound("InputInventory"));
+        outputInv.deserializeNBT(compound.getCompound("OutputInventory"));
+        super.read(compound, clientPacket);
     }
 
     public int getProcessingSpeed() {
         return Mth.clamp((int) Math.abs(getSpeed() / 16f), 1, 512);
+    }
+
+    @Override
+    public <T> @NotNull LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+        if (isItemHandlerCap(cap))
+            return capability.cast();
+        return super.getCapability(cap, side);
     }
 
     private boolean canProcess(ItemStack stack) {
@@ -204,7 +196,7 @@ public class MechanicalComposterBlockEntity extends KineticBlockEntity {
         if (lastRecipe != null && lastRecipe.matches(inventoryIn, level))
             return true;
 
-        return ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.COMPOSTING).isPresent();
+        return ModRecipeTypes.COMPOSTING.find(inventoryIn, level).isPresent();
     }
 
     private class MechanicalComposterInventoryHandler extends CombinedInvWrapper {

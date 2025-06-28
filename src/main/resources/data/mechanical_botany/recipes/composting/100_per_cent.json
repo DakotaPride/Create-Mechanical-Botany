@@ -1,0 +1,24 @@
+{
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "minecraft:cake"
+      },
+      {
+        "item": "minecraft:pumpkin_pie"
+      }
+    ]
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "count": 1,
+      "item": "mechanical_botany:compost"
+    },
+    {
+      "count": 1,
+      "item": "mechanical_botany:compost"
+    }
+  ]
+}

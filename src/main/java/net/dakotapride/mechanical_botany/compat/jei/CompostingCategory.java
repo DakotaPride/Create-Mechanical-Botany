@@ -3,7 +3,6 @@ package net.dakotapride.mechanical_botany.compat.jei;
 
 import com.simibubi.create.compat.jei.DoubleItemIcon;
 import com.simibubi.create.compat.jei.EmptyBackground;
-import com.simibubi.create.compat.jei.ItemIcon;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
@@ -19,11 +18,9 @@ import net.dakotapride.mechanical_botany.ModBlocks;
 import net.dakotapride.mechanical_botany.ModItems;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
 import net.dakotapride.mechanical_botany.kinetics.composter.CompostingRecipe;
-import net.dakotapride.mechanical_botany.kinetics.insolator.InsolatingRecipe;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -62,8 +59,8 @@ public class CompostingCategory extends CreateRecipeCategory<CompostingRecipe> {
         }
     }
 
-    public static final RecipeType<RecipeHolder<CompostingRecipe>> TYPE =
-            RecipeType.createRecipeHolderType(CreateMechanicalBotany.asResource("composting"));
+    public static final RecipeType<CompostingRecipe> TYPE =
+            RecipeType.create(CreateMechanicalBotany.MOD_ID, "composting", CompostingRecipe.class);
 
     public static CompostingCategory create(IGuiHelper guiHelper) {
         Component title = Component.translatable("recipe.mechanical_botany.composting");
@@ -81,7 +78,7 @@ public class CompostingCategory extends CreateRecipeCategory<CompostingRecipe> {
         return new CompostingCategory(info);
     }
 
-    private static List<RecipeHolder<CompostingRecipe>> getAllRecipes() {
+    private static List<CompostingRecipe> getAllRecipes() {
         return CreateMechanicalBotanyJEI.getRecipeManager().getAllRecipesFor(ModRecipeTypes.COMPOSTING.getType());
     }
 

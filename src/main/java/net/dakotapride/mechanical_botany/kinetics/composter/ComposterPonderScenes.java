@@ -1,19 +1,19 @@
 package net.dakotapride.mechanical_botany.kinetics.composter;
 
-import com.simibubi.create.AllFluids;
 import com.simibubi.create.content.fluids.drain.ItemDrainBlockEntity;
-import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.PonderPalette;
 import net.createmod.ponder.api.element.ElementLink;
 import net.createmod.ponder.api.element.EntityElement;
-import net.createmod.ponder.api.scene.*;
+import net.createmod.ponder.api.scene.PonderStoryBoard;
+import net.createmod.ponder.api.scene.SceneBuilder;
+import net.createmod.ponder.api.scene.SceneBuildingUtil;
+import net.createmod.ponder.api.scene.Selection;
 import net.dakotapride.mechanical_botany.ModFluids;
 import net.dakotapride.mechanical_botany.ModItems;
 import net.minecraft.core.BlockPos;
@@ -23,9 +23,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 public class ComposterPonderScenes {
     public static class Intro implements PonderStoryBoard {
@@ -299,9 +299,8 @@ public class ComposterPonderScenes {
             for (int i = 0; i < 4; i++) {
                 scene.world().modifyBlockEntity(drain, ItemDrainBlockEntity.class,
                         be -> {
-                            IFluidHandler fh = be.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
-                            if (fh != null)
-                                fh.drain(50, IFluidHandler.FluidAction.EXECUTE);
+                            be.getCapability(ForgeCapabilities.FLUID_HANDLER)
+                                    .ifPresent(fh -> fh.drain(50, IFluidHandler.FluidAction.EXECUTE));
                         });
 
                 scene.world().modifyBlockEntity(tank0Position, FluidTankBlockEntity.class, be -> be.getTankInventory()
@@ -327,9 +326,8 @@ public class ComposterPonderScenes {
             scene.idle(14);
             scene.world().modifyBlockEntity(util.grid().at(3, 2, 1), BasinBlockEntity.class,
                     be -> {
-                        IFluidHandler handler = be.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
-                        if (handler != null)
-                            handler.fill(content0, IFluidHandler.FluidAction.EXECUTE);
+                        be.getCapability(ForgeCapabilities.FLUID_HANDLER)
+                                .ifPresent(fh -> fh.fill(content0, IFluidHandler.FluidAction.EXECUTE));
                     });
             scene.idle(7);
             scene.overlay().showText(80)
@@ -354,22 +352,19 @@ public class ComposterPonderScenes {
                 scene.idle(7);
                 scene.world().modifyBlockEntity(util.grid().at(3, 2, 1), BasinBlockEntity.class,
                         be -> {
-                            IFluidHandler handler = be.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
-                            if (handler != null)
-                                handler.drain(new FluidStack(content0.getFluid(), content0.getAmount() / 5), IFluidHandler.FluidAction.EXECUTE);
+                            be.getCapability(ForgeCapabilities.FLUID_HANDLER)
+                                    .ifPresent(fh -> fh.drain(new FluidStack(content0.getFluid(), content0.getAmount() / 5), IFluidHandler.FluidAction.EXECUTE));
                         });
                 scene.world().modifyBlockEntity(util.grid().at(3, 2, 1), BasinBlockEntity.class,
                         be -> {
-                            IFluidHandler handler = be.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
-                            if (handler != null)
-                                handler.drain(new FluidStack(Fluids.LAVA, 1000 / 5), IFluidHandler.FluidAction.EXECUTE);
+                            be.getCapability(ForgeCapabilities.FLUID_HANDLER)
+                                    .ifPresent(fh -> fh.drain(new FluidStack(Fluids.LAVA, 1000 / 5), IFluidHandler.FluidAction.EXECUTE));
                         });
             }
             scene.world().modifyBlockEntity(util.grid().at(3, 2, 1), BasinBlockEntity.class,
                     be -> {
-                        IFluidHandler handler = be.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
-                        if (handler != null)
-                            handler.fill(content1, IFluidHandler.FluidAction.EXECUTE);
+                        be.getCapability(ForgeCapabilities.FLUID_HANDLER)
+                                .ifPresent(fh -> fh.fill(content1, IFluidHandler.FluidAction.EXECUTE));
                     });
             scene.idle(14);
             scene.overlay().showControls(util.vector().blockSurface(basinPosition, Direction.WEST), Pointing.LEFT, 25).withItem(new ItemStack(ModFluids.MOLTEN_COMPOST.get().getBucket()));

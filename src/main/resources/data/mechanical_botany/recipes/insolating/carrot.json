@@ -1,0 +1,25 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "amount": 1000,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    },
+    {
+      "item": "minecraft:carrot"
+    }
+  ],
+  "processingTime": 1600,
+  "results": [
+    {
+      "count": 2,
+      "item": "minecraft:carrot"
+    },
+    {
+      "chance": 0.35,
+      "count": 1,
+      "item": "minecraft:carrot"
+    }
+  ]
+}

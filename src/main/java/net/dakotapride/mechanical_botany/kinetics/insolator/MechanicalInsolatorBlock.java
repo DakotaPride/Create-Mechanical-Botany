@@ -9,7 +9,7 @@ import net.dakotapride.mechanical_botany.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -20,23 +20,28 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class MechanicalInsolatorBlock extends KineticBlock implements IBE<MechanicalInsolatorBlockEntity>, ICogWheel, IWrenchable {
     public MechanicalInsolatorBlock(Properties properties) {
         super(properties);
     }
 
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!stack.isEmpty())
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if (level.isClientSide)
-            return ItemInteractionResult.SUCCESS;
 
-        withBlockEntityDo(level, pos, insolator -> {
+    @Override
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
+                                 BlockHitResult hit) {
+        if (!player.getItemInHand(handIn)
+                .isEmpty())
+            return InteractionResult.PASS;
+        if (worldIn.isClientSide)
+            return InteractionResult.SUCCESS;
+
+        withBlockEntityDo(worldIn, pos, insolator -> {
             boolean emptyOutput = true;
             IItemHandlerModifiable inv = insolator.outputInv;
             for (int slot = 0; slot < inv.getSlots(); slot++) {
@@ -61,7 +66,7 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
             insolator.sendData();
         });
 
-        return ItemInteractionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -83,11 +88,11 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
         if (insolator == null)
             return;
 
-        IItemHandler capability = insolator.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, insolator.getBlockPos(), null);
-        if (capability == null)
+        LazyOptional<IItemHandler> capability = insolator.getCapability(ForgeCapabilities.ITEM_HANDLER);
+        if (!capability.isPresent())
             return;
 
-        ItemStack remainder = capability
+        ItemStack remainder = capability.orElse(new ItemStackHandler())
                 .insertItem(0, itemEntity.getItem(), false);
         if (remainder.isEmpty())
             itemEntity.discard();
@@ -112,7 +117,7 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
     }
 
     @Override
-    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
+    public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
         return false;
     }
 

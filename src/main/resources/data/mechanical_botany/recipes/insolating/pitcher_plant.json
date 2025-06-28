@@ -1,0 +1,29 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 200,
+      "fluid": "mechanical_botany:compost"
+    },
+    {
+      "item": "minecraft:pitcher_pod"
+    }
+  ],
+  "processingTime": 8000,
+  "results": [
+    {
+      "count": 1,
+      "item": "minecraft:pitcher_plant"
+    },
+    {
+      "count": 1,
+      "item": "minecraft:pitcher_pod"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
+      "item": "minecraft:pitcher_pod"
+    }
+  ]
+}

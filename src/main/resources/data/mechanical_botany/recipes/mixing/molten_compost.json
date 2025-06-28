@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "amount": 10,
+      "fluid": "mechanical_botany:compost",
+      "nbt": {}
+    },
+    {
+      "amount": 10,
+      "fluid": "minecraft:lava",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 20,
+      "fluid": "mechanical_botany:molten_compost"
+    }
+  ]
+}

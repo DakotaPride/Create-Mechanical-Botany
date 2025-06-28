@@ -1,0 +1,20 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 100,
+      "fluid": "minecraft:lava"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    }
+  ],
+  "processingTime": 4800,
+  "results": [
+    {
+      "count": 2,
+      "item": "minecraft:nether_wart"
+    }
+  ]
+}

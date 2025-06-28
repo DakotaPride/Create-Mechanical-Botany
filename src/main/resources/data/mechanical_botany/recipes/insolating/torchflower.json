@@ -1,0 +1,29 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 200,
+      "fluid": "mechanical_botany:compost"
+    },
+    {
+      "item": "minecraft:torchflower_seeds"
+    }
+  ],
+  "processingTime": 8000,
+  "results": [
+    {
+      "count": 1,
+      "item": "minecraft:torchflower"
+    },
+    {
+      "count": 1,
+      "item": "minecraft:torchflower_seeds"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
+      "item": "minecraft:torchflower_seeds"
+    }
+  ]
+}

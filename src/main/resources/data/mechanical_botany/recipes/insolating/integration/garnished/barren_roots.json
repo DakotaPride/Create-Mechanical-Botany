@@ -1,0 +1,31 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "garnished"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 100,
+      "fluid": "mechanical_botany:void_compost"
+    },
+    {
+      "item": "garnished:barren_roots"
+    }
+  ],
+  "processingTime": 8000,
+  "results": [
+    {
+      "count": 2,
+      "item": "garnished:barren_roots"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
+      "item": "garnished:chorus_tuft"
+    }
+  ]
+}

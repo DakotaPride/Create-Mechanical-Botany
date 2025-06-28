@@ -1,16 +1,10 @@
 package net.dakotapride.mechanical_botany.compat.jei;
 
 
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
-import com.simibubi.create.Create;
-import com.simibubi.create.compat.jei.DoubleItemIcon;
 import com.simibubi.create.compat.jei.EmptyBackground;
 import com.simibubi.create.compat.jei.ItemIcon;
-import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
-import com.simibubi.create.foundation.utility.CreateLang;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -19,7 +13,6 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import net.createmod.catnip.lang.LangBuilder;
-import net.createmod.catnip.theme.Color;
 import net.dakotapride.mechanical_botany.CreateMechanicalBotany;
 import net.dakotapride.mechanical_botany.ModBlocks;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
@@ -30,8 +23,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.RecipeHolder;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -72,8 +63,8 @@ public class InsolatingCategory extends CreateMechanicalBotanyRecipeCategory<Ins
         }
     }
 
-    public static final RecipeType<RecipeHolder<InsolatingRecipe>> TYPE =
-            RecipeType.createRecipeHolderType(CreateMechanicalBotany.asResource("insolating"));
+    public static final RecipeType<InsolatingRecipe> TYPE =
+            RecipeType.create(CreateMechanicalBotany.MOD_ID, "insolating", InsolatingRecipe.class);
 
     public static InsolatingCategory create(IGuiHelper guiHelper) {
         Component title = Component.translatable("recipe.mechanical_botany.insolating");
@@ -91,7 +82,7 @@ public class InsolatingCategory extends CreateMechanicalBotanyRecipeCategory<Ins
         return new InsolatingCategory(info);
     }
 
-    private static List<RecipeHolder<InsolatingRecipe>> getAllRecipes() {
+    private static List<InsolatingRecipe> getAllRecipes() {
         return CreateMechanicalBotanyJEI.getRecipeManager().getAllRecipesFor(ModRecipeTypes.INSOLATING.getType());
     }
 

@@ -1,0 +1,25 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "amount": 1000,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    },
+    {
+      "item": "minecraft:cocoa_beans"
+    }
+  ],
+  "processingTime": 1600,
+  "results": [
+    {
+      "count": 2,
+      "item": "minecraft:cocoa_beans"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
+      "item": "minecraft:cocoa_beans"
+    }
+  ]
+}

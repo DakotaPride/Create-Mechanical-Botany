@@ -1,0 +1,26 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "supplementaries"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    {
+      "item": "supplementaries:flax_block"
+    }
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.85,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

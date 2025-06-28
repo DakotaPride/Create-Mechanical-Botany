@@ -2,18 +2,16 @@ package net.dakotapride.mechanical_botany.kinetics.insolator;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
-import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
-import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
-    public InsolatingRecipe(ProcessingRecipeParams params) {
+public class InsolatingRecipe extends ProcessingRecipe<RecipeWrapper> {
+    public InsolatingRecipe(ProcessingRecipeBuilder.ProcessingRecipeParams params) {
         super(ModRecipeTypes.INSOLATING, params);
     }
 
@@ -44,7 +42,7 @@ public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
 //    }
 
     @Override
-    public boolean matches(RecipeInput inv, Level worldIn) {
+    public boolean matches(RecipeWrapper inv, Level worldIn) {
         if (inv.isEmpty())
             return false;
 
@@ -55,11 +53,5 @@ public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
     @Override
     protected int getMaxOutputCount() {
         return 4;
-    }
-
-    public static class Serializer extends StandardProcessingRecipe.Serializer<InsolatingRecipe> {
-        public Serializer() {
-            super(InsolatingRecipe::new);
-        }
     }
 }

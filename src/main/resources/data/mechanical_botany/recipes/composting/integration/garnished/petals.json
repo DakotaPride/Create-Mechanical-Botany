@@ -1,0 +1,31 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "garnished"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "garnished:pansophical_petal"
+      },
+      {
+        "item": "garnished:incandescent_petal"
+      }
+    ]
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.45,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

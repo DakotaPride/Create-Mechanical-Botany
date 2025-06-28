@@ -1,0 +1,29 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "amount": 1000,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    },
+    {
+      "item": "minecraft:beetroot_seeds"
+    }
+  ],
+  "processingTime": 1600,
+  "results": [
+    {
+      "count": 1,
+      "item": "minecraft:beetroot"
+    },
+    {
+      "count": 1,
+      "item": "minecraft:beetroot_seeds"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
+      "item": "minecraft:beetroot_seeds"
+    }
+  ]
+}

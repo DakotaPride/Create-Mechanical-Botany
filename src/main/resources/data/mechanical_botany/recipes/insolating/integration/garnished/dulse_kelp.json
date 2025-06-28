@@ -1,0 +1,31 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "garnished"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    },
+    {
+      "item": "garnished:dulse_kelp"
+    }
+  ],
+  "processingTime": 800,
+  "results": [
+    {
+      "count": 2,
+      "item": "garnished:dulse_kelp"
+    },
+    {
+      "chance": 0.35,
+      "count": 1,
+      "item": "garnished:dulse_kelp"
+    }
+  ]
+}

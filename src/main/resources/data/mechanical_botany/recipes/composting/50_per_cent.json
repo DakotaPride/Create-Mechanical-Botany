@@ -1,0 +1,52 @@
+{
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "minecraft:flowering_azalea_leaves"
+      },
+      {
+        "item": "minecraft:sugar_cane"
+      },
+      {
+        "item": "minecraft:cactus"
+      },
+      {
+        "item": "minecraft:nether_sprouts"
+      },
+      {
+        "item": "minecraft:weeping_vines"
+      },
+      {
+        "item": "minecraft:twisting_vines"
+      },
+      {
+        "item": "minecraft:vine"
+      },
+      {
+        "item": "minecraft:tall_grass"
+      },
+      {
+        "item": "minecraft:glow_lichen"
+      },
+      {
+        "item": "minecraft:dried_kelp_block"
+      },
+      {
+        "item": "minecraft:melon_slice"
+      }
+    ]
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "count": 1,
+      "item": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.50,
+      "count": 1,
+      "item": "mechanical_botany:compost"
+    }
+  ]
+}

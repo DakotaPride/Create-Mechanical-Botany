@@ -1,0 +1,26 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    },
+    {
+      "item": "biomesoplenty:blue_hydrangea"
+    }
+  ],
+  "processingTime": 2400,
+  "results": [
+    {
+      "count": 2,
+      "item": "biomesoplenty:blue_hydrangea"
+    }
+  ]
+}

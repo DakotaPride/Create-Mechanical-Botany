@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "C": {
+      "item": "create:cogwheel"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "pattern": [
+    "#C#",
+    "#A#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "item": "mechanical_botany:mechanical_composter"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomeswevegone"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 200,
+      "fluid": "mechanical_botany:compost"
+    },
+    {
+      "item": "biomeswevegone:green_glowcane_shoot"
+    }
+  ],
+  "processingTime": 8000,
+  "results": [
+    {
+      "count": 2,
+      "item": "biomeswevegone:green_glowcane_shoot"
+    }
+  ]
+}

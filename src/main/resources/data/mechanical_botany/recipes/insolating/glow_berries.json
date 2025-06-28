@@ -1,0 +1,25 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "amount": 1000,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    },
+    {
+      "item": "minecraft:glow_berries"
+    }
+  ],
+  "processingTime": 3200,
+  "results": [
+    {
+      "count": 2,
+      "item": "minecraft:glow_berries"
+    },
+    {
+      "chance": 0.45,
+      "count": 1,
+      "item": "minecraft:glow_berries"
+    }
+  ]
+}

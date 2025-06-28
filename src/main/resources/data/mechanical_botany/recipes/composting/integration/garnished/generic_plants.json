@@ -1,0 +1,46 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "garnished"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "garnished:sorrowful_lichen"
+      },
+      {
+        "item": "garnished:pansophical_daisy"
+      },
+      {
+        "item": "garnished:incandescent_lily"
+      },
+      {
+        "item": "garnished:soul_roots"
+      },
+      {
+        "item": "garnished:aureate_shrub"
+      },
+      {
+        "item": "garnished:small_chorus_plant"
+      },
+      {
+        "item": "garnished:barren_roots"
+      }
+    ]
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.65,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

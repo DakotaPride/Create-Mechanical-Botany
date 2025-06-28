@@ -3,19 +3,19 @@ package net.dakotapride.mechanical_botany;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Items;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Supplier;
 
 //@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class ModCreativeModeTabs {
     private static final DeferredRegister<CreativeModeTab> REGISTER =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CreateMechanicalBotany.MOD_ID);
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MECHANICAL_BOTANY = REGISTER.register("mechanical_botany",
+    public static final Supplier<CreativeModeTab> MECHANICAL_BOTANY = REGISTER.register("mechanical_botany",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.mechanical_botany.base"))
                     .icon(ModBlocks.MECHANICAL_INSOLATOR::asStack)
@@ -26,9 +26,9 @@ public class ModCreativeModeTabs {
     public static class DisplayItemsGenerator implements CreativeModeTab.DisplayItemsGenerator {
 
         private final boolean addItems;
-        private final DeferredHolder<CreativeModeTab, CreativeModeTab> tabFilter;
+        private final Supplier<CreativeModeTab> tabFilter;
 
-        public DisplayItemsGenerator(boolean addItems, DeferredHolder<CreativeModeTab, CreativeModeTab> tabFilter) {
+        public DisplayItemsGenerator(boolean addItems, Supplier<CreativeModeTab> tabFilter) {
             this.addItems = addItems;
             this.tabFilter = tabFilter;
         }

@@ -1,0 +1,20 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "amount": 1000,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    },
+    {
+      "item": "minecraft:white_tulip"
+    }
+  ],
+  "processingTime": 400,
+  "results": [
+    {
+      "count": 2,
+      "item": "minecraft:white_tulip"
+    }
+  ]
+}

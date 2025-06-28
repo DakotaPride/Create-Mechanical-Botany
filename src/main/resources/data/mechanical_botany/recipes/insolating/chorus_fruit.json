@@ -1,0 +1,24 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 100,
+      "fluid": "mechanical_botany:void_compost"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    }
+  ],
+  "processingTime": 11200,
+  "results": [
+    {
+      "count": 2,
+      "item": "minecraft:chorus_fruit"
+    },
+    {
+      "count": 1,
+      "item": "minecraft:chorus_flower"
+    }
+  ]
+}

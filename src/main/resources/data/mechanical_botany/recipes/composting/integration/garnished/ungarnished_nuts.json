@@ -1,0 +1,26 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "garnished"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    {
+      "tag": "garnished:ungarnished_nuts"
+    }
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.15,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

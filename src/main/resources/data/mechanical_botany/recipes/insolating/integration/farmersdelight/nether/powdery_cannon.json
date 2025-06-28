@@ -1,0 +1,31 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mynethersdelight"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 400,
+      "fluid": "minecraft:lava"
+    },
+    {
+      "item": "mynethersdelight:powder_cannon"
+    }
+  ],
+  "processingTime": 2400,
+  "results": [
+    {
+      "count": 2,
+      "item": "mynethersdelight:powder_cannon"
+    },
+    {
+      "chance": 0.35,
+      "count": 1,
+      "item": "mynethersdelight:bullet_pepper"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mynethersdelight"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 400,
+      "fluid": "minecraft:lava"
+    },
+    {
+      "item": "mynethersdelight:crimson_fungus_colony"
+    }
+  ],
+  "processingTime": 2400,
+  "results": [
+    {
+      "count": 2,
+      "item": "mynethersdelight:crimson_fungus_colony"
+    }
+  ]
+}

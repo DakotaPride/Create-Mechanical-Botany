@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 public class ModPonderScenes {
 
     public static void register(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
+        PonderSceneRegistrationHelper<ItemProviderEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
         HELPER.forComponents(ModBlocks.MECHANICAL_INSOLATOR).addStoryBoard("insolator", new InsolatorPonderScenes.Intro());
         HELPER.forComponents(ModBlocks.MECHANICAL_INSOLATOR).addStoryBoard("compost_use", new InsolatorPonderScenes.CompostUsage());

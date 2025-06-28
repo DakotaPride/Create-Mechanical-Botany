@@ -1,0 +1,26 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 100,
+      "fluid": "mechanical_botany:void_compost"
+    },
+    {
+      "item": "biomesoplenty:lumaloop"
+    }
+  ],
+  "processingTime": 3600,
+  "results": [
+    {
+      "count": 2,
+      "item": "biomesoplenty:lumaloop"
+    }
+  ]
+}

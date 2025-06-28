@@ -1,0 +1,20 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 100,
+      "fluid": "mechanical_botany:molten_compost"
+    },
+    {
+      "item": "minecraft:wither_rose"
+    }
+  ],
+  "processingTime": 8000,
+  "results": [
+    {
+      "count": 2,
+      "item": "minecraft:wither_rose"
+    }
+  ]
+}

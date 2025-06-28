@@ -1,0 +1,25 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "amount": 1000,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    },
+    {
+      "item": "minecraft:sea_pickle"
+    }
+  ],
+  "processingTime": 800,
+  "results": [
+    {
+      "count": 2,
+      "item": "minecraft:sea_pickle"
+    },
+    {
+      "chance": 0.5,
+      "count": 1,
+      "item": "minecraft:sea_pickle"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "garnished"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 100,
+      "fluid": "minecraft:lava"
+    },
+    {
+      "item": "garnished:pansophical_daisy"
+    }
+  ],
+  "processingTime": 4800,
+  "results": [
+    {
+      "count": 2,
+      "item": "garnished:pansophical_daisy"
+    }
+  ]
+}
