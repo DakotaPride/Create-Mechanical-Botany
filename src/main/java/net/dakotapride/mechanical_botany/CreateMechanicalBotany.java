@@ -21,6 +21,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -49,6 +50,7 @@ public class CreateMechanicalBotany {
     }
 
     public CreateMechanicalBotany(IEventBus eventBus, ModContainer modContainer) {
+        ModLoadingContext ctx = ModLoadingContext.get();
         // Register the commonSetup method for modloading
         eventBus.addListener(this::commonSetup);
 
@@ -74,6 +76,8 @@ public class CreateMechanicalBotany {
         NeoForge.EVENT_BUS.register(this);
 
         eventBus.addListener(CreateMechanicalBotany::onRegister);
+
+        ModConfigs.register(ctx, modContainer);
 
         // Register the item to a creative tab
         // modEventBus.addListener(this::addCreative);

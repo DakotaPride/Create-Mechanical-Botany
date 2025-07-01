@@ -1,10 +1,9 @@
 package net.dakotapride.mechanical_botany.kinetics.insolator;
 
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
+import net.dakotapride.mechanical_botany.ModConfigs;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
@@ -38,7 +37,12 @@ public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
         return true;
     }
 
-//    @Override
+    @Override
+    public int getProcessingDuration() {
+        return super.getProcessingDuration() * ModConfigs.server().insolator.processingTimeMultiplier.get();
+    }
+
+    //    @Override
 //    public int getProcessingDuration() {
 //        return super.getProcessingDuration() * 2;
 //    }

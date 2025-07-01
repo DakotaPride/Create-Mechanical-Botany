@@ -12,8 +12,8 @@ import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.lang.LangBuilder;
 import net.dakotapride.mechanical_botany.CreateMechanicalBotany;
 import net.dakotapride.mechanical_botany.ModBlockEntityTypes;
+import net.dakotapride.mechanical_botany.ModConfigs;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
-import net.dakotapride.mechanical_botany.kinetics.composter.CompostingRecipe;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -138,7 +138,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         behaviours.add(new DirectBeltInputBehaviour(this));
-        behaviours.add(tank = SmartFluidTankBehaviour.single(this, 4000)
+        behaviours.add(tank = SmartFluidTankBehaviour.single(this, ModConfigs.server().insolator.tankSize.get())
                 .allowExtraction().allowInsertion());
         super.addBehaviours(behaviours);
         // registerAwardables(behaviours, AllAdvancements.MILLSTONE);
@@ -214,15 +214,6 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         super.destroy();
         ItemHelper.dropContents(level, worldPosition, inputInv);
         ItemHelper.dropContents(level, worldPosition, outputInv);
-    }
-
-    public boolean check(RecipeInput inv, Level worldIn, NonNullList<Ingredient> ingredients, NonNullList<FluidIngredient> fluidIngredients) {
-        if (inv.isEmpty())
-            return false;
-        if (tank.isEmpty())
-            return false;
-
-        return ingredients.get(0).test(inv.getItem(0)) && fluidIngredients.get(0).test(getCurrentFluidInTank());
     }
 
     private void process() {
