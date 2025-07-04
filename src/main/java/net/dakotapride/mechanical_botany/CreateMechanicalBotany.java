@@ -5,6 +5,7 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import net.createmod.catnip.lang.FontHelper;
+import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.dakotapride.mechanical_botany.kinetics.composter.MechanicalComposterBlockEntity;
 import net.dakotapride.mechanical_botany.kinetics.insolator.MechanicalInsolatorBlockEntity;
@@ -34,6 +35,8 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(CreateMechanicalBotany.MOD_ID)
 public class CreateMechanicalBotany {
@@ -47,6 +50,18 @@ public class CreateMechanicalBotany {
 
     public static ResourceLocation asResource(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
+
+    public static LangBuilder builder() {
+        return new LangBuilder(CreateMechanicalBotany.MOD_ID);
+    }
+
+    public static LangBuilder translate(String langKey, Object... args) {
+        return builder().translate(langKey, args);
+    }
+
+    private static void addBlankSpace(List<Component> tooltip) {
+        tooltip.add(Component.literal(""));
     }
 
     public CreateMechanicalBotany(IEventBus eventBus, ModContainer modContainer) {

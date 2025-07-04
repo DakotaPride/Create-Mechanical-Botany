@@ -15,7 +15,8 @@
   "recipe.mechanical_botany.insolating": "Mechanical Insolating",
   "recipe.mechanical_botany.composting": "Mechanical Composting",
   "create.gui.goggles.item_container": "Item Container Info: ",
-  "mechanical_botany.text.insolator.empty": "No Items Recognised Within Container",
+  "mechanical_botany.text.cannot_process.empty": "Cannot process when input is empty",
+  "mechanical_botany.gui.goggles.composter_contents": "Mechanical Composter Contents: ",
   "mechanical_botany.insolator.processing_duration": "Process Duration: %s",
 
   "item.mechanical_botany.compost.tooltip": "Compost",
