@@ -3,6 +3,7 @@ package net.dakotapride.mechanical_botany.kinetics.insolator;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
+import net.dakotapride.mechanical_botany.ModConfigs;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -48,6 +49,11 @@ public class InsolatingRecipe extends ProcessingRecipe<RecipeWrapper> {
 
 //        return blockEntity.check(inv, worldIn, ingredients, fluidIngredients);
         return ingredients.get(0).test(inv.getItem(0)) && fluidIngredients.get(0).test(getRequiredFluid().getMatchingFluidStacks().get(0));
+    }
+
+    @Override
+    public int getProcessingDuration() {
+        return super.getProcessingDuration() * ModConfigs.server().insolator.processingTimeMultiplier.get();
     }
 
     @Override

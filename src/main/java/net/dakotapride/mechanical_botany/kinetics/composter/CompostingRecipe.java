@@ -2,6 +2,7 @@ package net.dakotapride.mechanical_botany.kinetics.composter;
 
 import com.simibubi.create.content.kinetics.crusher.AbstractCrushingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import net.dakotapride.mechanical_botany.ModConfigs;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -19,6 +20,11 @@ public class CompostingRecipe extends AbstractCrushingRecipe {
         if (inv.isEmpty())
             return false;
         return ingredients.get(0).test(inv.getItem(0));
+    }
+
+    @Override
+    public int getProcessingDuration() {
+        return super.getProcessingDuration() * ModConfigs.server().composter.processingTimeMultiplier.get();
     }
 
     @Override

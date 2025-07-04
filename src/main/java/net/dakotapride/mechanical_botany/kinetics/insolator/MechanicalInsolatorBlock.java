@@ -31,6 +31,9 @@ public class MechanicalInsolatorBlock extends KineticBlock implements IBE<Mechan
         super(properties);
     }
 
+    public static boolean hasPipeTowards(Direction face) {
+        return face == Direction.DOWN;
+    }
 
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,

@@ -1,15 +1,19 @@
 package net.dakotapride.mechanical_botany.kinetics.insolator;
 
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.fluids.hosePulley.HosePulleyBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
+import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.item.ItemHelper;
+import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.sound.SoundScapes;
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.lang.LangBuilder;
 import net.dakotapride.mechanical_botany.CreateMechanicalBotany;
+import net.dakotapride.mechanical_botany.ModConfigs;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -28,6 +32,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
@@ -39,19 +44,49 @@ import java.util.Optional;
 
 public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation {
 
-    public ItemStackHandler inputInv;
-    public ItemStackHandler outputInv;
-    public LazyOptional<IItemHandler> capability;
+    public MechanicalInsolatorInventory inputInv;
+    public MechanicalInsolatorInventory outputInv;
+    public LazyOptional<IItemHandlerModifiable> itemCapability;
     public int timer;
     private InsolatingRecipe lastRecipe;
 
     public SmartFluidTankBehaviour tank;
+    protected LazyOptional<IFluidHandler> fluidCapability;
 
     public MechanicalInsolatorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        inputInv = new ItemStackHandler(1);
-        outputInv = new ItemStackHandler(9);
-        capability = LazyOptional.of(InsolatorInventoryHandler::new);
+        inputInv = new MechanicalInsolatorInventory(1, this);
+        outputInv = new MechanicalInsolatorInventory(9, this);
+        itemCapability = LazyOptional.of(() -> new MechanicalInsolatorInvWrapper(inputInv, outputInv));
+    }
+
+    private class MechanicalInsolatorInvWrapper extends CombinedInvWrapper {
+        public MechanicalInsolatorInvWrapper(SmartInventory input, SmartInventory output) {
+            super(input, output);
+        }
+
+        @Override
+        public boolean isItemValid(int slot, ItemStack stack) {
+            if (outputInv == getHandlerFromIndex(getIndexForSlot(slot)))
+                return false;
+            return canProcess(stack) && super.isItemValid(slot, stack);
+        }
+
+        @Override
+        public @NotNull ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+            if (outputInv == getHandlerFromIndex(getIndexForSlot(slot)))
+                return stack;
+            if (!isItemValid(slot, stack))
+                return stack;
+            return super.insertItem(slot, stack, simulate);
+        }
+
+        @Override
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
+            if (inputInv == getHandlerFromIndex(getIndexForSlot(slot)))
+                return ItemStack.EMPTY;
+            return super.extractItem(slot, amount, simulate);
+        }
     }
 
     @Override
@@ -84,16 +119,22 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
                     .forGoggles(tooltip, 1);
         }
 
+        IItemHandlerModifiable items = itemCapability.orElse(new ItemStackHandler());
         CreateLang.translate("gui.goggles.item_container").forGoggles(tooltip);
-        if (!inputInv.getStackInSlot(0).isEmpty()) {
-            CreateLang.itemName(inputInv.getStackInSlot(0))
-                    .style(ChatFormatting.GRAY)
+        for (int i = 0; i < items.getSlots(); i++) {
+            ItemStack stackInSlot = items.getStackInSlot(i);
+            if (stackInSlot.isEmpty()) {
+                continue;
+            }
+            CreateLang.text("")
+                    .add(Component.translatable(stackInSlot.getDescriptionId())
+                            .withStyle(ChatFormatting.GRAY))
+                    .add(CreateLang.text(" x" + stackInSlot.getCount())
+                            .style(ChatFormatting.GREEN))
                     .forGoggles(tooltip, 1);
-            CreateLang.builder().add(CreateLang.number(inputInv.getStackInSlot(0).getCount())
-                    .style(ChatFormatting.GOLD))
-                    .forGoggles(tooltip, 1);
-        } else {
-            translate("text.insolator.empty").style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
+        }
+        if (inputInv.getStackInSlot(0).isEmpty()) {
+            CreateMechanicalBotany.translate("text.cannot_process.empty").style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
         }
 
         //addBlankSpace(tooltip);
@@ -101,25 +142,20 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         return super.addToGoggleTooltip(tooltip, isPlayerSneaking);
     }
 
-    public static LangBuilder builder() {
-        return new LangBuilder(CreateMechanicalBotany.MOD_ID);
-    }
-
-    public static LangBuilder translate(String langKey, Object... args) {
-        return builder().translate(langKey, args);
-    }
-
-    private static void addBlankSpace(List<Component> tooltip) {
-        tooltip.add(Component.literal(""));
+    public static boolean hasPipeTowards(Direction face) {
+        return face == Direction.DOWN;
     }
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         behaviours.add(new DirectBeltInputBehaviour(this));
-        behaviours.add(tank = SmartFluidTankBehaviour.single(this, 4000)
-                .allowExtraction().allowInsertion());
-        super.addBehaviours(behaviours);
-        // registerAwardables(behaviours, AllAdvancements.MILLSTONE);
+        tank = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this,
+                1, ModConfigs.server().insolator.tankSize.get(), true).allowExtraction().allowInsertion();
+        behaviours.add(tank);
+        fluidCapability = LazyOptional.of(() -> {
+            LazyOptional<? extends IFluidHandler> inputCap = tank.getCapability();
+            return new CombinedTankWrapper(inputCap.orElse(null));
+        });
     }
 
     public FluidStack getCurrentFluidInTank() {
@@ -240,8 +276,8 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
     @Override
     public <T> @NotNull LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
         if (isItemHandlerCap(cap))
-            return capability.cast();
-        if (side == Direction.DOWN && isFluidHandlerCap(cap))
+            return itemCapability.cast();
+        if (isFluidHandlerCap(cap) && (side == null || MechanicalInsolatorBlock.hasPipeTowards(side)))
             return tank.getCapability().cast();
         return super.getCapability(cap, side);
     }
@@ -255,36 +291,6 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
             return true;
 
         return ModRecipeTypes.INSOLATING.find(inventoryIn, level).isPresent();
-    }
-
-    private class InsolatorInventoryHandler extends CombinedInvWrapper {
-
-        public InsolatorInventoryHandler() {
-            super(inputInv, outputInv);
-        }
-
-        @Override
-        public boolean isItemValid(int slot, ItemStack stack) {
-            if (outputInv == getHandlerFromIndex(getIndexForSlot(slot)))
-                return false;
-            return canProcess(stack) && super.isItemValid(slot, stack);
-        }
-
-        @Override
-        public @NotNull ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-            if (outputInv == getHandlerFromIndex(getIndexForSlot(slot)))
-                return stack;
-            if (!isItemValid(slot, stack))
-                return stack;
-            return super.insertItem(slot, stack, simulate);
-        }
-
-        @Override
-        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
-            if (inputInv == getHandlerFromIndex(getIndexForSlot(slot)))
-                return ItemStack.EMPTY;
-            return super.extractItem(slot, amount, simulate);
-        }
     }
 
 }
