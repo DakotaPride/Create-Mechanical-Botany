@@ -25,7 +25,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 @ParametersAreNonnullByDefault
 public class CreateMechanicalBotanyJEI implements IModPlugin {
-    private static final ResourceLocation MOD_ID = new ResourceLocation(CreateMechanicalBotany.MOD_ID, "jei_plugin");
+    public static final ResourceLocation MOD_ID = new ResourceLocation(CreateMechanicalBotany.MOD_ID, "jei_plugin");
 
     @Override
     @Nonnull
@@ -64,7 +64,7 @@ public class CreateMechanicalBotanyJEI implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         loadCategories(registration);
-        registration.addRecipeCategories(categories.toArray(IRecipeCategory[]::new));
+        //registration.addRecipeCategories(categories.toArray(IRecipeCategory[]::new));
     }
 
     @Override

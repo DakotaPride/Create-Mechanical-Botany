@@ -40,8 +40,8 @@ public class ModBlocks {
         //GarnishedStoneAutomation.LOGGER.info("Registering blocks for " + GarnishedStoneAutomation.NAME);
 
         BlockStressValues.IMPACTS.registerProvider((block) -> {
-            if (block == MECHANICAL_INSOLATOR.get()) return () -> 64.0D;
-            if (block == MECHANICAL_COMPOSTER.get()) return () -> 16.0D;
+            if (block == MECHANICAL_INSOLATOR.get()) return () -> (double) ModConfigs.server().insolator.kineticStressImpact.get();
+            if (block == MECHANICAL_COMPOSTER.get()) return () -> (double) ModConfigs.server().composter.kineticStressImpact.get();
             else return null;
         });
     }
