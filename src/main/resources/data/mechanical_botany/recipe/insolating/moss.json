@@ -7,14 +7,19 @@
       "fluid": "minecraft:water"
     },
     {
-      "item": "minecraft:moss"
+      "item": "minecraft:moss_block"
     }
   ],
   "processing_time": 6400,
   "results": [
     {
       "count": 2,
-      "id": "minecraft:moss"
+      "id": "minecraft:moss_block"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:moss_carpet",
+      "chance": 0.75
     },
     {
       "chance": 0.45,
