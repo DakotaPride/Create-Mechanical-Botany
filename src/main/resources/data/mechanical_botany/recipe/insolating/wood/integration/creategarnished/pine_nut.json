@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "creategarnished"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 500,
+      "fluid": "mechanical_botany:compost"
+    },
+    {
+      "item": "creategarnished:pine_nut"
+    }
+  ],
+  "processing_time": 16000,
+  "results": [
+    {
+      "count": 3,
+      "id": "creategarnished:pine_nut"
+    },
+    {
+      "count": 1,
+      "id": "creategarnished:pine_nut",
+      "chance": 0.5
+    },
+    {
+      "count": 7,
+      "id": "minecraft:spruce_log"
+    }
+  ]
+}

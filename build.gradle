@@ -161,6 +161,10 @@ dependencies {
     runtimeOnly ("maven.modrinth:jade:15.10.1+neoforge")
     runtimeOnly ("maven.modrinth:jade-addons-forge:6.1.0+neoforge")
 
+    // testing
+    //compileOnly ("maven.modrinth:biomes-o-plenty:3RGurDCA")
+    //compileOnly ("maven.modrinth:oh-the-biomes-weve-gone:2.4.5-NeoForge")
+
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html

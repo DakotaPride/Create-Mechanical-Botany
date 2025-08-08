@@ -1,0 +1,25 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    },
+    {
+      "item": "minecraft:moss"
+    }
+  ],
+  "processing_time": 6400,
+  "results": [
+    {
+      "count": 2,
+      "id": "minecraft:moss"
+    },
+    {
+      "chance": 0.45,
+      "count": 1,
+      "id": "minecraft:wheat_seeds"
+    }
+  ]
+}

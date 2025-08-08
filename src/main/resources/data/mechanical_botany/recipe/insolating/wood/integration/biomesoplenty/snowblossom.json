@@ -1,0 +1,29 @@
+{
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 500,
+      "fluid": "mechanical_botany:compost"
+    },
+    {
+      "item": "biomesoplenty:snowblossom_sapling"
+    }
+  ],
+  "processing_time": 16000,
+  "results": [
+    {
+      "count": 1,
+      "id": "biomesoplenty:snowblossom_sapling"
+    },
+    {
+      "count": 1,
+      "id": "biomesoplenty:snowblossom_sapling",
+      "chance": 0.35
+    },
+    {
+      "count": 7,
+      "id": "minecraft:cherry_log"
+    }
+  ]
+}

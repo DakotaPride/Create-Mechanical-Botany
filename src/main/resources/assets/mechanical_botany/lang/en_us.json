@@ -1,5 +1,6 @@
 {
   "mechanical_botany.text.processing_ticks": "%ss",
+  "mechanical_botany.text.config.disabled_saplings": "Sapling Processing Disabled Via Config",
 
   "itemGroup.mechanical_botany.base": "Create: Mechanical Botany",
   "block.mechanical_botany.mechanical_insolator": "Mechanical Insolator",

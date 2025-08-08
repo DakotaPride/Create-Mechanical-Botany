@@ -1,0 +1,43 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ars_nouveau"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "ars_nouveau:bastion_pod"
+      },
+      {
+        "item": "ars_nouveau:bombegranate_pod"
+      },
+      {
+        "item": "ars_nouveau:frostaya_pod"
+      },
+      {
+        "item": "ars_nouveau:magebloom"
+      },
+      {
+        "item": "ars_nouveau:magebloom_crop"
+      },
+      {
+        "item": "ars_nouveau:mendosteen_pod"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.65,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

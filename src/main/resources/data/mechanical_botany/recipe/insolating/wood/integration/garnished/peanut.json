@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "garnished"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 500,
+      "fluid": "mechanical_botany:compost"
+    },
+    {
+      "item": "garnished:cracked_peanut"
+    }
+  ],
+  "processing_time": 16000,
+  "results": [
+    {
+      "count": 1,
+      "id": "garnished:peanut"
+    },
+    {
+      "count": 1,
+      "id": "garnished:peanut",
+      "chance": 0.35
+    },
+    {
+      "count": 4,
+      "id": "garnished:nut_log"
+    }
+  ]
+}

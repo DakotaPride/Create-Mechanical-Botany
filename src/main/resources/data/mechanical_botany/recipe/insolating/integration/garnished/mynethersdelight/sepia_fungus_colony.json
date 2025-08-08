@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "garnished"
+        },
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "mynethersdelight"
+        }
+      ]
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 100,
+      "fluid": "mechanical_botany:void_compost"
+    },
+    {
+      "item": "garnished:sepia_fungus_colony"
+    }
+  ],
+  "processing_time": 8000,
+  "results": [
+    {
+      "count": 2,
+      "id": "garnished:sepia_fungus_colony"
+    }
+  ]
+}

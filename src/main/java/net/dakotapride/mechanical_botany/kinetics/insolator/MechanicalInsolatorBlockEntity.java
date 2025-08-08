@@ -17,13 +17,13 @@ import net.dakotapride.mechanical_botany.ModConfigs;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
@@ -32,7 +32,6 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -70,6 +69,8 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         public boolean isItemValid(int slot, ItemStack stack) {
             if (outputInv == getHandlerFromIndex(getIndexForSlot(slot)))
                 return false;
+            if (stack.is(ItemTags.SAPLINGS))
+                return ModConfigs.server().insolator.canProcessSaplings.get();
             return canProcess(stack) && super.isItemValid(slot, stack);
         }
 
@@ -92,12 +93,10 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        //IFluidHandler handler = level.getCapability(Capabilities.FluidHandler.BLOCK, this.getBlockPos(), null);
 
         LangBuilder mb = CreateLang.translate("generic.unit.millibuckets");
         CreateLang.translate("gui.goggles.fluid_container").forGoggles(tooltip);
 
-//        tooltip.add(Component.literal(getCurrentFluidInTank().toString()));
         if (!getCurrentFluidInTank().isEmpty()) {
             CreateLang.fluidName(getCurrentFluidInTank())
                     .style(ChatFormatting.GRAY)
@@ -135,9 +134,9 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         }
         if (inputInv.getStackInSlot(0).isEmpty()) {
             CreateMechanicalBotany.translate("text.cannot_process.empty").style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
+            if (!ModConfigs.server().insolator.canProcessSaplings.get())
+                CreateMechanicalBotany.translate("text.config.disabled_saplings").style(ChatFormatting.RED).forGoggles(tooltip, 1);
         }
-
-        //addBlankSpace(tooltip);
 
         return super.addToGoggleTooltip(tooltip, isPlayerSneaking);
     }
@@ -162,8 +161,6 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         behaviours.add(new DirectBeltInputBehaviour(this));
-//        behaviours.add(tank = SmartFluidTankBehaviour.single(this, ModConfigs.server().insolator.tankSize.get())
-//                .allowExtraction().allowInsertion());
         tank = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this,
                 1, ModConfigs.server().insolator.tankSize.get(), true).allowExtraction().allowInsertion();
         behaviours.add(tank);
@@ -192,7 +189,6 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
     @Override
     public void tick() {
         super.tick();
-        FluidStack currentFluidInTank = getCurrentFluidInTank();
 
         if (getSpeed() == 0)
             return;
@@ -262,7 +258,6 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
             sendData();
             setChanged();
         }
-        // award(AllAdvancements.MILLSTONE);
     }
 
     @Override
@@ -284,13 +279,6 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
     public int getProcessingSpeed() {
         return Mth.clamp((int) Math.abs(getSpeed() / 16f), 1, 512);
     }
-
-//    @Override
-//    public <T> @NotNull LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-//        if (isItemHandlerCap(cap))
-//            return capability.cast();
-//        return super.getCapability(cap, side);
-//    }
 
     private boolean canProcess(ItemStack stack) {
         ItemStackHandler tester = new ItemStackHandler(1);

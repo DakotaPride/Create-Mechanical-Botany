@@ -1,0 +1,40 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ars_nouveau"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 400,
+      "fluid": "mechanical_botany:void_compost"
+    },
+    {
+      "item": "ars_nouveau:purple_archwood_sapling"
+    }
+  ],
+  "processing_time": 16000,
+  "results": [
+    {
+      "count": 1,
+      "id": "ars_nouveau:purple_archwood_sapling"
+    },
+    {
+      "count": 1,
+      "id": "ars_nouveau:purple_archwood_sapling",
+      "chance": 0.35
+    },
+    {
+      "count": 5,
+      "id": "ars_nouveau:purple_archwood_log"
+    },
+    {
+      "count": 2,
+      "id": "ars_nouveau:bastion_pod",
+      "chance": 0.25
+    }
+  ]
+}

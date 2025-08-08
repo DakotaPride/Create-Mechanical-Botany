@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "garnished"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 500,
+      "fluid": "mechanical_botany:molten_compost"
+    },
+    {
+      "item": "garnished:sepia_fungus"
+    }
+  ],
+  "processing_time": 16000,
+  "results": [
+    {
+      "count": 1,
+      "id": "garnished:sepia_fungus"
+    },
+    {
+      "count": 1,
+      "id": "garnished:sepia_fungus",
+      "chance": 0.05
+    },
+    {
+      "count": 5,
+      "id": "garnished:sepia_stem"
+    },
+    {
+      "count": 7,
+      "id": "garnished:sepia_wart_block"
+    }
+  ]
+}
