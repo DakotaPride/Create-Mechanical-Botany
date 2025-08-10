@@ -20,11 +20,11 @@
   "results": [
     {
       "count": 1,
-      "id": "garnished:pistachio"
+      "id": "garnished:ungarnished_pistachio"
     },
     {
       "count": 1,
-      "id": "garnished:pistachio",
+      "id": "garnished:ungarnished_pistachio",
       "chance": 0.35
     },
     {

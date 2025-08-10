@@ -20,11 +20,11 @@
   "results": [
     {
       "count": 1,
-      "id": "garnished:chestnut"
+      "id": "garnished:ungarnished_chestnut"
     },
     {
       "count": 1,
-      "id": "garnished:chestnut",
+      "id": "garnished:ungarnished_chestnut",
       "chance": 0.35
     },
     {

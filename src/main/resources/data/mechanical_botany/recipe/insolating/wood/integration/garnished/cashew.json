@@ -20,11 +20,11 @@
   "results": [
     {
       "count": 1,
-      "id": "garnished:cashew"
+      "id": "garnished:ungarnished_cashew"
     },
     {
       "count": 1,
-      "id": "garnished:cashew",
+      "id": "garnished:ungarnished_cashew",
       "chance": 0.35
     },
     {

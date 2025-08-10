@@ -20,11 +20,11 @@
   "results": [
     {
       "count": 1,
-      "id": "garnished:macadamia"
+      "id": "garnished:ungarnished_macadamia"
     },
     {
       "count": 1,
-      "id": "garnished:macadamia",
+      "id": "garnished:ungarnished_macadamia",
       "chance": 0.35
     },
     {

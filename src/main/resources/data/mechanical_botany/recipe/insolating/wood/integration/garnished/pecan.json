@@ -20,11 +20,11 @@
   "results": [
     {
       "count": 1,
-      "id": "garnished:pecan"
+      "id": "garnished:ungarnished_pecan"
     },
     {
       "count": 1,
-      "id": "garnished:pecan",
+      "id": "garnished:ungarnished_pecan",
       "chance": 0.35
     },
     {

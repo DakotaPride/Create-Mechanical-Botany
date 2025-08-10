@@ -20,11 +20,11 @@
   "results": [
     {
       "count": 1,
-      "id": "garnished:peanut"
+      "id": "garnished:ungarnished_peanut"
     },
     {
       "count": 1,
-      "id": "garnished:peanut",
+      "id": "garnished:ungarnished_peanut",
       "chance": 0.35
     },
     {

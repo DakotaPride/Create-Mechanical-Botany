@@ -20,11 +20,11 @@
   "results": [
     {
       "count": 1,
-      "id": "garnished:almond"
+      "id": "garnished:ungarnished_almond"
     },
     {
       "count": 1,
-      "id": "garnished:almond",
+      "id": "garnished:ungarnished_almond",
       "chance": 0.35
     },
     {
