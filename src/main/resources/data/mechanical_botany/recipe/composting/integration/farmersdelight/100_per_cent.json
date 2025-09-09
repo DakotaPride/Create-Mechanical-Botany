@@ -1,0 +1,45 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "farmersdelight:apple_pie"
+      },
+      {
+        "item": "farmersdelight:brown_mushroom_colony"
+      },
+      {
+        "item": "farmersdelight:red_mushroom_colony"
+      },
+      {
+        "item": "farmersdelight:chocolate_pie"
+      },
+      {
+        "item": "farmersdelight:dumplings"
+      },
+      {
+        "item": "farmersdelight:stuffed_pumpkin_block"
+      },
+      {
+        "item": "farmersdelight:sweet_berry_cheesecake"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

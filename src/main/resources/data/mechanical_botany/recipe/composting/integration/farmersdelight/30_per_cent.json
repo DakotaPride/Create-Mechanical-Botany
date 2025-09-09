@@ -1,0 +1,46 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "farmersdelight:cabbage_seeds"
+      },
+      {
+        "item": "farmersdelight:rice"
+      },
+      {
+        "item": "farmersdelight:rice_panicle"
+      },
+      {
+        "item": "farmersdelight:sandy_shrub"
+      },
+      {
+        "item": "farmersdelight:straw"
+      },
+      {
+        "item": "farmersdelight:tomato_seeds"
+      },
+      {
+        "item": "farmersdelight:tree_bark"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.30,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

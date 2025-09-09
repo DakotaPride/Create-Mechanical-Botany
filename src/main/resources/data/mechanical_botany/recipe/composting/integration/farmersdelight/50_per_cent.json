@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "farmersdelight:cabbage_leaf"
+      },
+      {
+        "item": "farmersdelight:kelp_roll_slice"
+      },
+      {
+        "item": "farmersdelight:pumpkin_slice"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.50,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

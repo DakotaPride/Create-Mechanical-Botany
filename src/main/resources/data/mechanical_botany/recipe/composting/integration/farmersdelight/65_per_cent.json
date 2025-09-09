@@ -1,0 +1,58 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "farmersdelight:cabbage"
+      },
+      {
+        "item": "farmersdelight:onion"
+      },
+      {
+        "item": "farmersdelight:pie_crust"
+      },
+      {
+        "item": "farmersdelight:tomato"
+      },
+      {
+        "item": "farmersdelight:wild_beetroots"
+      },
+      {
+        "item": "farmersdelight:wild_cabbages"
+      },
+      {
+        "item": "farmersdelight:wild_onions"
+      },
+      {
+        "item": "farmersdelight:wild_carrots"
+      },
+      {
+        "item": "farmersdelight:wild_tomatoes"
+      },
+      {
+        "item": "farmersdelight:wild_potatoes"
+      },
+      {
+        "item": "farmersdelight:wild_rice"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.65,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}
