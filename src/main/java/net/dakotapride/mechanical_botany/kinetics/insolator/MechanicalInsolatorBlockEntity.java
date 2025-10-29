@@ -250,11 +250,11 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
 
         ItemStack stackInSlot = inputInv.getStackInSlot(0);
         FluidStack fluidInSlot = getCurrentFluidInTank();
-        if (lastRecipe.getIngredients().get(0).test(stackInSlot) && lastRecipe.getFluidIngredients().get(0).test(fluidInSlot) && lastRecipe.getRequiredFluid().getRequiredAmount() <= getCurrentFluidInTank().getAmount()) {
+        if (lastRecipe.getIngredients().get(0).test(stackInSlot) && lastRecipe.getFluidIngredients().get(0).test(fluidInSlot) && lastRecipe.getRequiredFluid().amount() <= getCurrentFluidInTank().getAmount()) {
             stackInSlot.shrink(1);
-            fluidInSlot.shrink(lastRecipe.getRequiredFluid().getRequiredAmount());
+            fluidInSlot.shrink(lastRecipe.getRequiredFluid().amount());
             inputInv.setStackInSlot(0, stackInSlot);
-            lastRecipe.rollResults().forEach(stack -> ItemHandlerHelper.insertItemStacked(outputInv, stack, false));
+            lastRecipe.rollResults(level.random).forEach(stack -> ItemHandlerHelper.insertItemStacked(outputInv, stack, false));
             sendData();
             setChanged();
         }
@@ -285,7 +285,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         tester.setStackInSlot(0, stack);
         RecipeWrapper inventoryIn = new RecipeWrapper(tester);
 
-        if (lastRecipe != null && lastRecipe.matches(inventoryIn, level) && lastRecipe.getRequiredFluid().test(getCurrentFluidInTank()) && lastRecipe.getRequiredFluid().getRequiredAmount() <= getCurrentFluidInTank().getAmount())
+        if (lastRecipe != null && lastRecipe.matches(inventoryIn, level) && lastRecipe.getRequiredFluid().test(getCurrentFluidInTank()) && lastRecipe.getRequiredFluid().amount() <= getCurrentFluidInTank().getAmount())
             return true;
 
         return ModRecipeTypes.find(inventoryIn, level, ModRecipeTypes.INSOLATING).isPresent();

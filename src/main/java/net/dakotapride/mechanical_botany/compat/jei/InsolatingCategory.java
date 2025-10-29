@@ -40,12 +40,11 @@ public class InsolatingCategory extends CreateMechanicalBotanyRecipeCategory<Ins
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, InsolatingRecipe recipe, IFocusGroup focuses) {
-        builder
-                .addSlot(RecipeIngredientRole.INPUT, 5, 9)
+        builder.addSlot(RecipeIngredientRole.INPUT, 5, 9)
                 .setBackground(getRenderedSlot(), -1, -1)
                 .addIngredients(recipe.getIngredients().get(0));
 
-        addFluidSlot(builder, 25, 9, recipe.getRequiredFluid(), RecipeIngredientRole.INPUT);
+        addFluidSlot(builder, 25, 9, recipe.getRequiredFluid());
 
         List<ProcessingOutput> results = recipe.getRollableResults();
         boolean single = results.size() == 1;

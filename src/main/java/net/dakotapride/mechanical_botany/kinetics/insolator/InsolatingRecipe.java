@@ -2,11 +2,11 @@ package net.dakotapride.mechanical_botany.kinetics.insolator;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.dakotapride.mechanical_botany.ModConfigs;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -16,10 +16,10 @@ public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
         super(ModRecipeTypes.INSOLATING, params);
     }
 
-    public FluidIngredient getRequiredFluid() {
+    public SizedFluidIngredient getRequiredFluid() {
 //        if (fluidIngredients.isEmpty())
 //            throw new IllegalStateException("Insolator Recipe: " + id.toString() + " has no fluid ingredient!");
-        return fluidIngredients.get(0);
+        return fluidIngredients.getFirst();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
             return false;
 
 //        return blockEntity.check(inv, worldIn, ingredients, fluidIngredients);
-        return ingredients.get(0).test(inv.getItem(0)) && fluidIngredients.get(0).test(getRequiredFluid().getMatchingFluidStacks().get(0));
+        return ingredients.get(0).test(inv.getItem(0)) && fluidIngredients.get(0).test(getRequiredFluid().getFluids()[0]);
     }
 
     @Override

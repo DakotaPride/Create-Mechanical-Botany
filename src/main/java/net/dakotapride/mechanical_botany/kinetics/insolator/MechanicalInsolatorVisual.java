@@ -2,6 +2,7 @@ package net.dakotapride.mechanical_botany.kinetics.insolator;
 
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual;
+import dev.engine_room.flywheel.api.visual.DynamicVisual;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 import dev.engine_room.flywheel.lib.model.Models;
 import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
@@ -19,7 +20,7 @@ public class MechanicalInsolatorVisual extends SingleAxisRotatingVisual<Mechanic
     }
 
     @Override
-    public void beginFrame(Context ctx) {
+    public void beginFrame(DynamicVisual.Context ctx) {
         animate(ctx.partialTick());
     }
 

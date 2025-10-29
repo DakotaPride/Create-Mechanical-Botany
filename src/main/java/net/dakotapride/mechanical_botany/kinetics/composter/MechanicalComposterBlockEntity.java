@@ -208,7 +208,7 @@ public class MechanicalComposterBlockEntity extends KineticBlockEntity implement
         ItemStack stackInSlot = inputInv.getStackInSlot(0);
         stackInSlot.shrink(1);
         inputInv.setStackInSlot(0, stackInSlot);
-        lastRecipe.rollResults()
+        lastRecipe.rollResults(level.random)
                 .forEach(stack -> ItemHandlerHelper.insertItemStacked(outputInv, stack, false));
 
         sendData();
