@@ -6,6 +6,7 @@
     }
   ],
   "type": "mechanical_botany:insolating",
+  "consume_input": false,
   "ingredients": [
     {
       "type": "fluid_stack",
@@ -19,7 +20,6 @@
   "processing_time": 400,
   "results": [
     {
-      "count": 2,
       "id": "biomeswevegone:horseweed"
     }
   ]

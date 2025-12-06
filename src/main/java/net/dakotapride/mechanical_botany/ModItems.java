@@ -7,7 +7,7 @@ import net.minecraft.world.item.Item;
 import static net.dakotapride.mechanical_botany.CreateMechanicalBotany.REGISTRATE;
 
 public class ModItems {
-    public static ItemEntry<?> COMPOST = REGISTRATE.item("compost", BoneMealItem::new).register();
+    public static ItemEntry<?> COMPOST = REGISTRATE.item("compost", Item::new).register();
 
     public static void register() {}
 }

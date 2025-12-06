@@ -164,6 +164,13 @@ dependencies {
     //compileOnly ("maven.modrinth:oh-the-biomes-weve-gone:2.4.5-NeoForge")
     runtimeOnly ("maven.modrinth:floralis:17.0.0")
 
+    runtimeOnly ("maven.modrinth:create-shimmer:1.2.6")
+    runtimeOnly ("maven.modrinth:create-dragons-plus:1.8.5")
+
+    runtimeOnly ("maven.modrinth:miners-delight:1.4.2")
+    runtimeOnly ("maven.modrinth:farmers-delight:1.21.1-1.2.9")
+    runtimeOnly ("maven.modrinth:lodestonelib:1.7.1")
+
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html

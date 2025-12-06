@@ -6,6 +6,7 @@
     }
   ],
   "type": "mechanical_botany:insolating",
+  "consume_input": false,
   "ingredients": [
     {
       "type": "fluid_stack",
@@ -21,10 +22,6 @@
     {
       "count": 1,
       "id": "supplementaries:flax"
-    },
-    {
-      "count": 1,
-      "id": "supplementaries:flax_seeds"
     },
     {
       "chance": 0.25,

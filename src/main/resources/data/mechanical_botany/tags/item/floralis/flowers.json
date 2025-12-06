@@ -1,0 +1,68 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "floralis:red_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:orange_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:yellow_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:green_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:lime_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:blue_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:light_blue_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:cyan_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:purple_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:magenta_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:pink_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:black_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:gray_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:light_gray_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:white_flower"
+    },
+    {
+      "required": false,
+      "id": "floralis:brown_flower"
+    }
+  ]
+}

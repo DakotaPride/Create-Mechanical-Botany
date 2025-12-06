@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "minersdelight"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "minersdelight:cave_carrot"
+      },
+      {
+        "item": "minersdelight:baked_cave_carrot"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.65,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

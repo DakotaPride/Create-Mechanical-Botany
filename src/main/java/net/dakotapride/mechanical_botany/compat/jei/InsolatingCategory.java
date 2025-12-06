@@ -5,7 +5,9 @@ import com.simibubi.create.compat.jei.EmptyBackground;
 import com.simibubi.create.compat.jei.ItemIcon;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
+import com.simibubi.create.foundation.utility.CreateLang;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -18,6 +20,7 @@ import net.dakotapride.mechanical_botany.ModBlocks;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
 import net.dakotapride.mechanical_botany.compat.jei.util.CreateMechanicalBotanyRecipeCategory;
 import net.dakotapride.mechanical_botany.kinetics.insolator.InsolatingRecipe;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -40,7 +43,7 @@ public class InsolatingCategory extends CreateMechanicalBotanyRecipeCategory<Ins
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, InsolatingRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 5, 9)
+        IRecipeSlotBuilder plantInputSlot = builder.addSlot(RecipeIngredientRole.INPUT, 5, 9)
                 .setBackground(getRenderedSlot(), -1, -1)
                 .addIngredients(recipe.getIngredients().get(0));
 
@@ -61,6 +64,9 @@ public class InsolatingCategory extends CreateMechanicalBotanyRecipeCategory<Ins
 
             i++;
         }
+
+        if (recipe.consumeItem())
+            plantInputSlot.addTooltipCallback((recipeSlotView, tooltip) -> tooltip.add(1, translateDirect("text.insolating.input_consumed").withStyle(ChatFormatting.BOLD)));
     }
 
     public static final RecipeType<RecipeHolder<InsolatingRecipe>> TYPE =

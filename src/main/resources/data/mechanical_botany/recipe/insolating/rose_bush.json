@@ -1,5 +1,6 @@
 {
   "type": "mechanical_botany:insolating",
+  "consume_input": false,
   "ingredients": [
     {
       "type": "fluid_stack",
@@ -13,7 +14,6 @@
   "processing_time": 2400,
   "results": [
     {
-      "count": 2,
       "id": "minecraft:rose_bush"
     }
   ]

@@ -17,7 +17,7 @@ public class ModRecipeTypes {
 
 
     public static final MechancialBotanyRecipeTypeInfo<InsolatingRecipe> INSOLATING =
-            register("insolating", InsolatingRecipe.Serializer::new);
+            register("insolating", () -> new InsolatingRecipe.Serializer<>(InsolatingRecipe::new));
     public static final MechancialBotanyRecipeTypeInfo<CompostingRecipe> COMPOSTING =
             register("composting", CompostingRecipe.Serializer::new);
 

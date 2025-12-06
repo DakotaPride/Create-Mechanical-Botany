@@ -1,0 +1,61 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "twilightforest:time_sapling"
+      },
+      {
+        "item": "twilightforest:transformation_sapling"
+      },
+      {
+        "item": "twilightforest:mining_sapling"
+      },
+      {
+        "item": "twilightforest:sorting_sapling"
+      },
+      {
+        "item": "twilightforest:hollow_oak_sapling"
+      },
+      {
+        "item": "twilightforest:root"
+      },
+      {
+        "item": "twilightforest:moss_patch"
+      },
+      {
+        "item": "twilightforest:torchberry_plant"
+      },
+      {
+        "item": "twilightforest:beanstalk_leaves"
+      },
+      {
+        "item": "twilightforest:trollvidr"
+      },
+      {
+        "item": "twilightforest:thorn_rose"
+      },
+      {
+        "item": "twilightforest:liveroot"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.50,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

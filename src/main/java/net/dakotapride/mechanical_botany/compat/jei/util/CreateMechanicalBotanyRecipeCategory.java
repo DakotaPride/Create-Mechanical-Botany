@@ -6,12 +6,13 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.Arrays;
 
-public abstract class CreateMechanicalBotanyRecipeCategory <T extends StandardProcessingRecipe<?>> extends CreateRecipeCategory<T> {
+public abstract class CreateMechanicalBotanyRecipeCategory<T extends Recipe<?>> extends CreateRecipeCategory<T> {
     public CreateMechanicalBotanyRecipeCategory(Info<T> info) {
         super(info);
     }

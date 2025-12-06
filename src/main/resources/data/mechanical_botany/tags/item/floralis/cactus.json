@@ -1,0 +1,68 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "floralis:red_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:orange_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:yellow_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:green_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:lime_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:blue_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:light_blue_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:cyan_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:purple_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:magenta_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:pink_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:black_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:gray_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:light_gray_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:white_cactus"
+    },
+    {
+      "required": false,
+      "id": "floralis:brown_cactus"
+    }
+  ]
+}

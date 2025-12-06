@@ -6,6 +6,7 @@
     }
   ],
   "type": "mechanical_botany:insolating",
+  "consume_input": false,
   "ingredients": [
     {
       "type": "fluid_stack",
@@ -13,23 +14,20 @@
       "fluid": "minecraft:water"
     },
     {
-      "item": "farmersdelight:tomato"
+      "item": "farmersdelight:tomato_seeds"
     }
   ],
   "processing_time": 1600,
   "results": [
     {
-      "count": 2,
       "id": "farmersdelight:tomato"
     },
     {
       "chance": 0.35,
-      "count": 1,
-      "id": "farmersdelight:tomato"
+      "id": "farmersdelight:tomato_seeds"
     },
     {
       "chance": 0.05,
-      "count": 1,
       "id": "farmersdelight:rotten_tomato"
     }
   ]

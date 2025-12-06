@@ -1,18 +1,21 @@
 package net.dakotapride.mechanical_botany.kinetics.insolator;
 
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
-import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
+import com.mojang.serialization.MapCodec;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import net.dakotapride.mechanical_botany.ModConfigs;
 import net.dakotapride.mechanical_botany.ModRecipeTypes;
-import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
-    public InsolatingRecipe(ProcessingRecipeParams params) {
+public class InsolatingRecipe extends ProcessingRecipe<RecipeWrapper, InsolatingProcessingRecipeParams> {
+    public InsolatingRecipe(InsolatingProcessingRecipeParams params) {
         super(ModRecipeTypes.INSOLATING, params);
     }
 
@@ -20,6 +23,10 @@ public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
 //        if (fluidIngredients.isEmpty())
 //            throw new IllegalStateException("Insolator Recipe: " + id.toString() + " has no fluid ingredient!");
         return fluidIngredients.getFirst();
+    }
+
+    public boolean consumeItem() {
+        return params.consumeInput();
     }
 
     @Override
@@ -48,7 +55,7 @@ public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
 //    }
 
     @Override
-    public boolean matches(RecipeInput inv, Level worldIn) {
+    public boolean matches(RecipeWrapper inv, Level worldIn) {
         if (inv.isEmpty())
             return false;
 
@@ -61,9 +68,23 @@ public class InsolatingRecipe extends StandardProcessingRecipe<RecipeInput> {
         return 4;
     }
 
-    public static class Serializer extends StandardProcessingRecipe.Serializer<InsolatingRecipe> {
-        public Serializer() {
-            super(InsolatingRecipe::new);
+    public static class Serializer<R extends InsolatingRecipe> implements RecipeSerializer<R> {
+        private final MapCodec<R> codec;
+        private final StreamCodec<RegistryFriendlyByteBuf, R> streamCodec;
+
+        public Serializer(ProcessingRecipe.Factory<InsolatingProcessingRecipeParams, R> factory) {
+            this.codec = ProcessingRecipe.codec(factory, InsolatingProcessingRecipeParams.CODEC);
+            this.streamCodec = ProcessingRecipe.streamCodec(factory, InsolatingProcessingRecipeParams.STREAM_CODEC);
+        }
+
+        @Override
+        public MapCodec<R> codec() {
+            return codec;
+        }
+
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, R> streamCodec() {
+            return streamCodec;
         }
     }
 }

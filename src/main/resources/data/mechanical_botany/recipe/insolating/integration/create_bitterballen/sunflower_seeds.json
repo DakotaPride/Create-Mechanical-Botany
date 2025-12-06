@@ -6,6 +6,7 @@
     }
   ],
   "type": "mechanical_botany:insolating",
+  "consume_input": false,
   "ingredients": [
     {
       "type": "fluid_stack",
@@ -23,6 +24,7 @@
       "id": "minecraft:sunflower"
     },
     {
+      "chance": 0.5,
       "count": 1,
       "id": "create_bic_bit:sunflower_seeds"
     }

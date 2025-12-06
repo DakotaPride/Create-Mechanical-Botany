@@ -1,5 +1,6 @@
 {
   "type": "mechanical_botany:insolating",
+  "consume_input": false,
   "ingredients": [
     {
       "type": "fluid_stack",
@@ -15,10 +16,6 @@
     {
       "count": 1,
       "id": "minecraft:melon"
-    },
-    {
-      "count": 1,
-      "id": "minecraft:melon_seeds"
     },
     {
       "chance": 0.25,

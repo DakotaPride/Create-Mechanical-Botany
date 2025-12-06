@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "consume_input": false,
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 500,
+      "fluid": "mechanical_botany:compost"
+    },
+    {
+      "item": "twilightforest:twilight_oak_sapling"
+    }
+  ],
+  "processing_time": 16000,
+  "results": [
+    {
+      "count": 1,
+      "id": "twilightforest:twilight_oak_sapling",
+      "chance": 0.35
+    },
+    {
+      "count": 4,
+      "id": "twilightforest:twilight_oak_log"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "floralis:red_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:orange_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:yellow_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:green_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:lime_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:blue_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:light_blue_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:cyan_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:purple_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:magenta_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:pink_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:black_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:gray_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:light_gray_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:white_cactus_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:brown_cactus_seeds"
+    }
+  ]
+}

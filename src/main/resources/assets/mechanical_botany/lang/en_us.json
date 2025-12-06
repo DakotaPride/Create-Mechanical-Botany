@@ -1,5 +1,6 @@
 {
   "mechanical_botany.text.processing_ticks": "%ss",
+  "mechanical_botany.text.insolating.input_consumed": "Is Consumed",
   "mechanical_botany.text.config.disabled_saplings": "Sapling Processing Disabled Via Config",
 
   "itemGroup.mechanical_botany.base": "Create: Mechanical Botany",
@@ -19,9 +20,6 @@
   "mechanical_botany.text.cannot_process.empty": "Cannot process when input is empty",
   "mechanical_botany.gui.goggles.composter_contents": "Mechanical Composter Contents: ",
   "mechanical_botany.insolator.processing_duration": "Process Duration: %s",
-
-  "item.mechanical_botany.compost.tooltip": "Compost",
-  "item.mechanical_botany.compost.tooltip.summary": "Acts like _Bone Meal_!",
 
   "mechanical_botany.ponder.insolator.header": "Growing Plants in the Mechanical Insolator",
   "mechanical_botany.ponder.composter.header": "Breaking Down Plants Into Compost",

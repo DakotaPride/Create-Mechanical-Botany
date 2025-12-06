@@ -251,7 +251,8 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         ItemStack stackInSlot = inputInv.getStackInSlot(0);
         FluidStack fluidInSlot = getCurrentFluidInTank();
         if (lastRecipe.getIngredients().get(0).test(stackInSlot) && lastRecipe.getFluidIngredients().get(0).test(fluidInSlot) && lastRecipe.getRequiredFluid().amount() <= getCurrentFluidInTank().getAmount()) {
-            stackInSlot.shrink(1);
+            if (lastRecipe.getParams().consumeInput())
+                stackInSlot.shrink(1);
             fluidInSlot.shrink(lastRecipe.getRequiredFluid().amount());
             inputInv.setStackInSlot(0, stackInSlot);
             lastRecipe.rollResults(level.random).forEach(stack -> ItemHandlerHelper.insertItemStacked(outputInv, stack, false));

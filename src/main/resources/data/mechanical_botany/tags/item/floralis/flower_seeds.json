@@ -1,0 +1,68 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "floralis:red_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:orange_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:yellow_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:green_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:lime_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:blue_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:light_blue_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:cyan_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:purple_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:magenta_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:pink_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:black_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:gray_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:light_gray_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:white_flower_seeds"
+    },
+    {
+      "required": false,
+      "id": "floralis:brown_flower_seeds"
+    }
+  ]
+}

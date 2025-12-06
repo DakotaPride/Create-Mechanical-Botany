@@ -6,6 +6,7 @@
     }
   ],
   "type": "mechanical_botany:insolating",
+  "consume_input": false,
   "ingredients": [
     {
       "type": "fluid_stack",
@@ -28,7 +29,7 @@
       "chance": 0.5
     },
     {
-      "count": 2,
+      "chance": 0.15,
       "id": "floralis:purple_cactus_seeds"
     },
     {

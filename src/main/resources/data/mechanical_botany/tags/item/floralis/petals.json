@@ -1,0 +1,68 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "floralis:red_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:orange_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:yellow_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:green_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:lime_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:blue_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:light_blue_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:cyan_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:purple_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:magenta_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:pink_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:black_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:gray_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:light_gray_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:white_petals"
+    },
+    {
+      "required": false,
+      "id": "floralis:brown_petals"
+    }
+  ]
+}

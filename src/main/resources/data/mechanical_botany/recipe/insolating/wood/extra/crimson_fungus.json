@@ -1,5 +1,6 @@
 {
   "type": "mechanical_botany:insolating",
+  "consume_input": false,
   "ingredients": [
     {
       "type": "fluid_stack",
@@ -7,27 +8,23 @@
       "fluid": "mechanical_botany:molten_compost"
     },
     {
-      "item": "minecraft:warped_fungus"
+      "item": "minecraft:crimson_fungus"
     }
   ],
   "processing_time": 16000,
   "results": [
     {
       "count": 1,
-      "id": "minecraft:warped_fungus"
-    },
-    {
-      "count": 1,
-      "id": "minecraft:warped_fungus",
+      "id": "minecraft:crimson_fungus",
       "chance": 0.05
     },
     {
       "count": 5,
-      "id": "minecraft:warped_stem"
+      "id": "minecraft:crimson_stem"
     },
     {
       "count": 7,
-      "id": "minecraft:warped_wart_block"
+      "id": "minecraft:nether_wart_block"
     }
   ]
 }

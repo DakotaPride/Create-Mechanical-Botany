@@ -1,5 +1,6 @@
 {
   "type": "mechanical_botany:insolating",
+  "consume_input": false,
   "ingredients": [
     {
       "type": "fluid_stack",
@@ -13,7 +14,6 @@
   "processing_time": 1600,
   "results": [
     {
-      "count": 2,
       "id": "minecraft:spore_blossom"
     }
   ]

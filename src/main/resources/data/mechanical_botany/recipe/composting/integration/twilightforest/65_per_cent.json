@@ -1,0 +1,52 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
+  "type": "mechanical_botany:composting",
+  "ingredients": [
+    [
+      {
+        "item": "twilightforest:liveroot_block"
+      },
+      {
+        "item": "twilightforest:mushgloom"
+      },
+      {
+        "item": "twilightforest:huge_water_lily"
+      },
+      {
+        "item": "twilightforest:uberous_soil"
+      },
+      {
+        "item": "twilightforest:huge_stalk"
+      },
+      {
+        "item": "twilightforest:unripe_trollber"
+      },
+      {
+        "item": "twilightforest:trollber"
+      },
+      {
+        "item": "twilightforest:huge_mushgloom_stem"
+      },
+      {
+        "item": "twilightforest:maze_wafer"
+      }
+    ]
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    },
+    {
+      "chance": 0.65,
+      "count": 1,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

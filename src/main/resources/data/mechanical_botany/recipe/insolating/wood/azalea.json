@@ -1,5 +1,6 @@
 {
   "type": "mechanical_botany:insolating",
+  "consume_input": false,
   "ingredients": [
     {
       "type": "fluid_stack",
@@ -13,7 +14,7 @@
   "processing_time": 16000,
   "results": [
     {
-      "count": 2,
+      "count": 1,
       "id": "minecraft:azalea"
     },
     {
