@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:dirt"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "mechanical_botany:compost"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:podzol"
+    }
+  ]
+}

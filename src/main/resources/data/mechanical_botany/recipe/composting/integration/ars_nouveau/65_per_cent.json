@@ -31,10 +31,6 @@
   "processing_time": 50,
   "results": [
     {
-      "count": 1,
-      "id": "mechanical_botany:compost"
-    },
-    {
       "chance": 0.65,
       "count": 1,
       "id": "mechanical_botany:compost"

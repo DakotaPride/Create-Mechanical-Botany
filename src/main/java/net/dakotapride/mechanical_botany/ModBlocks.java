@@ -4,8 +4,11 @@ import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.dakotapride.mechanical_botany.content.block.CompostBlock;
 import net.dakotapride.mechanical_botany.kinetics.composter.MechanicalComposterBlock;
 import net.dakotapride.mechanical_botany.kinetics.insolator.MechanicalInsolatorBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
@@ -34,6 +37,9 @@ public class ModBlocks {
                     .transform(customItemModel())
                     // .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .register();
+
+    public static final BlockEntry<CompostBlock> COMPOST_BLOCK = REGISTRATE.block("compost_block", CompostBlock::new)
+            .initialProperties(() -> Blocks.DIRT).simpleItem().register();
 
     public static void register() {
         // load the class and register everything

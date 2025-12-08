@@ -1,0 +1,14 @@
+{
+  "type": "create:emptying",
+  "ingredients": [
+    {
+      "item": "mechanical_botany:compost_block"
+    }
+  ],
+  "results": [
+    {
+      "amount": 675,
+      "id": "mechanical_botany:compost"
+    }
+  ]
+}

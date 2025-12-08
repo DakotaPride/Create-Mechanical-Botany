@@ -19,25 +19,21 @@ public class ModCreativeModeTabs {
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.mechanical_botany.base"))
                     .icon(ModBlocks.MECHANICAL_INSOLATOR::asStack)
-                    .displayItems(new DisplayItemsGenerator(true, ModCreativeModeTabs.MECHANICAL_BOTANY))
+                    .displayItems(new DisplayItemsGenerator())
                     .build());
 
 
     public static class DisplayItemsGenerator implements CreativeModeTab.DisplayItemsGenerator {
 
-        private final boolean addItems;
-        private final DeferredHolder<CreativeModeTab, CreativeModeTab> tabFilter;
 
-        public DisplayItemsGenerator(boolean addItems, DeferredHolder<CreativeModeTab, CreativeModeTab> tabFilter) {
-            this.addItems = addItems;
-            this.tabFilter = tabFilter;
-        }
+        public DisplayItemsGenerator() {}
 
         @Override
         public void accept(CreativeModeTab.@NotNull ItemDisplayParameters parameters, CreativeModeTab.@NotNull Output output) {
             output.accept(ModBlocks.MECHANICAL_INSOLATOR.asStack());
             output.accept(ModBlocks.MECHANICAL_COMPOSTER.asStack());
             output.accept(ModItems.COMPOST.asStack());
+            output.accept(ModBlocks.COMPOST_BLOCK.asStack());
             output.accept(ModFluids.COMPOST.get().getBucket());
             output.accept(ModFluids.MOLTEN_COMPOST.get().getBucket());
             output.accept(ModFluids.VOID_COMPOST.get().getBucket());

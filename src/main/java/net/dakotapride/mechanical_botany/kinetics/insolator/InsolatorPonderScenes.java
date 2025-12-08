@@ -125,12 +125,22 @@ public class InsolatorPonderScenes {
 
             BlockPos beltPos = util.grid().at(1, 1, 2);
             scene.world().createItemOnBelt(beltPos, Direction.EAST, itemStack2);
-            scene.idle(15);
-            scene.world().createItemOnBelt(beltPos, Direction.EAST, new ItemStack(Items.ALLIUM));
             scene.idle(20);
 
             scene.overlay().showText(50)
                     .text("The outputs can also be extracted by automation through any side")
+                    .pointAt(util.vector().blockSurface(insolator, Direction.WEST)
+                            .add(-.5, .4, 0))
+                    .placeNearTarget();
+            scene.idle(60);
+
+            scene.addKeyframe();
+            scene.world().hideSection(beltCog, Direction.UP);
+            scene.world().hideSection(belt, Direction.UP);
+            scene.idle(15);
+
+            scene.overlay().showText(50)
+                    .text("Certain recipes will keep the input slot intact, allowing for simpler processing")
                     .pointAt(util.vector().blockSurface(insolator, Direction.WEST)
                             .add(-.5, .4, 0))
                     .placeNearTarget();
@@ -256,12 +266,6 @@ public class InsolatorPonderScenes {
             Vec3 insolatorTop = util.vector().topOf(insolator);
             scene.overlay().showText(80)
                     .attachKeyFrame()
-                    .text("Liquid Void Compost is made by mixing Liquid Compost with Powdered Obsidian")
-                    .pointAt(insolatorTop)
-                    .placeNearTarget();
-            scene.idle(90);
-            scene.overlay().showText(80)
-                    .attachKeyFrame()
                     .text("Liquid Void Compost can be used to produce Chorus Fruit")
                     .pointAt(insolatorTop)
                     .placeNearTarget();
@@ -302,7 +306,7 @@ public class InsolatorPonderScenes {
             scene.idle(15);
 
             BlockPos beltPos = util.grid().at(1, 2, 2);
-            scene.world().createItemOnBelt(beltPos, Direction.EAST, itemStack2);
+            scene.world().createItemOnBelt(beltPos, Direction.EAST, new ItemStack(Items.CHORUS_FRUIT));
             scene.idle(15);
             scene.world().createItemOnBelt(beltPos, Direction.EAST, new ItemStack(Items.CHORUS_FRUIT));
             scene.idle(20);
@@ -390,6 +394,13 @@ public class InsolatorPonderScenes {
             scene.idle(15);
             scene.world().createItemOnBelt(beltPos, Direction.EAST, new ItemStack(Items.TORCHFLOWER_SEEDS));
             scene.idle(20);
+
+            scene.overlay().showText(80)
+                    .attachKeyFrame()
+                    .text("Furthermore, most tree or tree adjacent plants require some form of Liquid Compost as well")
+                    .pointAt(insolatorTop)
+                    .placeNearTarget();
+            scene.idle(90);
         }
     }
 }

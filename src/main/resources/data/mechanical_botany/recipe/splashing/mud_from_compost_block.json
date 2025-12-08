@@ -1,0 +1,13 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "mechanical_botany:compost_block"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:mud"
+    }
+  ]
+}
