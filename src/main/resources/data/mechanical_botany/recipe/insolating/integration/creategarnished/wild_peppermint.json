@@ -14,19 +14,13 @@
       "fluid": "minecraft:water"
     },
     {
-      "item": "creategarnished:elven_sweet_berries"
+      "item": "creategarnished:wild_peppermint"
     }
   ],
   "processing_time": 1600,
   "results": [
     {
-      "id": "creategarnished:elven_sweet_berries",
-      "count": 2
-    },
-    {
-      "chance": 0.25,
-      "count": 1,
-      "id": "creategarnished:elven_sweet_berries"
+      "id": "creategarnished:wild_peppermint"
     }
   ]
 }
