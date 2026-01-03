@@ -7,6 +7,7 @@ public class InsolatorProcessingConfig extends ConfigBase {
     public ConfigInt tankSize = i(1000, 1000, 16000, "Tank Size", Comments.tankSize, Comments.requiresReplacement);
     public ConfigInt kineticStressImpact = i(64, 2, "Kinetic Stress Impact", Comments.kineticStressImpact, Comments.requiresReplacement);
     public ConfigBool canProcessSaplings = b(true, "Can Process Saplings", Comments.canProcessSaplings);
+    public ConfigBool readConsumeInputFlag = b(true, "Read \"consume_input\" Flag", Comments.readConsumeInputFlag);
 
     @Override
     public String getName() {
@@ -19,5 +20,6 @@ public class InsolatorProcessingConfig extends ConfigBase {
         static String tankSize = "Controls the tank size of the Mechanical Insolator.";
         static String kineticStressImpact = "The kinetic stress impact value.";
         static String canProcessSaplings = "Whether or not items tagged #minecraft:saplings can be processed.";
+        static String readConsumeInputFlag = "Whether or not the \"consume_input\" flag in insolating recipes is read.";
     }
 }
