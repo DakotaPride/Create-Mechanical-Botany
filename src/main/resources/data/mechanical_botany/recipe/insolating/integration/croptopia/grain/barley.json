@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
-      "modid": "fruitsdelight"
+      "modid": "croptopia"
     }
   ],
   "type": "mechanical_botany:insolating",
@@ -14,18 +14,18 @@
       "fluid": "minecraft:water"
     },
     {
-      "item": "fruitsdelight:lemon_seeds"
+      "item": "croptopia:barley_seed"
     }
   ],
-  "processing_time": 3200,
+  "processing_time": 1600,
   "results": [
     {
-      "id": "fruitsdelight:lemon"
+      "id": "croptopia:barley"
     },
     {
-      "chance": 0.35,
+      "chance": 0.25,
       "count": 1,
-      "id": "fruitsdelight:lemon_seeds"
+      "id": "croptopia:barley_seed"
     }
   ]
 }

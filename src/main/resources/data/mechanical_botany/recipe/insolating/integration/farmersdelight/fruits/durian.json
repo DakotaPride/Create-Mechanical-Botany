@@ -14,14 +14,14 @@
       "fluid": "mechanical_botany:compost"
     },
     {
-      "item": "fruitsdelight:peach_sapling"
+      "item": "fruitsdelight:durian_sapling"
     }
   ],
   "processing_time": 10000,
   "results": [
     {
       "count": 1,
-      "id": "fruitsdelight:peach_sapling",
+      "id": "fruitsdelight:durian_sapling",
       "chance": 0.35
     },
     {
@@ -30,7 +30,7 @@
     },
     {
       "count": 1,
-      "id": "fruitsdelight:peach",
+      "id": "fruitsdelight:durian",
       "chance": 0.8
     }
   ]

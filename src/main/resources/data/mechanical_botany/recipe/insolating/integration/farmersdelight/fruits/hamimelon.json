@@ -14,18 +14,18 @@
       "fluid": "minecraft:water"
     },
     {
-      "item": "fruitsdelight:lemon_seeds"
+      "item": "fruitsdelight:hamimelon_seeds"
     }
   ],
-  "processing_time": 3200,
+  "processing_time": 4800,
   "results": [
     {
-      "id": "fruitsdelight:lemon"
+      "id": "fruitsdelight:hamimelon"
     },
     {
-      "chance": 0.35,
+      "chance": 0.25,
       "count": 1,
-      "id": "fruitsdelight:lemon_seeds"
+      "id": "fruitsdelight:hamimelon_seeds"
     }
   ]
 }

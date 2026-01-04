@@ -14,10 +14,10 @@
       "fluid": "minecraft:water"
     },
     {
-      "item": "fruitsdelight:pineapple"
+      "item": "fruitsdelight:pineapple_sapling"
     }
   ],
-  "processing_time": 1600,
+  "processing_time": 3200,
   "results": [
     {
       "id": "fruitsdelight:pineapple"
@@ -25,7 +25,7 @@
     {
       "chance": 0.35,
       "count": 1,
-      "id": "fruitsdelight:pineapple"
+      "id": "fruitsdelight:pineapple_sapling"
     }
   ]
 }

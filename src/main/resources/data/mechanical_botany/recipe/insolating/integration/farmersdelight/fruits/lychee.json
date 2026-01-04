@@ -10,22 +10,28 @@
   "ingredients": [
     {
       "type": "fluid_stack",
-      "amount": 1000,
-      "fluid": "minecraft:water"
+      "amount": 500,
+      "fluid": "mechanical_botany:compost"
     },
     {
-      "item": "fruitsdelight:lychee"
+      "item": "fruitsdelight:lychee_sapling"
     }
   ],
-  "processing_time": 1600,
+  "processing_time": 10000,
   "results": [
     {
-      "id": "fruitsdelight:lychee"
+      "count": 1,
+      "id": "fruitsdelight:lychee_sapling",
+      "chance": 0.35
     },
     {
-      "chance": 0.35,
+      "count": 4,
+      "id": "minecraft:jungle_log"
+    },
+    {
       "count": 1,
-      "id": "fruitsdelight:lychee"
+      "id": "fruitsdelight:lychee",
+      "chance": 0.8
     }
   ]
 }

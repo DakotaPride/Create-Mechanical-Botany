@@ -10,22 +10,28 @@
   "ingredients": [
     {
       "type": "fluid_stack",
-      "amount": 1000,
-      "fluid": "minecraft:water"
+      "amount": 500,
+      "fluid": "mechanical_botany:compost"
     },
     {
-      "item": "fruitsdelight:bayberry"
+      "item": "fruitsdelight:bayberry_sapling"
     }
   ],
-  "processing_time": 1600,
+  "processing_time": 10000,
   "results": [
     {
-      "id": "fruitsdelight:bayberry"
+      "count": 1,
+      "id": "fruitsdelight:bayberry_sapling",
+      "chance": 0.35
     },
     {
-      "chance": 0.35,
+      "count": 4,
+      "id": "minecraft:spruce_log"
+    },
+    {
       "count": 1,
-      "id": "fruitsdelight:bayberry"
+      "id": "fruitsdelight:bayberry",
+      "chance": 0.8
     }
   ]
 }
