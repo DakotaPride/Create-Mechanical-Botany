@@ -22,7 +22,7 @@
     {
       "count": 1,
       "id": "fruitsdelight:mangosteen_sapling",
-      "chance": 0.35
+      "chance": 0.3
     },
     {
       "count": 4,
@@ -30,8 +30,7 @@
     },
     {
       "count": 1,
-      "id": "fruitsdelight:mangosteen",
-      "chance": 0.8
+      "id": "fruitsdelight:mangosteen"
     }
   ]
 }
