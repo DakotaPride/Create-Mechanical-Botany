@@ -5,7 +5,7 @@ import net.createmod.catnip.config.ConfigBase;
 public class InsolatorProcessingConfig extends ConfigBase {
     public ConfigInt processingTimeMultiplier = i(1, 1, "Processing Time Multiplier", Comments.processingTimeMultiplier);
     public ConfigInt tankSize = i(1000, 1000, 16000, "Tank Size", Comments.tankSize, Comments.requiresReplacement);
-    public ConfigInt kineticStressImpact = i(64, 2, "Kinetic Stress Impact", Comments.kineticStressImpact, Comments.requiresReplacement);
+    public ConfigInt kineticStressImpact = i(64, 2, "Kinetic Stress Impact", Comments.kineticStressImpact);
     public ConfigBool canProcessSaplings = b(true, "Can Process Saplings", Comments.canProcessSaplings);
     public ConfigBool readConsumeInputFlag = b(true, "Read \"consume_input\" Flag", Comments.readConsumeInputFlag);
 

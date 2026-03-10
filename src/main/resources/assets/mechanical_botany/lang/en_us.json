@@ -2,6 +2,8 @@
   "mechanical_botany.text.processing_ticks": "%ss",
   "mechanical_botany.text.insolating.input_consumed": "Is Consumed",
   "mechanical_botany.text.config.disabled_saplings": "Sapling Processing Disabled Via Config",
+  "mechanical_botany.text.config.input_slot": " (Input)",
+  "mechanical_botany.text.config.output_slot": " (Output)",
 
   "itemGroup.mechanical_botany.base": "Create: Mechanical Botany",
   "block.mechanical_botany.mechanical_insolator": "Mechanical Insolator",

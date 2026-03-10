@@ -1,6 +1,7 @@
 package net.dakotapride.mechanical_botany;
 
 import net.createmod.catnip.config.ConfigBase;
+import net.dakotapride.mechanical_botany.config.ClientConfig;
 import net.dakotapride.mechanical_botany.config.ServerConfig;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -20,13 +21,13 @@ public class ModConfigs {
 
     private static final Map<ModConfig.Type, ConfigBase> CONFIGS = new EnumMap<>(ModConfig.Type.class);
 
-    //private static ClientConfig client;
+    private static ClientConfig client;
     //private static CCommon common;
     private static ServerConfig server;
 
-//    public static CClient client() {
-//        return client;
-//    }
+    public static ClientConfig client() {
+        return client;
+    }
 
 //    public static CCommon common() {
 //        return common;
@@ -54,7 +55,7 @@ public class ModConfigs {
     }
 
     public static void register(ModLoadingContext context, ModContainer container) {
-        //client = register(ClientConfig::new, ModConfig.Type.CLIENT);
+        client = register(ClientConfig::new, ModConfig.Type.CLIENT);
         //common = register(CCommon::new, ModConfig.Type.COMMON);
         server = register(ServerConfig::new, ModConfig.Type.SERVER);
 

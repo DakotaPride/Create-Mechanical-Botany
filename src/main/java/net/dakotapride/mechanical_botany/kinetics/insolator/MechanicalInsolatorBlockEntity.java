@@ -120,18 +120,69 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         }
 
         CreateLang.translate("gui.goggles.item_container").forGoggles(tooltip);
-        for (int i = 0; i < itemCapability.getSlots(); i++) {
-            ItemStack stackInSlot = itemCapability.getStackInSlot(i);
-            if (stackInSlot.isEmpty()) {
+        int inputInvSlots = inputInv.getSlots();
+        int outputInvSlots = outputInv.getSlots();
+
+        for (int i = 0; i < inputInvSlots; i++) {
+            ItemStack stack = inputInv.getStackInSlot(i);
+            if (stack.isEmpty()) {
                 continue;
             }
-            CreateLang.text("")
-                    .add(Component.translatable(stackInSlot.getDescriptionId())
-                            .withStyle(ChatFormatting.GRAY))
-                    .add(CreateLang.text(" x" + stackInSlot.getCount())
-                            .style(ChatFormatting.GREEN))
-                    .forGoggles(tooltip, 1);
+            if (ModConfigs.client().slotRecognition.get()) {
+                CreateLang.text("")
+                        .add(Component.translatable(stack.getDescriptionId())
+                                .withStyle(ChatFormatting.GRAY))
+                        .add(CreateLang.text(" x" + stack.getCount())
+                                .style(ChatFormatting.GREEN))
+                        .add(CreateLang.text(""))
+                        .add(CreateMechanicalBotany.translate("text.config.input_slot").style(ChatFormatting.GRAY))
+                        .forGoggles(tooltip, 1);
+            } else {
+                CreateLang.text("")
+                        .add(Component.translatable(stack.getDescriptionId())
+                                .withStyle(ChatFormatting.GRAY))
+                        .add(CreateLang.text(" x" + stack.getCount())
+                                .style(ChatFormatting.GREEN))
+                        .forGoggles(tooltip, 1);
+            }
         }
+
+        for (int i = 0; i < outputInvSlots; i++) {
+            ItemStack stack = outputInv.getStackInSlot(i);
+            if (stack.isEmpty()) {
+                continue;
+            }
+            if (ModConfigs.client().slotRecognition.get()) {
+                CreateLang.text("")
+                        .add(Component.translatable(stack.getDescriptionId())
+                                .withStyle(ChatFormatting.GRAY))
+                        .add(CreateLang.text(" x" + stack.getCount())
+                                .style(ChatFormatting.GREEN))
+                        .add(CreateLang.text(""))
+                        .add(CreateMechanicalBotany.translate("text.config.output_slot").style(ChatFormatting.GRAY))
+                        .forGoggles(tooltip, 1);
+            } else {
+                CreateLang.text("")
+                        .add(Component.translatable(stack.getDescriptionId())
+                                .withStyle(ChatFormatting.GRAY))
+                        .add(CreateLang.text(" x" + stack.getCount())
+                                .style(ChatFormatting.GREEN))
+                        .forGoggles(tooltip, 1);
+            }
+        }
+
+//        for (int i = 0; i < itemCapability.getSlots(); i++) {
+//            ItemStack stackInSlot = itemCapability.getStackInSlot(i);
+//            if (stackInSlot.isEmpty()) {
+//                continue;
+//            }
+//            CreateLang.text("")
+//                    .add(Component.translatable(stackInSlot.getDescriptionId())
+//                            .withStyle(ChatFormatting.GRAY))
+//                    .add(CreateLang.text(" x" + stackInSlot.getCount())
+//                            .style(ChatFormatting.GREEN))
+//                    .forGoggles(tooltip, 1);
+//        }
         if (inputInv.getStackInSlot(0).isEmpty()) {
             CreateMechanicalBotany.translate("text.cannot_process.empty").style(ChatFormatting.GRAY).forGoggles(tooltip, 1);
             if (!ModConfigs.server().insolator.canProcessSaplings.get())
@@ -258,6 +309,11 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
             lastRecipe.rollResults(level.random).forEach(stack -> ItemHandlerHelper.insertItemStacked(outputInv, stack, false));
             sendData();
             setChanged();
+        }
+
+        for (int i = 0; i < outputInv.getSlots(); i++) {
+            if (!outputInv.getStackInSlot(i).isEmpty())
+                CreateMechanicalBotany.LOGGER.info("{} in slot ID # {}", outputInv.getStackInSlot(i), i);
         }
     }
 

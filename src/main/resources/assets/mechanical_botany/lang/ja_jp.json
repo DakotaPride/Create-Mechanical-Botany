@@ -6,6 +6,7 @@
   "itemGroup.mechanical_botany.base": "Create: Mechanical Botany",
   "block.mechanical_botany.mechanical_insolator": "メカニカルインソレーター",
   "block.mechanical_botany.mechanical_composter": "メカニカルコンポスター",
+  "block.mechanical_botany.compost_block": "Block of Compost",
   "fluid.mechanical_botany.compost": "液体堆肥",
   "fluid.mechanical_botany.molten_compost": "灼熱の液体堆肥",
   "fluid.mechanical_botany.void_compost": "虚空の液体堆肥",
@@ -21,9 +22,6 @@
   "mechanical_botany.gui.goggles.composter_contents": "メカニカルコンポスターの内容物: ",
   "mechanical_botany.insolator.processing_duration": "処理時間: %s",
 
-  "item.mechanical_botany.compost.tooltip": "堆肥",
-  "item.mechanical_botany.compost.tooltip.summary": "骨粉のように使えます！（1.20.1のみ）",
-
   "mechanical_botany.ponder.insolator.header": "メカニカルインソレーターによる植物の培養",
   "mechanical_botany.ponder.composter.header": "メカニカルコンポスターによる植物の堆肥への分解",
   "mechanical_botany.ponder.compost_creation.header": "堆肥の便利な液体への加工",
@@ -38,6 +36,7 @@
   "mechanical_botany.ponder.insolator.text_5": "上部に植物を搬入します",
   "mechanical_botany.ponder.insolator.text_6": "しばらくすると、右クリックで成長した植物を回収できるようになります",
   "mechanical_botany.ponder.insolator.text_7": "どの側面からでも自動搬出が可能です",
+  "mechanical_botany.ponder.insolator.text_8": "Certain recipes will keep the input slot intact, allowing for simpler processing",
   "mechanical_botany.ponder.composter.text_1": "メカニカルコンポスターは堆肥化可能なものを堆肥に変えます",
   "mechanical_botany.ponder.composter.text_2": "歯車を使って側面から回転力を得ることができます",
   "mechanical_botany.ponder.composter.text_3": "上部に堆肥化可能なものを搬入します",
@@ -50,5 +49,6 @@
   "mechanical_botany.ponder.compost_creation.text_2": "液体堆肥と溶岩を混ぜると、灼熱の液体堆肥が得られます",
   "mechanical_botany.ponder.molten_compost_use.text_1": "ウィザーローズは灼熱の液体堆肥を用いて生産することができます",
   "mechanical_botany.ponder.void_compost_use.text_1": "コーラスフルーツは虚空の液体堆肥を用いて生産することができます",
-  "mechanical_botany.ponder.compost_use.text_1": "スニッファーから採取した植物は、再加工するために液体堆肥を必要とします"
+  "mechanical_botany.ponder.compost_use.text_1": "スニッファーから採取した植物は、再加工するために液体堆肥を必要とします",
+  "mechanical_botany.ponder.compost_use.text_2": "Furthermore, most tree or tree adjacent plants require some form of Liquid Compost as well"
 }
