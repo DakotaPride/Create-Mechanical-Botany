@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "fruitsdelight"
+    }
+  ],
+  "type": "mechanical_botany:insolating",
+  "consume_input": false,
+  "ingredients": [
+    {
+      "type": "fluid_stack",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    },
+    {
+      "item": "fruitsdelight:hamimelon_seeds"
+    }
+  ],
+  "processing_time": 4800,
+  "results": [
+    {
+      "id": "fruitsdelight:hamimelon"
+    },
+    {
+      "chance": 0.25,
+      "count": 1,
+      "id": "fruitsdelight:hamimelon_seeds"
+    }
+  ]
+}
