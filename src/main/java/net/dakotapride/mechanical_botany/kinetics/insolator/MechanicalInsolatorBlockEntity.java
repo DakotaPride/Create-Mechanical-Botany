@@ -311,10 +311,10 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
             setChanged();
         }
 
-        for (int i = 0; i < outputInv.getSlots(); i++) {
-            if (!outputInv.getStackInSlot(i).isEmpty())
-                CreateMechanicalBotany.LOGGER.info("{} in slot ID # {}", outputInv.getStackInSlot(i), i);
-        }
+//        for (int i = 0; i < outputInv.getSlots(); i++) {
+//            if (!outputInv.getStackInSlot(i).isEmpty())
+//                CreateMechanicalBotany.LOGGER.info("{} in slot ID # {}", outputInv.getStackInSlot(i), i);
+//        }
     }
 
     @Override
