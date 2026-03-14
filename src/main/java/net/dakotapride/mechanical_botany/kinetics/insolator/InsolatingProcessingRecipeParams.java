@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
+import net.dakotapride.mechanical_botany.ModConfigs;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -23,6 +24,8 @@ public class InsolatingProcessingRecipeParams extends ProcessingRecipeParams {
     protected boolean consumeInput;
 
     protected final boolean consumeInput() {
+        if (!ModConfigs.server().insolator.readConsumeInputFlag.get())
+            return false;
         return consumeInput;
     }
 

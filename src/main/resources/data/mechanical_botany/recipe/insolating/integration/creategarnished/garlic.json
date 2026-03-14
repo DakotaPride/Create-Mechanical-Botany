@@ -14,18 +14,18 @@
       "fluid": "minecraft:water"
     },
     {
-      "item": "creategarnished:garlic"
+      "item": "creategarnished:garlic_bulb"
     }
   ],
   "processing_time": 1600,
   "results": [
     {
-      "id": "creategarnished:garlic"
+      "id": "creategarnished:garlic_bulb"
     },
     {
       "chance": 0.15,
       "count": 1,
-      "id": "creategarnished:garlic"
+      "id": "creategarnished:garlic_bulb"
     }
   ]
 }

@@ -20,8 +20,16 @@
   "processing_time": 1600,
   "results": [
     {
-      "count": 2,
+      "count": 1,
       "id": "ars_nouveau:magebloom_crop"
+    },
+    {
+      "count": 1,
+      "chance": 0.45,
+      "id": "ars_nouveau:magebloom_crop"
+    },
+    {
+      "id": "ars_nouveau:magebloom"
     }
   ]
 }
