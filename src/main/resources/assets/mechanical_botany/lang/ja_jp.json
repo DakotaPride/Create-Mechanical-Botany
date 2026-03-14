@@ -50,5 +50,7 @@
   "mechanical_botany.ponder.molten_compost_use.text_1": "ウィザーローズは灼熱の液体堆肥を用いて生産することができます",
   "mechanical_botany.ponder.void_compost_use.text_1": "コーラスフルーツは虚空の液体堆肥を用いて生産することができます",
   "mechanical_botany.ponder.compost_use.text_1": "スニッファーから採取した植物は、再加工するために液体堆肥を必要とします",
-  "mechanical_botany.ponder.compost_use.text_2": "Furthermore, most tree or tree adjacent plants require some form of Liquid Compost as well"
+  "mechanical_botany.ponder.compost_use.text_2": "さらに、ほとんどの木や、木に隣接する植物の再処理にも液体堆肥が必要です",
+  "mechanical_botany.text.config.input_slot": " (搬入)",
+  "mechanical_botany.text.config.output_slot": " (搬出)"
 }
