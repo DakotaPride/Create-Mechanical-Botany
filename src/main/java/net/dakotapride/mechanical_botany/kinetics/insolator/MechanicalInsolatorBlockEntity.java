@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -302,7 +303,7 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
         ItemStack stackInSlot = inputInv.getStackInSlot(0);
         FluidStack fluidInSlot = getCurrentFluidInTank();
         if (lastRecipe.getIngredients().get(0).test(stackInSlot) && lastRecipe.getFluidIngredients().get(0).test(fluidInSlot) && lastRecipe.getRequiredFluid().amount() <= getCurrentFluidInTank().getAmount()) {
-            if (lastRecipe.getParams().consumeInput())
+            if (lastRecipe.getParams().consumeInput() && ModConfigs.server().insolator.readConsumeInputFlag.get())
                 stackInSlot.shrink(1);
             fluidInSlot.shrink(lastRecipe.getRequiredFluid().amount());
             inputInv.setStackInSlot(0, stackInSlot);
@@ -311,10 +312,10 @@ public class MechanicalInsolatorBlockEntity extends KineticBlockEntity implement
             setChanged();
         }
 
-//        for (int i = 0; i < outputInv.getSlots(); i++) {
-//            if (!outputInv.getStackInSlot(i).isEmpty())
-//                CreateMechanicalBotany.LOGGER.info("{} in slot ID # {}", outputInv.getStackInSlot(i), i);
-//        }
+        for (int i = 0; i < outputInv.getSlots(); i++) {
+            if (!outputInv.getStackInSlot(i).isEmpty() && !FMLLoader.isProduction())
+                CreateMechanicalBotany.LOGGER.info("{} in slot ID # {}", outputInv.getStackInSlot(i), i);
+        }
     }
 
     @Override

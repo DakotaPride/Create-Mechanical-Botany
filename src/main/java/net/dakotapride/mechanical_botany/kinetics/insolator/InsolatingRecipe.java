@@ -41,7 +41,7 @@ public class InsolatingRecipe extends ProcessingRecipe<RecipeWrapper, Insolating
         for (int i = 0; i < this.getRollableResults().size(); i++) {
             ProcessingOutput output = this.getRollableResults().get(i);
             ItemStack stack = i == 0 && forcedResult != null ? forcedResult.get() : output.rollOutput(randomSource);
-            if (!this.consumeItem() && i == 0)
+            if (this.consumeItem() && !ModConfigs.server().insolator.readConsumeInputFlag.get() && i == 0)
                 stack.setCount(stack.getCount() - 1);
             if (!stack.isEmpty())
                 results.add(stack);
